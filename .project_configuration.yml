@@ -1,0 +1,12 @@
+namespace: software-engineering-muc.dai/semester/sose2026/modularbeit-teil-1
+
+project_name: modularbeit-teil-1
+starter_code: git@gitlab.lrz.de:hm/teaching/muc.dai/software-engineering/uebungen/sose2026/modularbeit-teil-1/modularbeit-teil-1
+per: 
+  - student
+access_level: maintainer
+access_level_group: reporter
+enable_ci: False
+squash_commit_history: False
+branches:
+  - main
