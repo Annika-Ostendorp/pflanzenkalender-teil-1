@@ -318,6 +318,11 @@ Somit können Ergebnisse nicht gewertet werden.
 Verzichten Sie auf die Verwendung von Rebase beim Zusammenführen von Branches.
 Nutzen Sie hierfür ausschließlich Merge, um so eine Nachvollziehbarkeit zu garantieren.
 
+#### Regel 5 - Sinnvolle Commit Nachrichten
+
+Commits mit Nachrichten wie "Blaaaaaa", "Implementiert", "uijuijuijuijui" werden nicht gewertet.
+Achten Sie auf sinnvolle Commit-Nachrichten (siehe auch diese [Folie](https://folien-7e1922.pages.gitlab.lrz.de/23d9ed478fd4328ee8a611fd71ece69a1eed0f17/folien/03_versionsverwaltung/03_versionsverwaltung.html#/commit-message---teil-2))
+
 #### Ausnahmen (für die Regeln)
 
 | Ausnahme                                                                                 | Begründung                           |
