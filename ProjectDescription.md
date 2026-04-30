@@ -32,6 +32,10 @@ Das folgende nicht vollständige Klassendiagramm zeigt die wichtigsten Member-Va
 
 Im Folgenden werden noch die Eigenschaften genauer beschrieben.
 
+**Wichtig:** Diese Eigenschaften müssen nicht zwingend alle Membervariablen Ihrer Klassen sein.
+Je nachdem, wie Sie Assoziationen umsetzen, kann dies auch anders aussehen. 
+Wichtigster Aspekt ist, dass Sie die weiter unten spezifizierte REST API einhalten.
+
 ### Pflanze (`Plant`)
 
 Nutzer können in der Anwendung neue Pflanzen (`Plant`) anlegen und die Eigenschaften bereits angelegter Pflanzen visualisieren.
@@ -331,11 +335,13 @@ Gibt alle überfälligen Pflegeaktionen **aller** Pflanzen zurück, absteigend n
 
 Verzichten Sie in dieser Anwendung auf eine persistente Speicherung der Daten.
 Wir werden diesen Teil im zweiten Teil der Modularbeit adressieren.
+Konkret bedeutet das: Wenn Sie den Server neu starten, müssen die vorher über das Frontend konfigurierten Pflanzen nicht wieder auftauchen.
 
 ## Frontend
 
-Das Frontend ist eine Single-Page Application in Vanilla JS ohne externe Bibliotheken und bereits mit den Dateien `templates/index.html`, `static/app.js` und `static/style.css` vorgegeben.
+Das Frontend ist eine Single-Page Application in Vanilla JS ohne externe Bibliotheken und bereits mit den Dateien `src/templates/index.html`, `src/static/app.js` und `src/static/style.css` vorgegeben.
 Es kommuniziert ausschließlich über die REST API mit dem Backend.
+Das Backend muss das Frontend unter `http://127.0.0.1:5000` zur Verfügung stellen.
 
 ## Starten
 
