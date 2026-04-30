@@ -502,7 +502,7 @@ Implementierung (8.6) + Tests (8.7) = **40 Punkte (40 %)**.
 Die verbleibenden **60 Punkte** entfallen auf Prozess, Planung, Workflow und Dokumentation.
 
 
-### 9 Noten
+## 9 Noten
 
 **Achtung:** Das erfolgreiche Abschließen dieser Modularbeit ist Voraussetzung für das Antreten des zweiten Teils. 
 Die Modularbeit gilt als erfolgreich angetreten, wenn mindestens 50% der Punkte erreicht werden. 
@@ -524,7 +524,7 @@ Für die Notenbildung kann die folgende Tabelle als Orientierungspunkt dienen (A
 | 95  | 100 | 1.0  |
 
 
-### 10  Abgabetermin
+## 10  Abgabetermin
 
 Am 29.5.2026 um 23:59 Uhr werden Ihnen die Schreibrechte in Ihrem Gitlab-Projekt automatisch entzogen. 
 Der zu diesem Zeitpunkt vorliegende Stand gilt als abgegebene Modularbeit. 
