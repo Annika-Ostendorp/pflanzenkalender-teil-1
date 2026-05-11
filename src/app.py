@@ -1,17 +1,17 @@
 from flask import Flask, jsonify, request, Response
-from datetime import datetime # um Datums-Bedingung (created_at) umzusetzen
+from datetime import date # um Datums-Bedingung (created_at) umzusetzen
 
 app = Flask(__name__)
 
 plants = []
 
 class Plant:
-    def __init__(self, id: int, name: str, species: str, location: str, created_at: str = None) -> None:
+    def __init__(self, id: int, name: str, species: str, location: str, created_at: date) -> None:
         self._id = id
         self._name = name
         self._species = species
         self._location = location
-        self._created_at = created_at if created_at else datetime.now().isoformat() # Falls kein Datum übergeben wird, soll jetziges Datum genommen werden
+        self._created_at = created_at
         self._schedules = []
         self._logs = []
     
@@ -21,11 +21,11 @@ class Plant:
             "name": self._name,
             "species": self._species,
             "location": self._location,
-            "created_at": self._created_at,
+            "created_at": str(self._created_at), # in string umwandeln für richtige Ausgabe 
             "schedules": self._schedules,
             "logs": self._logs
         }
-
+   
 next_id = 1 # Zähler festlegen für ID, damit jede Pflanze ihre eindeutige ID bekommt
 
 # Route für Endpoint POST /api/plants
@@ -41,12 +41,19 @@ def create_plant() -> Response:
     
     global next_id # mit global next_id außerhalb der Funktion abändern
 
+    date_str = data.get("created_at") # mit .get(), um Fehler zu vermeiden, falls Datum nicht existieren sollte --> gibt dann per Default das jetzige Datum aus (siehe else Bedingung)
+    if date_str: # falls gültig, also nicht leer o.ä.
+        actual_date = date.fromisoformat(date_str) # Datum hier wieder in date-Objekt umwandeln zur besseren Überprüfung
+
+    else:
+        actual_date = date.today()
+
     new_plant = Plant(
         id = next_id,
         name = data["name"],
         species = data["species"],
         location = data["location"],
-        created_at = data.get("created_at") # mit .get(), um Fehler zu vermeiden, falls Datum nicht existieren sollte --> gibt dann per Default das jetzige Datum aus
+        created_at = actual_date
     )
 
     plants.append(new_plant) # neue Pflanze zur Liste hinzufügen
