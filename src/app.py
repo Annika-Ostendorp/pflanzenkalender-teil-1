@@ -14,7 +14,18 @@ class Plant:
         self._created_at = created_at if created_at else datetime.now().isoformat() # Falls kein Datum übergeben wird, soll jetziges Datum genommen werden
         self._schedules = []
         self._logs = []
-        
+    
+    def to_json(self) -> dict: # Nutzen to_json, um Zugriff auf private Member-Variablen von Klasse Plant zu bekommen für JSON-Ausgabe
+        return {
+            "id": self._id,
+            "name": self._name,
+            "species": self._species,
+            "location": self._location,
+            "created_at": self._created_at,
+            "schedules": self._schedules,
+            "logs": self._logs
+        }
+    
 # Route für Endpoint POST /api/plants
 @app.route('/api/plants', methods=['POST'])
 def create_plant() -> Response:
