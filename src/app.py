@@ -25,7 +25,35 @@ class Plant:
             "schedules": self._schedules,
             "logs": self._logs
         }
-   
+
+class CareSchedule:
+    def __init__(self, id: int, care_type: str, interval_days: int) -> None:
+        self._id = id
+        self._care_type = care_type
+        self._interval_days = interval_days
+
+    def to_json(self) -> dict:
+        return {
+            "id": self._id,
+            "care_type": self._care_type,
+            "interval_days": self._interval_days
+        }
+
+class ActionLog:
+    def __init__(self, id: int, care_type: str, performed_at: date, notes: str) -> None:
+        self._id = id
+        self._care_type = care_type
+        self._performed_at = performed_at
+        self._notes = notes
+
+    def to_json(self) -> dict:
+        return {
+            "id": self._id,
+            "care_type": self._care_type,
+            "performed_at": str(self._performed_at),
+            "notes": self._notes
+        }   
+    
 next_id = 1 # Zähler festlegen für ID, damit jede Pflanze ihre eindeutige ID bekommt
 
 # Route für Endpoint POST /api/plants
