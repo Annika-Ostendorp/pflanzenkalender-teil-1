@@ -25,18 +25,31 @@ class Plant:
             "schedules": self._schedules,
             "logs": self._logs
         }
-    
+
+next_id = 1 # Zähler festlegen für ID, damit jede Pflanze ihre eindeutige ID bekommt
+
 # Route für Endpoint POST /api/plants
 @app.route('/api/plants', methods=['POST'])
 def create_plant() -> Response:
-    new_plant = request.get_json()
+    data = request.get_json() # new_plant umbenannt in data, da hiermit ja noch kein richtiges Plant-Objekt erzeugt wird -> nur Daten geholt
 
     mandatory_fields = ["name", "species", "location"]
     for field in mandatory_fields:
         # Fehlen Attribute oder gibt es leere Strings?
-        if field not in new_plant or new_plant[field] == "":
+        if field not in data or data[field] == "":
             return jsonify({"error": "Bad Request: Missing or invalid JSON body"}), 400 # in diesem Fall Error zurückgeben
     
+    global next_id # mit global next_id außerhalb der Funktion abändern
+
+    new_plant = Plant(
+        id = next_id,
+        name = data["name"],
+        species = data["species"],
+        location = data["location"],
+        created_at = data.get("created_at") # mit .get(), um Fehler zu vermeiden, falls Datum nicht existieren sollte --> gibt dann per Default das jetzige Datum aus
+    )
+
     plants.append(new_plant) # neue Pflanze zur Liste hinzufügen
+    next_id += 1 # nachdem Pflanzen-Objekt erstellt wurde -> Zähler hochsetzen, damit neue Pflanze = neue ID
     
-    return jsonify(new_plant), 201
+    return jsonify(new_plant.to_json()), 201 # Pflanzen-Objekt nun erfolgreich erstellt -> 201 
