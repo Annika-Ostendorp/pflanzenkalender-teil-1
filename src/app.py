@@ -1,9 +1,20 @@
 from flask import Flask, jsonify, request, Response
+from datetime import datetime # um Datums-Bedingung (created_at) umzusetzen
 
 app = Flask(__name__)
 
 plants = []
 
+class Plant:
+    def __init__(self, id: int, name: str, species: str, location: str, created_at: str = None) -> None:
+        self._id = id
+        self._name = name
+        self._species = species
+        self._location = location
+        self._created_at = created_at if created_at else datetime.now().isoformat() # Falls kein Datum übergeben wird, soll jetziges Datum genommen werden
+        self._schedules = []
+        self._logs = []
+        
 # Route für Endpoint POST /api/plants
 @app.route('/api/plants', methods=['POST'])
 def create_plant() -> Response:
