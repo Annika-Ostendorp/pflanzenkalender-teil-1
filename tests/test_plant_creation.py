@@ -25,3 +25,14 @@ def test_create_plant_success(client): # Beispieldaten hier verwenden --> Gülti
     assert "id" in data # Wurde spezifische ID vergeben? (siehe Task 3)
     assert "created_at" in data # Existiert ein Erstellungsdatum/ das heutige Datum als Default? (siehe Task 3)
 
+def test_create_plant_missing_fields(client):
+    payload = { # erzeugen nun extra unvollständiges JSON-Objekt -> wollen ja error erzeugen
+        "name": "Goldfruchtpalme"
+    }
+
+    response = client.post('/api/plants', json=payload)
+    data = response.get_json()
+
+    assert response.status_code == 400 # erwarten ja Fehler Status Code, da JSON-Objekt unvollständig 
+    assert "error" in data # wird Fehlermeldung ausgegeben?
+    assert "Bad Request: Missing or invalid JSON body" in data["error"] # Richtige Beschreibung der Fehlermeldung?
