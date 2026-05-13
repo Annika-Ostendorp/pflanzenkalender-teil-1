@@ -17,4 +17,13 @@ def test_get_plants_success(client): # Happy Path (200) & korrekte JSON-Struktur
     assert response.status_code == 200 # existiert eine Liste mit Pflanzen? -> erfolgreiche Rückmeldung
     assert len(data) == 1 # bisher nur eine Pflanzen-Instanz in Liste -> stimmt das?
 
+    # JSON-Struktur validieren
+    plant_json = data[0] # an erster Stelle in Liste ist Eintrag (0. Stelle bei Python)
+
+    expected_fields = ["id", "name", "species", "location", "created_at", "status"] # diese Felder hat Plant-Objekt
+    for field in expected_fields:
+        assert field in plant_json # Gibt es Feld in Pflanzenobjekt-Eintrag?
     
+    assert plant_json["name"] == "Goldfruchtpalme" # ist diesem field auch etwas zugeordnet? -> hat Datenübertragung geklappt?
+    assert plant_json["status"] == "ok" # schauen, ob calculate_status Methode funktioniert hat
+    # nur für 2 fields Asserts, um Tests lesbar zu halten 
