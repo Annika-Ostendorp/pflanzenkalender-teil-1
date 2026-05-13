@@ -31,7 +31,7 @@ class Plant:
     def calculate_status(self) -> str:
         from datetime import timedelta, date # timedelta, um Zeitdifferenz zwischen 2 Zeiten zu berechnen -> Tage, Stunden, Minuten, Sekunden addieren oder subtrahieren
                                              # wichtig für "soon" Status z.B.
-        today = date.today()
+        today = date.today() # heutiges Datum als Bsp. festlegen, damit Berechnung für z.B. "overdue"-Logik funktioniert
         three_days_from_now = today + timedelta(days = 3)
 
         for schedule in self._schedules: # erst alles prüfen, ob etwas "overdue" ist
@@ -45,16 +45,22 @@ class Plant:
         return "ok" # wenn alle Aktionen mehr als 3 Tage in der Zukunft liegt -> wenn 2 Schleifen durchgelaufen, aber keine Übereinstimmung gefunden haben
                
 class CareSchedule:
-    def __init__(self, id: int, care_type: str, interval_days: int) -> None:
+    def __init__(self, id: int, care_type: str, interval_days: int, next_due: date) -> None:
         self._id = id
         self._care_type = care_type
         self._interval_days = interval_days
+        self._next_due = next_due
+    
+    @property # Property-Dekorator, um nicht immer Klammern mitschreiben zu müssen bei Methode -> auf Methode zugriefen wie auf normale Variablen
+    def next_due(self) -> date:
+        return self._next_due
 
     def to_json(self) -> dict:
         return {
             "id": self._id,
             "care_type": self._care_type,
-            "interval_days": self._interval_days
+            "interval_days": self._interval_days,
+            "next_due": str(self._next_due) # next_due hinzufügen für calculate_status Methode, damit Tests nicht fehlschlagen
         }
 
 class ActionLog:
