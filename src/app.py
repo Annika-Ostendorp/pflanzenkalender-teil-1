@@ -89,3 +89,9 @@ def create_plant() -> Response:
     next_id += 1 # nachdem Pflanzen-Objekt erstellt wurde -> Zähler hochsetzen, damit neue Pflanze = neue ID
     
     return jsonify(new_plant.to_json()), 201 # Pflanzen-Objekt nun erfolgreich erstellt -> 201 
+
+
+# Route für Endpoint GET /api/plants
+@app.route('/api/plants', methods=['GET'])
+def get_plants() -> Response:
+    return jsonify([plant.to_json() for plant in plants]), 200 # wollen jede Pflanze aus Liste im Dictionary-Format bekommen -> Sammlung
