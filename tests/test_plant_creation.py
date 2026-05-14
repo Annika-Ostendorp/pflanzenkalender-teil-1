@@ -1,6 +1,6 @@
 from app import app
 
-def test_create_plant_success(client): # Beispieldaten hier verwenden --> Gültige Testdaten (Payload Aspekt in User Story)
+def test_api_plants_post_success(client): # Beispieldaten hier verwenden --> Gültige Testdaten (Payload Aspekt in User Story)
     payload = {
         "name": "Monstera",
         "species": "Deliciosa",
@@ -16,7 +16,7 @@ def test_create_plant_success(client): # Beispieldaten hier verwenden --> Gülti
     assert "id" in data # Wurde spezifische ID vergeben? (siehe Task 3)
     assert "created_at" in data # Existiert ein Erstellungsdatum/ das heutige Datum als Default? (siehe Task 3)
 
-def test_create_plant_missing_fields(client):
+def test_api_plants_post_missing_fields(client):
     payload = { # erzeugen nun extra unvollständiges JSON-Objekt -> wollen ja error erzeugen
         "name": "Goldfruchtpalme"
     }
