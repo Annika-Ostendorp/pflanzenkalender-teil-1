@@ -1,5 +1,4 @@
-import pytest
-from datetime import date, timedelta
+from datetime import date
 from unittest.mock import patch, MagicMock # patch, um Tests zeitunabhängig zu machen
 from app import Plant, CareSchedule # beide wichtig für calculate_status Methode
 
