@@ -22,4 +22,4 @@ def test_api_plants_id_delete_not_found(client): # falls ID nicht vorhanden ist
     # Überprüfen, ob richtiger Statuscode & Fehlermeldung kommt
     assert response.status_code == 404
     assert "error" in data # kommt dieses Feld?
-    assert data["error"] == "Plant not Found"
+    assert data["error"] == "Plant not found"
