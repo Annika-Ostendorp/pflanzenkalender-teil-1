@@ -27,3 +27,17 @@ def test_api_plants_post_missing_fields(client):
     assert response.status_code == 400 # erwarten ja Fehler Status Code, da JSON-Objekt unvollständig 
     assert "error" in data # wird Fehlermeldung ausgegeben?
     assert "Bad Request: Missing or invalid JSON body" in data["error"] # Richtige Beschreibung der Fehlermeldung?
+
+def test_api_plants_post_with_date_success(client):
+    payload = {
+        "name": "Schmetterlingsorchidee",
+        "species": "Phalaenopsis",
+        "location": "Büro",
+        "created_at": "2026-01-01" # damit die Missing Zeile 98 (actual_date = date.fromisoformat(date_str)) aufgerufen wird für bessere Code Coverage --> davor immer direkt in else Schleife gesprungen, da nie Datum mitgegeben
+    }
+
+    response = client.post('/api/plants', json=payload)
+    data = response.get_json()
+
+    assert data["created_at"] == "2026-01-01"
+    assert data["name"] == "Schmetterlingsorchidee"
