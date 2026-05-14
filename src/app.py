@@ -130,3 +130,7 @@ def delete_plant(plant_id: int) -> Response:
             return '', 204 # erfolgreiches Löschen von Pflanze -> 204 No Content -> leerer String als Body
     
     return jsonify({"error": "Plant not Found"}), 404 # falls ID nicht existieren sollte -> Fehlermeldung zurückgeben
+
+
+if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
+    app.run(debug=True, port=5000) 
