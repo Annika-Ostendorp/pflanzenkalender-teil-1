@@ -1,5 +1,7 @@
 from flask import Flask, jsonify, request, Response
-from datetime import date # um Datums-Bedingung (created_at) umzusetzen
+from datetime import timedelta, date # timedelta, um Zeitdifferenz zwischen 2 Zeiten zu berechnen -> Tage, Stunden, Minuten, Sekunden addieren oder subtrahieren
+                                             # wichtig für "soon" Status z.B.
+                                             # date, um Datums-Bedingung (created_at) umzusetzen
 
 app = Flask(__name__)
 
@@ -29,8 +31,6 @@ class Plant:
         }
     
     def calculate_status(self) -> str:
-        from datetime import timedelta, date # timedelta, um Zeitdifferenz zwischen 2 Zeiten zu berechnen -> Tage, Stunden, Minuten, Sekunden addieren oder subtrahieren
-                                             # wichtig für "soon" Status z.B.
         today = date.today() # heutiges Datum als Bsp. festlegen, damit Berechnung für z.B. "overdue"-Logik funktioniert
         three_days_from_now = today + timedelta(days = 3)
 
