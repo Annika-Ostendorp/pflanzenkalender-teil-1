@@ -10,7 +10,6 @@ def test_api_plants_id_delete_success(client):
 
     # Löschanfrage wird gesendet
     response = client.delete('/api/plants/1') # ID von angelegter Bsp.-Pflanze
-    data = response.get_json()
 
     # Überprüfungen
     assert response.status_code == 204 # für erfolgreiche Löschung -> No Content
