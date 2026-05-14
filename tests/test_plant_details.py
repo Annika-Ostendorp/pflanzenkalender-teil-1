@@ -14,8 +14,7 @@ def test_api_plants_id_get_success(client): # hier wieder mit MagicMock (wie bei
 
         test_plant = Plant(1, "Bogenhanf", "Sansevieria", "Schlafzimmer", set_today) # wieder Testpflanze erstellen mit Mock-Datum
         
-        last_done = date(2026, 5, 8) # damit bei 7 Tagen Intercall von schedule dann automatisch der 15.05. als next_due rauskommt
-        real_schedule = CareSchedule(3, "watering", 7, last_done) # brauchen hier echten Plan, da Objekt nur so mit to_json()-Methode von Flask verarbeitet werden kann
+        real_schedule = CareSchedule(3, 1, "watering", 7, desired_next_due) # brauchen hier echten Plan, da Objekt nur so mit to_json()-Methode von Flask verarbeitet werden kann
 
         test_plant._schedules.append(real_schedule) # Pflanze braucht ja Liste an care schedules
         plants.append(test_plant)
@@ -28,3 +27,12 @@ def test_api_plants_id_get_success(client): # hier wieder mit MagicMock (wie bei
         assert data["name"] == "Bogenhanf"
         assert data["status"] == "soon"
         assert len(data["schedules"]) == 1 # werden Schedules zurückgegeben als Liste?
+
+def test_api_plants_id_get_not_found(client): # diesselbe Logik wie wenn Löschen von Pflanze nicht geht
+    response = client.get('/api/plants/99') # Bsp.ID nehmen
+    data = response.get_json()
+
+    # Überprüfen, ob richtiger Statuscode & Fehlermeldung kommt
+    assert response.status_code == 404
+    assert "error" in data # kommt dieses Feld?
+    assert data["error"] == "Plant not found" # richtige Fehlermeldung?
