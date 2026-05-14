@@ -1,6 +1,6 @@
 from datetime import date
 from unittest.mock import patch, MagicMock # patch, um Tests zeitunabhängig zu machen
-from app import Plant, CareSchedule # beide wichtig für calculate_status Methode
+from app import Plant, CareSchedule, ActionLog # beide wichtig für calculate_status Methode
 
 def test_api_plants_get_success(client): # Happy Path (200) & korrekte JSON-Struktur testen
     from app import plants # geht ja darum, dass die Liste der Pflanzen zurückgegeben wird
@@ -66,3 +66,13 @@ def test_api_plants_get_status_overdue_with_mock():
 
         assert new_plant.calculate_status() == "overdue"
         mock_date.today.assert_called_once()
+
+
+def test_api_plants_get_internal_classes_coverage():
+    # Klassen nun echt erstellen, damit pytest merkt, dass Code funktioniert -> ansonsten Code-Coverage Problem, da bisher nur Mocks verwendet
+    schedule = CareSchedule(1, "fertilizing", 7, date(2026, 5, 20))
+    log = ActionLog(1, "watering", date(2026, 5, 10), "Viel Wasser verbraucht")
+
+    assert schedule.next_due == date(2026, 5, 20)
+    assert "fertilizing" in str(schedule.to_json())
+    assert "Viel Wasser verbraucht" in str(log.to_json())
