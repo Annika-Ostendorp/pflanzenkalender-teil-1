@@ -119,7 +119,7 @@ def create_plant() -> Response:
 def get_plants() -> Response:
     return jsonify([plant.to_json() for plant in plants]), 200 # wollen jede Pflanze aus Liste im Dictionary-Format bekommen -> Sammlung
 
-
+# Route für Endpoint DELETE /api/plants/<id>
 @app.route('/api/plants/<int:plant_id>', methods=['DELETE']) # brauchen Pflanzen-ID -> damit wir wissen, welche Pflanze wir löschen
 def delete_plant(plant_id: int) -> Response:
     global plants # wollen wieder außerhalb von Funktion auf Liste mit all unseren Pflanzen zugreifen
