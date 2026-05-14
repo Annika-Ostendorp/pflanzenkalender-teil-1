@@ -118,3 +118,15 @@ def create_plant() -> Response:
 @app.route('/api/plants', methods=['GET'])
 def get_plants() -> Response:
     return jsonify([plant.to_json() for plant in plants]), 200 # wollen jede Pflanze aus Liste im Dictionary-Format bekommen -> Sammlung
+
+
+@app.route('/api/plants/<int:plant_id>', methods=['DELETE']) # brauchen Pflanzen-ID -> damit wir wissen, welche Pflanze wir löschen
+def delete_plant(plant_id: int) -> Response:
+    global plants # wollen wieder außerhalb von Funktion auf Liste mit all unseren Pflanzen zugreifen
+
+    for plant in plants:
+        if plant._id == plant_id: # hat Pflanzenobjekt diesselbe ID wie die Übergebene?
+            plants.remove(plant) # falls ja, dann dieses Objekt löschen
+            return '', 204 # erfolgreiches Löschen von Pflanze -> 204 No Content -> leerer String als Body
+    
+    return jsonify({"error": "Plant not Found"}), 404 # falls ID nicht existieren sollte -> Fehlermeldung zurückgeben
