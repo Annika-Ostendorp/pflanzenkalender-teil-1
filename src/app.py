@@ -129,7 +129,19 @@ def delete_plant(plant_id: int) -> Response:
             plants.remove(plant) # falls ja, dann dieses Objekt löschen
             return '', 204 # erfolgreiches Löschen von Pflanze -> 204 No Content -> leerer String als Body
     
-    return jsonify({"error": "Plant not Found"}), 404 # falls ID nicht existieren sollte -> Fehlermeldung zurückgeben
+    return jsonify({"error": "Plant not found"}), 404 # falls ID nicht existieren sollte -> Fehlermeldung zurückgeben
+
+
+# Route für Endpoint GET /api/plants/<id>
+@app.route('/api/plants/<int:plant_id>', methods=['GET'])
+def get_plants_id(plant_id: int) -> Response: # ähnlicher Aufbau wie bei DELETE route, wo es auch um ID ging
+    global plants
+
+    for plant in plants:
+        if plant._id == plant_id:
+            return jsonify(plant.to_json()), 200 # spezifische Pflanze existiert --> Erfolg (200) --> enthält bereits schedules und status
+        
+    return jsonify({"error": "Plant not found"}), 404 # falls ID wieder nicht existiert -> Fehlermeldung
 
 
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
