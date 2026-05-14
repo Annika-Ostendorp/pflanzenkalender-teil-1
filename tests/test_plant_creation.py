@@ -1,15 +1,6 @@
-import pytest
 from app import app
 
-@pytest.fixture # Fixture, um Code-Duplikationen zu vermeiden --> kann dann in allen Tests verwendet werden
-                # und muss so später nur an einer Stelle etwas ändern, Bsp.daten für unsere API-Tests anlegen
-def client():
-    app.config['TESTING'] = True # Setup/ Vorbereitung -> Test-Konfiguration aktivieren
-    with app.test_client() as client:
-        yield client
-
-
-def test_create_plant_success(client): # Beispieldaten hier verwenden --> Gültige Testdaten (Payload Aspekt in User Story)
+def test_api_plants_post_success(client): # Beispieldaten hier verwenden --> Gültige Testdaten (Payload Aspekt in User Story)
     payload = {
         "name": "Monstera",
         "species": "Deliciosa",
@@ -25,7 +16,7 @@ def test_create_plant_success(client): # Beispieldaten hier verwenden --> Gülti
     assert "id" in data # Wurde spezifische ID vergeben? (siehe Task 3)
     assert "created_at" in data # Existiert ein Erstellungsdatum/ das heutige Datum als Default? (siehe Task 3)
 
-def test_create_plant_missing_fields(client):
+def test_api_plants_post_missing_fields(client):
     payload = { # erzeugen nun extra unvollständiges JSON-Objekt -> wollen ja error erzeugen
         "name": "Goldfruchtpalme"
     }
@@ -36,3 +27,17 @@ def test_create_plant_missing_fields(client):
     assert response.status_code == 400 # erwarten ja Fehler Status Code, da JSON-Objekt unvollständig 
     assert "error" in data # wird Fehlermeldung ausgegeben?
     assert "Bad Request: Missing or invalid JSON body" in data["error"] # Richtige Beschreibung der Fehlermeldung?
+
+def test_api_plants_post_with_date_success(client):
+    payload = {
+        "name": "Schmetterlingsorchidee",
+        "species": "Phalaenopsis",
+        "location": "Büro",
+        "created_at": "2026-01-01" # damit die Missing Zeile 98 (actual_date = date.fromisoformat(date_str)) aufgerufen wird für bessere Code Coverage --> davor immer direkt in else Schleife gesprungen, da nie Datum mitgegeben
+    }
+
+    response = client.post('/api/plants', json=payload)
+    data = response.get_json()
+
+    assert data["created_at"] == "2026-01-01"
+    assert data["name"] == "Schmetterlingsorchidee"
