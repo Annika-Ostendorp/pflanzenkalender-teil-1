@@ -49,3 +49,20 @@ def test_api_plants_get_status_soon_with_mock(): # müssen ja auch Magic Mocks n
         # ASSERT -> Überprüfung
         assert result == "soon" # ist Status bei soon? -> hatten ja oben next_due Variable mit due_soon Datum gesetzt
         mock_date.today.assert_called_once() # hat unsere Logik auch wirklich das Datum abgefragt?
+
+def test_api_plants_get_status_overdue_with_mock():
+    # ähnlicher Aufbau nur diesmal überfälliges Datum anstelle von zukünftigem Datum
+    fixed_today = date(2026, 5, 14)
+    old_date = date(2026, 5, 10) # schon seit 4 Tagen überfällig
+
+    with patch('app.date') as mock_date:
+        mock_date.today.return_value = fixed_today
+
+        mock_plan = MagicMock(spec = CareSchedule)
+        mock_plan.next_due = old_date
+
+        new_plant = Plant(1, "Monstera", "Araceae", "Büro", fixed_today)
+        new_plant._schedules.append(mock_plan)
+
+        assert new_plant.calculate_status() == "overdue"
+        mock_date.today.assert_called_once()
