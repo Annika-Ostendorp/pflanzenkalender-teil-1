@@ -1,86 +1,10 @@
 from flask import Flask, jsonify, request, Response
-from datetime import timedelta, date # timedelta, um Zeitdifferenz zwischen 2 Zeiten zu berechnen -> Tage, Stunden, Minuten, Sekunden addieren oder subtrahieren
-                                             # wichtig für "soon" Status z.B.
-                                             # date, um Datums-Bedingung (created_at) umzusetzen
+from datetime import date
+from models import ActionLog, CareSchedule, Plant
 
 app = Flask(__name__)
 
 plants = []
-
-class Plant:
-    def __init__(self, id: int, name: str, species: str, location: str, created_at: date) -> None:
-        self._id = id
-        self._name = name
-        self._species = species
-        self._location = location
-        self._created_at = created_at
-        self._schedules = [] # Liste mit CareSchedule Objekten
-        self._logs = [] # Liste mit ActionLog Objekten
-    
-    def to_json(self) -> dict: # Nutzen to_json, um Zugriff auf private Member-Variablen von Klasse Plant zu bekommen für JSON-Ausgabe
-        return {
-            "id": self._id,
-            "name": self._name,
-            "species": self._species,
-            "location": self._location,
-            "created_at": str(self._created_at), # in string umwandeln für richtige Ausgabe 
-            "status": self.calculate_status(),
-            "schedules": [schedule.to_json() for schedule in self._schedules], # jedes Objekt in der Liste soll zu einem Dictionary umgewandelt werden, und trotzdem leere Listen ausgeben für Variablen schedules, logs falls es diese nicht gibt 
-                                                                               # --> bessere Darstellung/ Struktur, um Pflanzen zusammen mit ihren Pflegeplänen etc. anzuzeigen
-            "logs": [log.to_json() for log in self._logs]
-        }
-    
-    def calculate_status(self) -> str:
-        today = date.today() # heutiges Datum als Bsp. festlegen, damit Berechnung für z.B. "overdue"-Logik funktioniert
-        three_days_from_now = today + timedelta(days = 3)
-
-        for schedule in self._schedules: # erst alles prüfen, ob etwas "overdue" ist
-            if schedule.next_due < today: # wenn mind. eine Aktion schon überfällig ist  
-                return "overdue"
-
-        for schedule in self._schedules: # danach prüfen, ob etwas "soon" ist
-            if schedule.next_due <= three_days_from_now: # wenn mind. eine Aktion in 3 oder weniger Tagen fällig ist
-                return "soon"
-        
-        return "ok" # wenn alle Aktionen mehr als 3 Tage in der Zukunft liegt -> wenn 2 Schleifen durchgelaufen, aber keine Übereinstimmung gefunden haben
-               
-class CareSchedule:
-    def __init__(self, id: int, plant_id: int, care_type: str, interval_days: int, next_due: date) -> None:
-        self._id = id
-        self._plant_id = plant_id # Hinzufügen von fehlender plant_id Variable
-        self._care_type = care_type
-        self._interval_days = interval_days
-        self._next_due = next_due
-    
-    @property # Property-Dekorator, um nicht immer Klammern mitschreiben zu müssen bei Methode -> auf Methode zugriefen wie auf normale Variablen
-    def next_due(self) -> date:
-        return self._next_due
-
-    def to_json(self) -> dict:
-        return {
-            "id": self._id,
-            "plant_id": self._plant_id,
-            "care_type": self._care_type,
-            "interval_days": self._interval_days,
-            "next_due": str(self._next_due) # next_due hinzufügen für calculate_status Methode, damit Tests nicht fehlschlagen
-        }
-
-class ActionLog:
-    def __init__(self, id: int, plant_id: int, care_type: str, performed_at: date, notes: str) -> None:
-        self._id = id
-        self._plant_id = plant_id
-        self._care_type = care_type
-        self._performed_at = performed_at
-        self._notes = notes
-
-    def to_json(self) -> dict:
-        return {
-            "id": self._id,
-            "plant_id": self._plant_id,
-            "care_type": self._care_type,
-            "performed_at": str(self._performed_at),
-            "notes": self._notes
-        }   
     
 next_id = 1 # Zähler festlegen für ID, damit jede Pflanze ihre eindeutige ID bekommt
 
