@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request, Response
-from models import ActionLog, CareSchedule
+from models import ActionLog, CareSchedule, Plant
 
 app = Flask(__name__)
 
@@ -27,20 +27,6 @@ class Plant:
                                                                                # --> bessere Darstellung/ Struktur, um Pflanzen zusammen mit ihren Pflegeplänen etc. anzuzeigen
             "logs": [log.to_json() for log in self._logs]
         }
-    
-    def calculate_status(self) -> str:
-        today = date.today() # heutiges Datum als Bsp. festlegen, damit Berechnung für z.B. "overdue"-Logik funktioniert
-        three_days_from_now = today + timedelta(days = 3)
-
-        for schedule in self._schedules: # erst alles prüfen, ob etwas "overdue" ist
-            if schedule.next_due < today: # wenn mind. eine Aktion schon überfällig ist  
-                return "overdue"
-
-        for schedule in self._schedules: # danach prüfen, ob etwas "soon" ist
-            if schedule.next_due <= three_days_from_now: # wenn mind. eine Aktion in 3 oder weniger Tagen fällig ist
-                return "soon"
-        
-        return "ok" # wenn alle Aktionen mehr als 3 Tage in der Zukunft liegt -> wenn 2 Schleifen durchgelaufen, aber keine Übereinstimmung gefunden haben   
     
 next_id = 1 # Zähler festlegen für ID, damit jede Pflanze ihre eindeutige ID bekommt
 
