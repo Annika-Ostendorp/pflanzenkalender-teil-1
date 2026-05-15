@@ -1,4 +1,4 @@
-from app import Plant
+from models import Plant, CareSchedule
 from datetime import date
 from unittest.mock import patch
 
@@ -9,7 +9,7 @@ def test_api_plants_id_get_success(client): # hier wieder mit MagicMock (wie bei
     with patch('app.date') as mock_date:
         mock_date.today.return_value = set_today
 
-        from app import plants, CareSchedule # wieder Liste mit allen Pflanzen holen & leeren für sauberen Test
+        from app import plants # wieder Liste mit allen Pflanzen holen & leeren für sauberen Test
         plants.clear()
 
         test_plant = Plant(1, "Bogenhanf", "Sansevieria", "Schlafzimmer", set_today) # wieder Testpflanze erstellen mit Mock-Datum

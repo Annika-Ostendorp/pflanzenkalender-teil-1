@@ -1,4 +1,3 @@
-from app import app
 
 def test_api_plants_post_success(client): # Beispieldaten hier verwenden --> Gültige Testdaten (Payload Aspekt in User Story)
     payload = {

@@ -1,4 +1,4 @@
-from app import Plant # brauchen nicht alles, nur testen, ob Pflanze erfolgreich gelöscht wurde
+from models import Plant # brauchen nicht alles, nur testen, ob Pflanze erfolgreich gelöscht wurde
 from datetime import date
 
 def test_api_plants_id_delete_success(client):
