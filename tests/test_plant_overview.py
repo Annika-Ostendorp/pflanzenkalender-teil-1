@@ -1,6 +1,6 @@
 from datetime import date
 from unittest.mock import patch, MagicMock # patch, um Tests zeitunabhängig zu machen
-from app import Plant, CareSchedule, ActionLog # beide wichtig für calculate_status Methode
+from models import Plant, CareSchedule, ActionLog # beide wichtig für calculate_status Methode
 
 def test_api_plants_get_success(client): # Happy Path (200) & korrekte JSON-Struktur testen
     from app import plants # geht ja darum, dass die Liste der Pflanzen zurückgegeben wird
@@ -34,7 +34,7 @@ def test_api_plants_get_status_soon_with_mock(): # müssen ja auch Magic Mocks n
     set_today = date(2026, 5, 13)
     due_soon = date(2026, 5, 15) # fällig in 2 Tagen -> soon
     
-    with patch('app.date') as mock_date:
+    with patch('models.date') as mock_date:
         mock_date.today.return_value = set_today # gewünschtes Ergebnis ist ja simuliertes heutiges Datum -> soll zurückgegeben werden
 
         mock_schedule = MagicMock(spec = CareSchedule) # Bsp.-Pflegeplan aufsetzen
@@ -55,7 +55,7 @@ def test_api_plants_get_status_overdue_with_mock():
     fixed_today = date(2026, 5, 14)
     old_date = date(2026, 5, 10) # schon seit 4 Tagen überfällig
 
-    with patch('app.date') as mock_date:
+    with patch('models.date') as mock_date:
         mock_date.today.return_value = fixed_today
 
         mock_plan = MagicMock(spec = CareSchedule)
