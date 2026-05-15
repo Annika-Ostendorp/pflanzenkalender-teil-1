@@ -72,10 +72,6 @@ def get_plants_id(plant_id: int) -> Response: # ähnlicher Aufbau wie bei DELETE
     return jsonify({"error": "Plant not found"}), 404 # falls ID wieder nicht existiert -> Fehlermeldung
 
 
-if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
-    app.run(debug=True, port=5000) 
-
-
 # Route für Endpoint PUT /api/plants/<id>
 @app.route('/api/plants/<int:plant_id>', methods=['PUT'])
 def update_plant(plant_id: int):
@@ -113,3 +109,8 @@ def update_plant(plant_id: int):
             return jsonify(plant.to_json()), 200 # Felder wurden erfolgreich geupdatet
     
     return jsonify({"error": "Plant not found"}), 404 # falls Schleufe durchläuft, aber keine ID gefunden hat -> Fehlermeldung
+
+
+
+if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
+    app.run(debug=True, port=5000) 
