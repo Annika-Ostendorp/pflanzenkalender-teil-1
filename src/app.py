@@ -80,6 +80,14 @@ if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
 @app.route('/api/plants/<int:plant_id>', methods=['PUT'])
 def update_plant(plant_id: int):
     global plants
+
     data = request.get_json() # erstmal wieder alle Daten holen
     if not data:
         return jsonify({"error": "No data provided"}), 400
+    
+    # id, status, created_at und schedules dürfen nicht geändert werden!
+    forbidden_fields_for_update = ["id", "status", "created_at", "schedules"]
+
+    for field in forbidden_fields_for_update:
+        if field in data:
+            return jsonify({"error": "Bad Request: Updating id, status, created_at or schedules is not allowed"}), 400
