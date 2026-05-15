@@ -74,3 +74,12 @@ def get_plants_id(plant_id: int) -> Response: # ähnlicher Aufbau wie bei DELETE
 
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
+
+
+# Route für Endpoint PUT /api/plants/<id>
+@app.route('/api/plants/<int:plant_id>', methods=['PUT'])
+def update_plant(plant_id: int):
+    global plants
+    data = request.get_json() # erstmal wieder alle Daten holen
+    if not data:
+        return jsonify({"error": "No data provided"}), 400
