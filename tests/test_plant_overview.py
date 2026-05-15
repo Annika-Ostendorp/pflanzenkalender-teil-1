@@ -82,3 +82,13 @@ def test_api_plants_get_internal_classes_coverage():
     log_json = log.to_json()
     assert log_json["plant_id"] == 1
     assert "Viel Wasser verbraucht" in log_json["notes"]
+
+
+def test_api_plants_empty_list(client):
+    from app import plants
+    plants.clear() # damit Liste leer ist für Überprüfung
+
+    response = client.get('/api/plants')
+
+    assert response.status_code == 200
+    assert response.get_json() == [] # gibt Server leere Liste zurück? -> Test erfolgreich (200)
