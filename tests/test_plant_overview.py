@@ -1,6 +1,6 @@
 from datetime import date
 from unittest.mock import patch, MagicMock # patch, um Tests zeitunabhängig zu machen
-from models import Plant, CareSchedule, ActionLog # beide wichtig für calculate_status Methode
+from models import Plant, CareSchedule, ActionLog # wichtig für calculate_status Methode
 
 def test_api_plants_get_success(client): # Happy Path (200) & korrekte JSON-Struktur testen
     from app import plants # geht ja darum, dass die Liste der Pflanzen zurückgegeben wird
