@@ -50,3 +50,24 @@ def test_api_plants_id_put_forbidden_fields(client):
 
     assert "error" in data # ist Fehlermeldung in Response von Server?
     assert data["error"] == "Bad Request: Updating id, status, created_at or schedules is not allowed"
+
+def test_api_plants_id_put_empty_value(client): # 2. Möglichkeit, dass ungültige Werte übergeben werden (leerer String, etc.)
+    plants.clear()
+
+    setup = {
+        "name": "Efeu",
+        "species": "Hedera",
+        "location": "Bad"
+    }
+
+    post_response = client.post('/api/plants', json=setup)
+    post_id = post_response.get_json()["id"]
+    
+    # Übergabe von gültigem Feld name aber mit ungültigem, leeren Inhalt
+    response = client.put(f'/api/plants/{post_id}', json={"name": "   "})
+    data = response.get_json()
+
+    # Überprüfungen
+    assert response.status_code == 400
+    assert "error" in data
+    assert data["error"] == "Bad Request: name cannot be empty" # kommt wieder richtige Fehlermeldung für ungültiges, leeres Feld?
