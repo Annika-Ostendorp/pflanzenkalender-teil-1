@@ -91,8 +91,14 @@ def update_plant(plant_id: int):
     for field in forbidden_fields_for_update:
         if field in data:
             return jsonify({"error": "Bad Request: Updating id, status, created_at or schedules is not allowed"}), 400
-        
+    
     # Herausfinden, welche Felder für ein Update erlaubt sind -> die anderen müssen aber unverändert bleiben
+    allowed_fields = ["name", "species", "location"]
+    for field in allowed_fields:
+        if field in data:
+            if data[field] is None or str(data[field]).strip() == "": # umwandeln in str und dann strip -> damit man z.b. auch nicht einfach nur Leerzeichen für Namen eingeben kann
+                return jsonify({"error": f"Bad Request: {field} cannot be empty"}), 400
+            
     for plant in plants:
         if plant._id == plant_id: # erlaubte Felder sind name, species und location -> schauen, ob sie auch in data sind -> nur dann updaten
             if "name" in data:
@@ -106,4 +112,4 @@ def update_plant(plant_id: int):
             
             return jsonify(plant.to_json()), 200 # Felder wurden erfolgreich geupdatet
     
-    return jsonify({"error": "Plant not found"}), 404
+    return jsonify({"error": "Plant not found"}), 404 # falls Schleufe durchläuft, aber keine ID gefunden hat -> Fehlermeldung
