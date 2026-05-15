@@ -1,6 +1,6 @@
 from app import plants
 
-def test_api_plants_id_put_partial_success(client):
+def test_api_plants_id_put_partial_update_success(client):
     # wieder zur Vorbereitung Liste leeren für klare IDs der Pflanzen
     plants.clear()
 
@@ -24,3 +24,29 @@ def test_api_plants_id_put_partial_success(client):
     assert data["location"] == "Balkon" # stimmt nun geänderter Wert?
     assert data["name"] == "Goldfruchtpalme" # bleiben name und species unverändert?
     assert data["species"] == "Palme"
+
+def test_api_plants_id_put_forbidden_fields(client):
+    plants.clear()
+    # wieder Pflanze anlegen, um gültige ID zu haben
+    setup = {
+        "name": "Monstera",
+        "species": "Deliciosa",
+        "location": "Schlafzimmer"
+    }
+
+    # Gleiche Logik wie bei erfolgreichem Test oben
+    post_response = client.post('/api/plants', json=setup)
+    post_id = post_response.get_json()["id"]
+
+    forbidden_payload = {
+        "id": 99, # übergeben nun falsche ID -> Versuch diese zu ändern, aber ist Teil von forbidden_fields!
+        "name": "Schmetterlingsorchidee"
+    }
+    response = client.put(f'/api/plants/{post_id}', json=forbidden_payload)
+
+    # Überprüfungen
+    assert response.status_code == 400 # falsche ID muss mit Bad Request Fehlermeldung abgelehnt werden
+    data = response.get_json()
+
+    assert "error" in data # ist Fehlermeldung in Response von Server?
+    assert data["error"] == "Bad Request: Updating id, status, created_at or schedules is not allowed"
