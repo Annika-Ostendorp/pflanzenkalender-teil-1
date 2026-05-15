@@ -71,3 +71,15 @@ def test_api_plants_id_put_empty_value(client): # 2. Möglichkeit, dass ungülti
     assert response.status_code == 400
     assert "error" in data
     assert data["error"] == "Bad Request: name cannot be empty" # kommt wieder richtige Fehlermeldung für ungültiges, leeres Feld?
+
+def test_api_plants_id_put_not_found(client):
+    plants.clear()
+
+    response = client.put('/api/plants/999', json={"name": "Topf"})
+
+    data = response.get_json()
+    
+    # Überprüfungen
+    assert response.status_code == 404 # ID ist ungültig -> richtiger Status Code?
+    assert "error" in data
+    assert data["error"] == "Plant not found" # richtige Fehlerbeschreibung?
