@@ -70,9 +70,15 @@ def test_api_plants_get_status_overdue_with_mock():
 
 def test_api_plants_get_internal_classes_coverage():
     # Klassen nun echt erstellen, damit pytest merkt, dass Code funktioniert -> ansonsten Code-Coverage Problem, da bisher nur Mocks verwendet
-    schedule = CareSchedule(1, "fertilizing", 7, date(2026, 5, 20))
-    log = ActionLog(1, "watering", date(2026, 5, 10), "Viel Wasser verbraucht")
+    schedule = CareSchedule(1, 1, "fertilizing", 7, date(2026, 5, 20)) # jetzt noch plant_id hinzufügen
+    log = ActionLog(1, 1, "watering", date(2026, 5, 10), "Viel Wasser verbraucht")
 
     assert schedule.next_due == date(2026, 5, 20)
-    assert "fertilizing" in str(schedule.to_json())
-    assert "Viel Wasser verbraucht" in str(log.to_json())
+
+    schedule_json = schedule.to_json() # noch versichern, dass plant_id auch sicher in to_json-Methoden ist
+    assert schedule_json["plant_id"] == 1
+    assert "fertilizing" in schedule_json["care_type"]
+
+    log_json = log.to_json()
+    assert log_json["plant_id"] == 1
+    assert "Viel Wasser verbraucht" in log_json["notes"]
