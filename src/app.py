@@ -91,3 +91,19 @@ def update_plant(plant_id: int):
     for field in forbidden_fields_for_update:
         if field in data:
             return jsonify({"error": "Bad Request: Updating id, status, created_at or schedules is not allowed"}), 400
+        
+    # Herausfinden, welche Felder für ein Update erlaubt sind -> die anderen müssen aber unverändert bleiben
+    for plant in plants:
+        if plant._id == plant_id: # erlaubte Felder sind name, species und location -> schauen, ob sie auch in data sind -> nur dann updaten
+            if "name" in data:
+                plant._name = data["name"]
+            
+            if "species" in data:
+                plant._species = data["species"]
+
+            if "location" in data:
+                plant._location = data["location"]
+            
+            return jsonify(plant.to_json()), 200 # Felder wurden erfolgreich geupdatet
+    
+    return jsonify({"error": "Plant not found"}), 404
