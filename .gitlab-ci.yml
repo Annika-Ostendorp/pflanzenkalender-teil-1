@@ -14,7 +14,7 @@ run_all_tests:
     - coverage run --source=src -m pytest tests/
     - coverage report
     - coverage xml -o cov.xml
-  coverage: '^TOTAL.*\s+(\d+\%)$'
+  coverage: "/^TOTAL.*\\s+(\\d+\\%)$/"
   artifacts:
     when: always
     reports:
