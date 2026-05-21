@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, Response
+from flask import Flask, jsonify, request, Response, render_template
 from flask_cors import CORS # fehlendes CORS-Modul importieren
 from datetime import date
 from models import ActionLog, CareSchedule, Plant
@@ -9,6 +9,12 @@ CORS(app) # brauchen CORS ja für gesamte API
 plants = []
     
 next_id = 1 # Zähler festlegen für ID, damit jede Pflanze ihre eindeutige ID bekommt
+
+# Route, damit Webseite nun direkt geladen wird ohne 404 Not Found-Fehler
+@app.route("/")
+def index():
+    return render_template("index.html")
+
 
 # Route für Endpoint POST /api/plants
 @app.route('/api/plants', methods=['POST'])
