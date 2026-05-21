@@ -1,0 +1,35 @@
+image: python:3.13.5
+
+stages:
+- test
+- build
+
+# Test Job erstellen, der auf allen Branches läuft
+run_all_tests:
+  stage: test
+  before_script:
+    - pip3 install -r requirements.txt # damit alle Abhängigkeiten installiert sind
+  script: # nach Vorlesungsinhalten
+    - pytest --junitxml=report.xml
+    - coverage run --source=src -m pytest tests/
+    - coverage report
+    - coverage xml -o cov.xml
+  coverage: "/^TOTAL.*\\s+(\\d+\\%)$/"
+  artifacts:
+    when: always
+    reports:
+      junit: report.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: cov.xml
+
+# Build Job
+build-job:
+  stage: build
+  script:
+    - apt-get update && apt-get install -y zip # Zip-Tool installieren
+    - zip -r src.zip src/ # alle Dateien und Unterordner aus src/ kommen in eine einzige komprimierte Datei src.zip
+  artifacts:
+    when: always
+    paths:
+      - src.zip 
