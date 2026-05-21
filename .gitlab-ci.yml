@@ -14,3 +14,11 @@ run_all_tests:
     - coverage run --source=src -m pytest
     - coverage report
     - coverage xml -o cov.xml
+  coverage: '^TOTAL.*\s+(\d+\%)$'
+  artifacts:
+    when: always
+    reports:
+      junit: report.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: cov.xml
