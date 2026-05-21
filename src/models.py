@@ -31,7 +31,14 @@ class CareSchedule:
     
     @property # Property-Dekorator, um nicht immer Klammern mitschreiben zu müssen bei Methode -> auf Methode zugriefen wie auf normale Variablen
     def next_due(self) -> date:
-        return self._next_due
+        if self._plant is not None: # Pflanze wurde von außen übergeben -> Datumslogik berechnen
+            last_log = None # Ausgangszustand, noch kein Protokoll angesehen
+
+            for log in self._plant._logs:
+                if log._care_type == self._care_type: # stimmt Log mit care_type von CareSchedule Objekt überein?
+                    if last_log is None or log._performed_at > last_log._performed_at: # wenn noch kein Log gemerkt oder aktuelles Log neuer ist als das gemerkte
+                        last_log = log # last_log nun das neuere log zuweisen
+
 
     def to_json(self) -> dict:
         return {
