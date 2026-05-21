@@ -2,3 +2,4 @@ Flask
 pytest
 pytest-cov
 pytest-mock
+flask-cors~=4.0.0 # alle Versionen die >= 4.0.0 sind -> sicher für Pipeline
