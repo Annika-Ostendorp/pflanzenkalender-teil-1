@@ -6,7 +6,7 @@ def test_api_plants_id_get_success(client): # hier wieder mit MagicMock (wie bei
     set_today = date(2026, 5, 13)
     desired_next_due = date(2026, 5, 15) # in 2 Tagen fällig -> "soon"-> AttributeError (next_due of Care Schedule object has no setter) lösen -> desired_next_due
 
-    with patch('app.date') as mock_date:
+    with patch('models.date') as mock_date:
         mock_date.today.return_value = set_today
 
         from app import plants # wieder Liste mit allen Pflanzen holen & leeren für sauberen Test
