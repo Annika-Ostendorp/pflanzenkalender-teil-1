@@ -39,6 +39,13 @@ class CareSchedule:
                     if last_log is None or log._performed_at > last_log._performed_at: # wenn noch kein Log gemerkt oder aktuelles Log neuer ist als das gemerkte
                         last_log = log # last_log nun das neuere log zuweisen
 
+            if last_log is not None: # falls last_log vorhanden (Projektbeschreibung) -> Rechenlogik implementieren
+                return last_log._performed_at + timedelta(days=self._interval_days)
+
+            return self._plant._created_at + timedelta(days=self._interval_days)
+    
+        return self._next_due # trotzdem, damit Tests aus Sprint 1 nicht fehlschlagen
+
 
     def to_json(self) -> dict:
         return {
@@ -46,7 +53,7 @@ class CareSchedule:
             "plant_id": self._plant_id,
             "care_type": self._care_type,
             "interval_days": self._interval_days,
-            "next_due": str(self._next_due) # next_due hinzufügen für calculate_status Methode, damit Tests nicht fehlschlagen
+            "next_due": str(self.next_due) # next_due hinzufügen für calculate_status Methode, damit Tests nicht fehlschlagen
         }
     
 
