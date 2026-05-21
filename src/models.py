@@ -27,10 +27,25 @@ class CareSchedule:
         self._care_type = care_type
         self._interval_days = interval_days
         self._next_due = next_due
+        self._plant = None # beim Erstellen hat Plan noch keine Pflanze -> damit Tests trotzdem nicht fehlschlagen
     
     @property # Property-Dekorator, um nicht immer Klammern mitschreiben zu müssen bei Methode -> auf Methode zugriefen wie auf normale Variablen
     def next_due(self) -> date:
-        return self._next_due
+        if self._plant is not None: # Pflanze wurde von außen übergeben -> Datumslogik berechnen
+            last_log = None # Ausgangszustand, noch kein Protokoll angesehen
+
+            for log in self._plant._logs:
+                if log._care_type == self._care_type: # stimmt Log mit care_type von CareSchedule Objekt überein?
+                    if last_log is None or log._performed_at > last_log._performed_at: # wenn noch kein Log gemerkt oder aktuelles Log neuer ist als das gemerkte
+                        last_log = log # last_log nun das neuere log zuweisen
+
+            if last_log is not None: # falls last_log vorhanden (Projektbeschreibung) -> Rechenlogik implementieren
+                return last_log._performed_at + timedelta(days=self._interval_days)
+
+            return self._plant._created_at + timedelta(days=self._interval_days)
+    
+        return self._next_due # trotzdem, damit Tests aus Sprint 1 nicht fehlschlagen
+
 
     def to_json(self) -> dict:
         return {
@@ -38,7 +53,7 @@ class CareSchedule:
             "plant_id": self._plant_id,
             "care_type": self._care_type,
             "interval_days": self._interval_days,
-            "next_due": str(self._next_due) # next_due hinzufügen für calculate_status Methode, damit Tests nicht fehlschlagen
+            "next_due": str(self.next_due) # next_due hinzufügen für calculate_status Methode, damit Tests nicht fehlschlagen
         }
     
 
@@ -53,6 +68,9 @@ class Plant:
         self._logs = [] # Liste mit ActionLog Objekten
     
     def to_json(self) -> dict: # Nutzen to_json, um Zugriff auf private Member-Variablen von Klasse Plant zu bekommen für JSON-Ausgabe
+        for schedule in self._schedules: # damit dann jedes CareSchedule-Objekt Zugriff/Referenz auf Daten dieser Pflanze
+            schedule._plant = self
+
         return {
             "id": self._id,
             "name": self._name,
@@ -66,6 +84,9 @@ class Plant:
         }
     
     def calculate_status(self) -> str:
+        for schedule in self._schedules: # auch hier verknüpft, damit gerechnet werden kann -> nicht stored sondern calculated
+            schedule._plant = self
+
         today = date.today() # heutiges Datum als Bsp. festlegen, damit Berechnung für z.B. "overdue"-Logik funktioniert
         three_days_from_now = today + timedelta(days = 3)
 
