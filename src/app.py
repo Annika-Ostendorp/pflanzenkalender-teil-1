@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, request, Response
+from flask_cors import CORS # fehlendes CORS-Modul importieren
 from datetime import date
 from models import ActionLog, CareSchedule, Plant
 
 app = Flask(__name__)
+CORS(app) # brauchen CORS ja für gesamte API
 
 plants = []
     
