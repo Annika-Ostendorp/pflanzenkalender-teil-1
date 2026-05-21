@@ -27,6 +27,7 @@ class CareSchedule:
         self._care_type = care_type
         self._interval_days = interval_days
         self._next_due = next_due
+        self._plant = None # beim Erstellen hat Plan noch keine Pflanze -> damit Tests trotzdem nicht fehlschlagen
     
     @property # Property-Dekorator, um nicht immer Klammern mitschreiben zu müssen bei Methode -> auf Methode zugriefen wie auf normale Variablen
     def next_due(self) -> date:
@@ -53,6 +54,9 @@ class Plant:
         self._logs = [] # Liste mit ActionLog Objekten
     
     def to_json(self) -> dict: # Nutzen to_json, um Zugriff auf private Member-Variablen von Klasse Plant zu bekommen für JSON-Ausgabe
+        for schedule in self._schedules: # damit dann jedes CareSchedule-Objekt Zugriff/Referenz auf Daten dieser Pflanze
+            schedule._plant = self
+
         return {
             "id": self._id,
             "name": self._name,
@@ -66,6 +70,9 @@ class Plant:
         }
     
     def calculate_status(self) -> str:
+        for schedule in self._schedules: # auch hier verknüpft, damit gerechnet werden kann -> nicht stored sondern calculated
+            schedule._plant = self
+
         today = date.today() # heutiges Datum als Bsp. festlegen, damit Berechnung für z.B. "overdue"-Logik funktioniert
         three_days_from_now = today + timedelta(days = 3)
 
