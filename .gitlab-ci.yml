@@ -1,0 +1,5 @@
+image: python:3.13.5
+
+stages:
+- test
+- build
