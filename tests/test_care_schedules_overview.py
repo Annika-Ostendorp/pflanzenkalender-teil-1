@@ -13,3 +13,16 @@ def test_api_get_plants_id_schedules_success(client):
     test_schedule = CareSchedule(1, 1, "repotting", 7, None)
     test_plant._schedules.append(test_schedule)
     plants.append(test_plant)
+
+    response = client.get('/api/plants/1/schedules')
+    data = response.get_json()
+
+    # Überprüfungen
+    assert response.status_code == 200
+    assert len(data) == 1 # Liste muss ja hier genau 1 Plan enthalten
+
+    # jetzt genau diese CareSchedule Liste durchgehen -> ist an 1. Stelle der großen Liste -> deshalb [0] (Python beginnt ja bei 0 mit zählen)
+    assert data[0]["id"] == 1
+    assert data[0]["plant_id"] == 1
+    assert data[0]["care_type"] == "repotting"
+    assert data[0]["interval_days"] == 7
