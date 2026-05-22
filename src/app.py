@@ -208,7 +208,18 @@ def get_plant_schedules(plant_id: int) -> Response:
 # Route für Endpoint DELETE /api/plants/<id>/schedules/<care_type>
 @app.route('/api/plants/<int:plant_id>/schedules/<string:care_type>', methods=['DELETE'])
 def delete_plant_schedule(plant_id: int, care_type: str) -> Response:
+    test_plant = None
 
+    # wieder Logik wie vorhin -> existiert Pflanze mit spezieller ID überhaupt in Liste?
+    for plant in plants:
+        if plant._id == plant_id:
+            test_plant = plant
+            break # Pflanze wurde gefunden -> hier wieder Schleife abbrechen+
     
+    # falls trotzdem test_plant weiterhin None --> Fehler
+    if test_plant is None:
+        return jsonify({"error": "Plant not found"}), 404
+    
+
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
