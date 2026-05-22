@@ -33,3 +33,15 @@ def test_api_delete_plants_id_schedules_care_type_plant_not_found(client):
     assert response.status_code == 404
     assert "error" in data
     assert data["error"] == "Plant not found"
+
+
+def test_api_delete_plants_id_schedules_care_type_not_found(client):
+    plants.clear()
+
+    # wieder Testpflanze mit Test-Schedule anlegen
+    plant_creation_date = date(2026, 5, 22)
+    test_plant = Plant(1, "Goldfruchtpalme", "Palme", "Schlafzimmer", plant_creation_date)
+
+    test_schedule = CareSchedule(1, 1, "repotting", 7, None)
+    test_plant._schedules.append(test_schedule)
+    plants.append(test_plant)
