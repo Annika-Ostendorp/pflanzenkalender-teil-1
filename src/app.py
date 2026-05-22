@@ -205,5 +205,10 @@ def get_plant_schedules(plant_id: int) -> Response:
     return jsonify(schedules), 200 # neue Liste mit gefilterten schedules (die bestimmte plant_id haben) erfolgreich zurückgegeben
 
 
+# Route für Endpoint DELETE /api/plants/<id>/schedules/<care_type>
+@app.route('/api/plants/<int:plant_id>/schedules/<string:care_type>', methods=['DELETE'])
+def delete_plant_schedule(plant_id: int, care_type: str) -> Response:
+
+    
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
