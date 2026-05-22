@@ -226,7 +226,15 @@ def delete_plant_schedule(plant_id: int, care_type: str) -> Response:
         if schedule._care_type == care_type:
             specific_schedule = schedule
             break # schedule mit spezifischem care_type gefunden -> Schleife kann abgebrochen werden
-        
+
+    if specific_schedule is None: # falls aber dieser Pflegeplan mit spezifischem care_type nicht existiert -> Fehler
+        return jsonify({"error": "Care schedule not found"}), 404
+    
+    # diesen speziellen Pflegeplan dann dauerhaft aus Pflanze entfernen
+    test_plant._schedules.remove(specific_schedule)
+
+    return '', 204 # erfolgreich gelöscht (204) -> leerer Body ('')
+
 
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
