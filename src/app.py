@@ -182,5 +182,28 @@ def create_or_update_schedule(plant_id: int) -> Response:
         return jsonify(new_schedule.to_json()), 201 # neuer Plan wurde erfolgreich hinzugefügt
 
 
+# Route für Endpoint GET /api/plants/<id>/schedules
+@app.route('/api/plants/<int:plant_id>/schedules', methods=['GET'])
+def get_plant_schedules(plant_id: int) -> Response:
+    test_plant = None
+
+    # wieder Logik wie bei voriger Route -> existiert Pflanze überhaupt?
+    for plant in plants:
+        if plant._id == plant_id:
+            test_plant = plant
+            break
+    
+    if test_plant is None:
+        return jsonify({"error": "Plant not found"}), 404 # Pflanze existiert nicht -> Fehlermeldung (404)
+
+    # alle Pflegepläne mit dieser bestimmten plant_id filtern + in JSON umwandeln
+    schedules = []
+
+    for schedule in test_plant._schedules: # jeden schedule einzeln durchgehen und Liste hinzufügen
+        schedules.append(schedule.to_json())
+
+    return jsonify(schedules), 200 # neue Liste mit gefilterten schedules (die bestimmte plant_id haben) erfolgreich zurückgegeben
+
+
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
