@@ -138,5 +138,21 @@ def create_or_update_schedule(plant_id: int) -> Response:
             existing_schedule = schedule
             break
 
+    # Szenario B -> Falls schedule mit diesem care_type existiert -> Update von interval_days
+    if existing_schedule is not None:
+        existing_schedule._interval_days = interval_days
+        return jsonify(existing_schedule.to_json()), 201 # interval_days konnte geupdatet werden -> Erfolg (201)
+    
+    # Szenario A -> Falls schedule mit diesem care_type aber nicht existiert -> neuen schedule anlegen
+    if existing_schedule is None:
+        max_id = 0 # aktuell höchste ID
+
+        for schedule in test_plant._schedules:
+            if schedule._id > max_id: # falls ID von bestehendem schedule größer als momentane max_id -> neu zuweisen
+                max_id = schedule._id
+        
+        new_id = max_id + 1 # für neuen Plan wieder neue ID
+
+
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
