@@ -66,3 +66,23 @@ def test_api_plants_id_schedules_errors_care_type(client):
 
     response = client.post('/api/plants/999/schedules', json=payload)
     assert response.status_code == 404 # ungültige ID -> Fehlermeldung mit Status Code 404
+
+    # brauchen jetzt wieder Testpflanze für Überprüfung von ungültigem care_type
+    test_plant = Plant(1, "Monstera", "Deliciosa", "Schlafzimmer", date(2026, 5, 19))
+    plants.append(test_plant)
+
+    # care_type ist leer
+    invalid_payload = {
+        "care_type": "  ",
+        "interval_days": 7
+    }
+    response = client.post('/api/plants/1/schedules', json=invalid_payload)
+    assert response.status_code == 400 # care_type ist ungültig wegen Leerzeichen -> Fehlermeldung & Statuscode 400
+
+    # care_type hat falschen Typ
+    payload_wrong_type = {
+        "care_type": 246,
+        "interval_days": 7
+    }
+    response = client.post('/api/plants/1/schedules', json=payload_wrong_type)
+    assert response.status_code == 400 # care_type hat falschen Typ (nicht str) -> 400
