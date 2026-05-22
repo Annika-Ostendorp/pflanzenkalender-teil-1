@@ -38,3 +38,18 @@ def test_api_plants_id_schedules_update_success(client):
     old_schedule = CareSchedule(1, 1, "watering", 7, None) # wurde noch nicht geupdatet -> old_schedule
     test_plant._schedules.append(old_schedule) # bestehenden alten Plan der Pflanze geben
     plants.append(test_plant)
+
+     # neues Intervall festlegen
+    payload = {
+        "care_type": "watering",
+        "interval_days": 14
+    }
+
+    response = client.post('/api/plants/1/schedules', json=payload)
+    data = response.get_json()
+
+    # Überprüfungen
+    assert response.status_code == 201
+    assert data["id"] == 1
+    assert data["interval_days"] == 14 # wurde Intervall erfolgreich aktualisiert?
+    assert len(test_plant._schedules) == 1
