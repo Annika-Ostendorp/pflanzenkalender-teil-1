@@ -86,3 +86,17 @@ def test_api_plants_id_schedules_errors_care_type(client):
     }
     response = client.post('/api/plants/1/schedules', json=payload_wrong_type)
     assert response.status_code == 400 # care_type hat falschen Typ (nicht str) -> 400
+
+
+def test_api_plants_id_schedules_errors_interval_days(client):
+    plants.clear()
+
+    test_plant = Plant(1, "Monstera", "Deliciosa", "Schlafzimmer", date(2026, 5, 19))
+    plants.append(test_plant)
+
+    # Attribut interval_days fehlt 
+    payload_missing = {
+        "care_type": "repotting"
+    }
+    response = client.post('/api/plants/1/schedules', json=payload_missing)
+    assert response.status_code == 400 # interval_days fehlt komplett -> Fehler (400)
