@@ -122,14 +122,35 @@ def update_plant(plant_id: int) -> Response:
 # Route für Endpoint POST /api/plants/<id>/schedules
 @app.route('/api/plants/<int:plant_id>/schedules', methods=['POST'])
 def create_or_update_schedule(plant_id: int) -> Response:
+    test_plant = None # Ausgangszustand
+
     for plant in plants:
         if plant._id == plant_id: # existiert Pflanze überhaupt im Speicher/ Liste?
             test_plant = plant
             break # gefunden -> brauchen keine weitere Bedingung -> break, Schleife abbrechen
     
+    if test_plant is None:
+        return jsonify({"error": "Plant not found"}), 404 # es existiert noch keine Pflanze -> Fehlermeldung
+    
     data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "Missing JSON payload"}), 400 # es existieren keine Daten
+    
+    # Pflichtfelder care_type oder interval_days fehlen 
+    if "care_type" not in data or "interval_days" not in data:
+        return jsonify({"error": "Missing care_type or interval_days"}), 400
+    
     care_type = data["care_type"]
     interval_days = data["interval_days"]
+
+    # Pflichtfelder sind ungültig -> gleiche Logik wie bei Route PUT /api/plants/<id> -> hier aber mit Sicherheit bei Typarten
+    if type(care_type) is not str or str(care_type).strip() == "":
+        return jsonify({"error": "Bad Request: care_type cannot be empty"}), 400
+    
+    if type(interval_days) is not int or interval_days < 1:
+        return jsonify({"error": "Bad Request: interval_days must be a positive integer >= 1"}), 400
+    
 
     # Existiert für bestimmten Pflegetyp schon Pflegeplan?
     existing_schedule = None # gibt bisher noch keinen Pflegeplan
