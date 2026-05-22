@@ -153,6 +153,13 @@ def create_or_update_schedule(plant_id: int) -> Response:
         
         new_id = max_id + 1 # für neuen Plan wieder neue ID
 
+        # jetzt neuen Plan erstellen & in Pflanzenliste speichern
+        new_schedule = CareSchedule(new_id, plant_id, care_type, interval_days, None)
+
+        test_plant._schedules.append(new_schedule)
+
+        return jsonify(new_schedule.to_json()), 201 # neuer Plan wurde erfolgreich hinzugefügt
+
 
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
