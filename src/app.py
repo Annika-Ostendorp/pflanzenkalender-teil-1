@@ -82,7 +82,7 @@ def get_plants_id(plant_id: int) -> Response: # ähnlicher Aufbau wie bei DELETE
 
 # Route für Endpoint PUT /api/plants/<id>
 @app.route('/api/plants/<int:plant_id>', methods=['PUT'])
-def update_plant(plant_id: int):
+def update_plant(plant_id: int) -> Response:
     global plants
 
     data = request.get_json() # erstmal wieder alle Daten holen
@@ -119,6 +119,9 @@ def update_plant(plant_id: int):
     return jsonify({"error": "Plant not found"}), 404 # falls Schleufe durchläuft, aber keine ID gefunden hat -> Fehlermeldung
 
 
+# Route für Endpoint POST /api/plants/<id>/schedules
+@app.route('/api/plants/<int:plant_id>/schedules', methods=['POST'])
+def create_or_update_schedule(plant_id: int) -> Response:
 
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
