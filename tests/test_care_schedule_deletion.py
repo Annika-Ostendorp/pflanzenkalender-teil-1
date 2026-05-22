@@ -16,3 +16,9 @@ def test_api_delete_plants_id_care_schedules_care_type_success(client):
 
     # Ist Plan sicher in Liste drin? -> ansonsten könnten wir ihn ja nicht löschen
     assert len(test_plant._schedules) == 1
+
+    response = client.delete('/api/plants/1/schedules/fertilizing')
+
+    # Überprüfungen -> muss erfolgreich gelöscht sein
+    assert response.status_code == 204
+    assert len(test_plant._schedules) == 0 # darf kein Plan mehr enthalten sein!
