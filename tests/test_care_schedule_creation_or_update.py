@@ -1,6 +1,6 @@
 from datetime import date
 from app import plants
-from models import Plant
+from models import Plant, CareSchedule
 
 def test_api_plants_id_schedules_success(client):
     plants.clear()
@@ -26,3 +26,15 @@ def test_api_plants_id_schedules_success(client):
     assert data["care_type"] == "watering"
     assert data["interval_days"] == 7
     assert len(test_plant._schedules) == 1 # wurde neue Pflanze hinzugefügt -> Liste muss nun Länge von 1 haben
+
+
+def test_api_plants_id_schedules_update_success(client):
+    plants.clear()
+
+    # wieder Vorbereitung von Testpflanze
+    plant_creation_date = date(2026, 5, 14)
+    test_plant = Plant(1, "Monstera", "Deliciosa", "Büro", plant_creation_date)
+
+    old_schedule = CareSchedule(1, 1, "watering", 7, None) # wurde noch nicht geupdatet -> old_schedule
+    test_plant._schedules.append(old_schedule) # bestehenden alten Plan der Pflanze geben
+    plants.append(test_plant)
