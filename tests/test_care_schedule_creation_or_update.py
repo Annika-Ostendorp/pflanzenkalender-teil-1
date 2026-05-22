@@ -100,3 +100,19 @@ def test_api_plants_id_schedules_errors_interval_days(client):
     }
     response = client.post('/api/plants/1/schedules', json=payload_missing)
     assert response.status_code == 400 # interval_days fehlt komplett -> Fehler (400)
+
+    # interval_days ist ein ungültiger Typ -> Nachkommazahl statt ganze Zahl
+    payload_float = {
+        "care_type": "watering",
+        "interval_days": 3.5
+    }
+    response = client.post('/api/plants/1/schedules', json=payload_float)
+    assert response.status_code == 400
+
+    # interval_days ist ungültig -> kleiner als 1
+    payload_zero = {
+        "care_type": "repotting",
+        "interval_days": 0
+    }
+    response = client.post('/api/plants/1/schedules', json=payload_zero)
+    assert response.status_code == 400
