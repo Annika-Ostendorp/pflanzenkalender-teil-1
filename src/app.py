@@ -220,6 +220,13 @@ def delete_plant_schedule(plant_id: int, care_type: str) -> Response:
     if test_plant is None:
         return jsonify({"error": "Plant not found"}), 404
     
+    # jetzt schauen, ob Pflanze Pflegeplan mit spezifischem care_type besitzt
+    specific_schedule = None
+    for schedule in test_plant._schedules:
+        if schedule._care_type == care_type:
+            specific_schedule = schedule
+            break # schedule mit spezifischem care_type gefunden -> Schleife kann abgebrochen werden
+        
 
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
