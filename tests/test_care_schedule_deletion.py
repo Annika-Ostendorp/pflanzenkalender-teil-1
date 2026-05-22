@@ -45,3 +45,13 @@ def test_api_delete_plants_id_schedules_care_type_not_found(client):
     test_schedule = CareSchedule(1, 1, "repotting", 7, None)
     test_plant._schedules.append(test_schedule)
     plants.append(test_plant)
+
+    response = client.delete('/api/plants/1/schedules/fertilizing') # dieser care_type existiert nicht! -> Fehler (404)
+    data = response.get_json()
+
+    # Überprüfungen
+    assert response.status_code == 404
+    assert "error" in data
+    assert data["error"] == "Care schedule not found" # care_type "fertilizing" gibt es nicht -> richtige Fehlermeldung zurückgegeben?
+
+    assert len(test_plant._schedules) == 1 # bestehender Plan mit care_type "repotting" darf nicht gelöscht werden!
