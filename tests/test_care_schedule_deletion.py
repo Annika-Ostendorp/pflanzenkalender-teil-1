@@ -22,3 +22,14 @@ def test_api_delete_plants_id_care_schedules_care_type_success(client):
     # Überprüfungen -> muss erfolgreich gelöscht sein
     assert response.status_code == 204
     assert len(test_plant._schedules) == 0 # darf kein Plan mehr enthalten sein!
+
+
+def test_api_delete_plants_id_schedules_care_type_plant_not_found(client):
+    plants.clear()
+
+    response = client.delete('/api/plants/999/schedules/watering') # ID existiert nicht -> Fehler
+    data = response.get_json()
+
+    assert response.status_code == 404
+    assert "error" in data
+    assert data["error"] == "Plant not found"
