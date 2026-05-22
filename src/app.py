@@ -182,5 +182,11 @@ def create_or_update_schedule(plant_id: int) -> Response:
         return jsonify(new_schedule.to_json()), 201 # neuer Plan wurde erfolgreich hinzugefügt
 
 
+# Route für Endpoint GET /api/plants/<id>/schedules
+@app.route('/api/plants/<int:plant_id>/schedules', methods=['GET'])
+def get_plant_schedules(plant_id: int) -> Response:
+    
+
+
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
