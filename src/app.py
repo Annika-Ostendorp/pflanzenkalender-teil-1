@@ -205,5 +205,36 @@ def get_plant_schedules(plant_id: int) -> Response:
     return jsonify(schedules), 200 # neue Liste mit gefilterten schedules (die bestimmte plant_id haben) erfolgreich zurückgegeben
 
 
+# Route für Endpoint DELETE /api/plants/<id>/schedules/<care_type>
+@app.route('/api/plants/<int:plant_id>/schedules/<string:care_type>', methods=['DELETE'])
+def delete_plant_schedule(plant_id: int, care_type: str) -> Response:
+    test_plant = None
+
+    # wieder Logik wie vorhin -> existiert Pflanze mit spezieller ID überhaupt in Liste?
+    for plant in plants:
+        if plant._id == plant_id:
+            test_plant = plant
+            break # Pflanze wurde gefunden -> hier wieder Schleife abbrechen+
+    
+    # falls trotzdem test_plant weiterhin None --> Fehler
+    if test_plant is None:
+        return jsonify({"error": "Plant not found"}), 404
+    
+    # jetzt schauen, ob Pflanze Pflegeplan mit spezifischem care_type besitzt
+    specific_schedule = None
+    for schedule in test_plant._schedules:
+        if schedule._care_type == care_type:
+            specific_schedule = schedule
+            break # schedule mit spezifischem care_type gefunden -> Schleife kann abgebrochen werden
+
+    if specific_schedule is None: # falls aber dieser Pflegeplan mit spezifischem care_type nicht existiert -> Fehler
+        return jsonify({"error": "Care schedule not found"}), 404
+    
+    # diesen speziellen Pflegeplan dann dauerhaft aus Pflanze entfernen
+    test_plant._schedules.remove(specific_schedule)
+
+    return '', 204 # erfolgreich gelöscht (204) -> leerer Body ('')
+
+
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
