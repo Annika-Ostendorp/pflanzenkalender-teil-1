@@ -122,6 +122,21 @@ def update_plant(plant_id: int) -> Response:
 # Route für Endpoint POST /api/plants/<id>/schedules
 @app.route('/api/plants/<int:plant_id>/schedules', methods=['POST'])
 def create_or_update_schedule(plant_id: int) -> Response:
+    for plant in plants:
+        if plant._id == plant_id: # existiert Pflanze überhaupt im Speicher/ Liste?
+            test_plant = plant
+            break # gefunden -> brauchen keine weitere Bedingung -> break, Schleife abbrechen
+    
+    data = request.get_json()
+    care_type = data["care_type"]
+    interval_days = data["interval_days"]
+
+    # Existiert für bestimmten Pflegetyp schon Pflegeplan?
+    existing_schedule = None # gibt bisher noch keinen Pflegeplan
+    for schedule in test_plant._schedules:
+        if schedule._care_type == care_type: # gleiche Logik wie oben --> existiert Pflegetyp in Liste --> existing_schedule = schedule
+            existing_schedule = schedule
+            break
 
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
