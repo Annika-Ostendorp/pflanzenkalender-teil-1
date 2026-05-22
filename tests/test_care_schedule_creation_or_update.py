@@ -53,3 +53,16 @@ def test_api_plants_id_schedules_update_success(client):
     assert data["id"] == 1
     assert data["interval_days"] == 14 # wurde Intervall erfolgreich aktualisiert?
     assert len(test_plant._schedules) == 1
+
+
+def test_api_plants_id_schedules_errors_care_type(client):
+    plants.clear()
+
+    # Pflanze existiert nicht im Speicher
+    payload = {
+        "care_type": "repotting",
+        "interval_days": 7
+    }
+
+    response = client.post('/api/plants/999/schedules', json=payload)
+    assert response.status_code == 404 # ungültige ID -> Fehlermeldung mit Status Code 404
