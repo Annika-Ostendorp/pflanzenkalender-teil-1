@@ -290,5 +290,38 @@ def create_plant_log(plant_id: int) -> Response:
 
     return jsonify(new_log.to_json()), 201 # neuer Log-Eintrag erfolgreich zurückgegeben
 
+
+# Route für Endpoint GET /api/plants/<id>/logs
+@app.route('/api/plants/<int:plant_id>/logs', methods=['GET'])
+def get_plants_logs(plant_id: int) -> Response:
+    test_plant = None
+
+    # wieder prüfen, ob Pflanze überhaupt existiert
+    for plant in plants:
+        if plant._id == plant_id:
+            test_plant = plant
+            break
+
+    if test_plant is None:
+        return jsonify({"error": "Plant not found"}), 404 # Pflanze existiert nicht -> Fehler 404
+
+    # Logs für spezielle plant_id holen & in JSON umwandeln
+    unsorted_logs = [log.to_json() for log in test_plant._logs]
+    sorted_logs = []
+
+    # jetzt logs in Reihenfolge mit absteigendem Datum sortieren
+    while len(unsorted_logs) > 0:
+        newest_log = unsorted_logs[0] # 1. momentaner Log ist Startpunkt -> mit diesem nun alle anderen Logs vergleichen & sortieren
+
+        for log in unsorted_logs:
+            if log["performed_at"] > newest_log["performed_at"]:
+                newest_log = log # neues Datum neu zuweisen, wenn es aktueller ist als momentan "höchstes" gefundenes
+
+        sorted_logs.append(newest_log) # neustes Datum in neue Liste hinzufügen und dann aus alter löschen
+        unsorted_logs.remove(newest_log)
+
+    return jsonify(sorted_logs), 200 # sortierte Liste mit allen Logs erfolgreich zurückgegeben
+
+
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
