@@ -19,28 +19,28 @@ def test_api_get_plants_id_next_actions_sorting_success(client):
         schedule_watering = CareSchedule(1, 1, "watering", 7, None)
         log_watering = ActionLog(1, 1, "watering", date(2026, 5, 20), "Gegossen")
         test_plant._logs.append(log_watering)
-    
+
         # Szenario B: overdue ist True, da Aktion bereits überfällig -> negatives days_until
         # 20. Mai - 25. Mai = -5 Tage
         schedule_fertilizing = CareSchedule(2, 1, "fertilizing", 10, None)
-    
+
         test_plant._schedules.append(schedule_watering)
         test_plant._schedules.append(schedule_fertilizing)
         plants.append(test_plant)
 
-    # Daten holen
-    response = client.get('/api/plants/1/next-actions')
-    data = response.get_json()
+        # Daten holen
+        response = client.get('/api/plants/1/next-actions')
+        data = response.get_json()
 
-    # Überprüfungen
-    assert response.status_code == 200
-    assert len(data) == 2 # sind 2 Pflegepläne in Liste der kommenden Aktionen?
+        # Überprüfungen
+        assert response.status_code == 200
+        assert len(data) == 2 # sind 2 Pflegepläne in Liste der kommenden Aktionen?
 
-    # Aufsteigende Sortierung prüfen
-    assert data[0]["care_type"] == "fertilizing"
-    assert data[0]["next_due"] == "2026-05-20"
-    assert data[0]["days_until"] == -5 # als erstes (Index 0) muss in Liste die überfällige Aktion kommen
-    assert data[0]["overdue"] is True # ist überfällig -> True
+        # Aufsteigende Sortierung prüfen
+        assert data[0]["care_type"] == "fertilizing"
+        assert data[0]["next_due"] == "2026-05-20"
+        assert data[0]["days_until"] == -5 # als erstes (Index 0) muss in Liste die überfällige Aktion kommen
+        assert data[0]["overdue"] is True # ist überfällig -> True
 
     # das Gießen was erst in 2 Tagen fällig ist kommt danach
     assert data[1]["care_type"] == "watering"
