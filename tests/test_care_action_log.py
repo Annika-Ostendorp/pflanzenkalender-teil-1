@@ -76,3 +76,19 @@ def test_api_post_plants_id_logs_invalid(client):
     assert "error" in data
     assert data["error"] == "Bad Request: Missing or invalid care_type"
     assert len(test_plant._logs) == 0 # kein Eintrag in Logs-Liste von Testpflanze! -> Feld fehlt ja
+
+
+def test_api_post_plants_id_logs_not_found(client):
+    plants.clear()
+
+    payload = {
+        "care_type": "repotting"
+    }
+
+    response = client.post('/api/plants/999/logs', json=payload) # ID existiert nicht -> 404 Fehlermeldung
+    data = response.get_json()
+
+    # Überprüfungen
+    assert response.status_code == 404 # Pflanze nicht gefunden -> 404
+    assert "error" in data
+    assert data["error"] == "Plant not found"
