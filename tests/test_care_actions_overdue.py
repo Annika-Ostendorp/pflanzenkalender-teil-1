@@ -26,3 +26,23 @@ def test_api_get_overdue_sorting_success(client):
         # beide Pflanzen in plants-Liste hinzufügen
         plants.append(plant_monstera)
         plants.append(plant_goldfruchtpalme)
+
+        # wieder Daten holen/ API abrufen
+        response = client.get('/api/overdue')
+        data = response.get_json()
+
+        # Überprüfungen
+        assert response.status_code == 200
+        assert len(data) == 2 # wurden 2 Pflanzen hinzugefügt?
+
+        # Absteigende Sortierung prüfen -> Monstera die 10 Tage überfällig ist, muss vor Goldfruchtpalme stehen
+        assert data[0]["plant_name"] == "Monstera"
+        assert data[0]["days_overdue"] == 10
+        assert data[0]["plant_location"] == "Wohnzimmer"
+
+        assert data[1]["plant_name"] == "Goldfruchtpalme"
+        assert data[1]["days_overdue"] == 3
+        assert data[1]["plant_location"] == "Küche"
+
+        # und wieder testen, ob Mock-Datum auch benutzt wurde
+        mock_date.today.assert_called_once()
