@@ -338,6 +338,7 @@ def get_plant_next_actions(plant_id: int) -> Response:
         return jsonify({"error": "Plant not found"}), 404
     
     next_actions = []
+    today = date.today()
 
     for schedule in test_plant._schedules:
         # jetzt haben wir ja neuen next_due-Property-Dekorator aus früherem Bugfix (stored-next-due-issue)
@@ -346,6 +347,20 @@ def get_plant_next_actions(plant_id: int) -> Response:
 
         next_due_date = schedule.next_due
 
+        days_until = (next_due_date - today).days() # mit .days() Anzahl der Tage zwischen zwei bestimmten Daten berechnen
 
+        is_overdue = next_due_date < today # prüfen, dass Aktionen, die genau heute fällig sind nicht overdue sind
+
+        action_log_object = {
+            "care_type": schedule._care_type,
+            "interval_days": schedule._interval_days,
+            "next_due": next_due_date.isoformat(),
+            "days_until": days_until,
+            "overdue": is_overdue
+        }
+
+        next_actions.append(action_log_object)
+
+        
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
