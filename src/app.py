@@ -239,7 +239,17 @@ def delete_plant_schedule(plant_id: int, care_type: str) -> Response:
 # Route für Endpoint POST /api/plants/<id>/logs
 @app.route('/api/plants/<int:plant_id>/logs', methods=['POST'])
 def create_plant_log(plant_id: int) -> Response:
+    data = request.get_json()
+    test_plant = None
+
+    # wieder gleiche Logik wie bei vorigem DELETE Endpoint
+    for plant in plants:
+        if plant._id == plant_id:
+            test_plant = plant
+            break
     
+    if test_plant is None: # falls Pflanze nicht existiert -> Fehlermeldung
+        return jsonify({"error": "Plant not found"}), 404
 
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
