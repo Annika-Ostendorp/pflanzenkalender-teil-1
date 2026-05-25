@@ -16,3 +16,18 @@ def test_api_get_plants_id_logs_success_sorted(client):
     test_plant._logs.append(older_log)
     test_plant._logs.append(newer_log)
     plants.append(test_plant)
+
+    response = client.get('/api/plants/1/logs')
+    data = response.get_json()
+
+    # Überprüfungen (auch mit richtiger Sortierung)
+    assert response.status_code == 200
+    assert len(data) == 2 # existieren die 2 angelegten Logs?
+
+    # absteigende Sortierung prüfen
+    assert data[0]["id"] == 2 # ist 1. Log das mit dem aktuelleren Datum und richtiger ID?
+    assert data[0]["performed_at"] == "2026-05-24"
+    assert data[0]["notes"] == "Neues Log"
+
+    assert data[1]["id"] == 1
+    assert data[1]["performed_at"] == "2026-05-14" # ist älteres Log nun nach dem neueren Log von der Position her?
