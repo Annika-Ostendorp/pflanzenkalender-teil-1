@@ -1,7 +1,7 @@
 from models import Plant # brauchen nicht alles, nur testen, ob Pflanze erfolgreich gelöscht wurde
 from datetime import date
 
-def test_api_plants_id_delete_success(client):
+def test_api_delete_plants_id_success(client):
     from app import plants
     plants.clear() # mit leerer Liste starten -> extra Pflanze zum Löschen anlegen (das ist Vorbereitung)
 
@@ -15,7 +15,7 @@ def test_api_plants_id_delete_success(client):
     assert response.status_code == 204 # für erfolgreiche Löschung -> No Content
     assert len(plants) == 0 # nach Löschen, darf ja kein Objekt mit dieser ID in Liste sein -> da nur 1 Objekt vorhin hinzugefügt, müsste Liste nun leer sein -> len(plants) == 0
 
-def test_api_plants_id_delete_not_found(client): # falls ID nicht vorhanden ist
+def test_api_delete_plants_id_not_found(client): # falls ID nicht vorhanden ist
     response = client.delete('/api/plants/99') # Bsp.ID nehmen
     data = response.get_json()
 
