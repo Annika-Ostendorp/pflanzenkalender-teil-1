@@ -42,11 +42,11 @@ def test_api_get_plants_id_next_actions_sorting_success(client):
         assert data[0]["days_until"] == -5 # als erstes (Index 0) muss in Liste die überfällige Aktion kommen
         assert data[0]["overdue"] is True # ist überfällig -> True
 
-    # das Gießen was erst in 2 Tagen fällig ist kommt danach
-    assert data[1]["care_type"] == "watering"
-    assert data[1]["next_due"] == "2026-05-27"
-    assert data[1]["days_until"] == 2
-    assert data[1]["overdue"] is False
-
-    # wieder prüfen, ob wirklich simuliertes Datum benutzt wurde
-    mock_date.today.assert_called_once()
+        # das Gießen was erst in 2 Tagen fällig ist kommt danach
+        assert data[1]["care_type"] == "watering"
+        assert data[1]["next_due"] == "2026-05-27"
+        assert data[1]["days_until"] == 2
+        assert data[1]["overdue"] is False
+    
+        # wieder prüfen, ob wirklich simuliertes Datum benutzt wurde
+        mock_date.today.assert_called_once()
