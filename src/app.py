@@ -379,6 +379,29 @@ def get_plant_next_actions(plant_id: int) -> Response:
  # Route für Endpoint GET /api/overdue
 @app.route('/api/overdue', methods=['GET'])
 def get_all_overdue_tasks() -> Response: 
+    unsorted_overdue = []
+    today = date.today()
+
+    # Globaler Filter der alle Pflanzen & Pläne durchgeht
+    for plant in plants:
+        for schedule in plant._schedules:
+            schedule._plant = plant # Pflegeplan aktuelle Pflanze zuweisen -> damit dann next_due Property verwenden kann
+            next_due_date = schedule.next_due
+
+            if next_due_date < today: # filtern, ob Aktion bereits überfällig ist
+                days_overdue = (today - next_due_date).days # wieder wie vorhin Tage berechnen, die die Aktion schon überfällig ist
+               
+            overdue_object = { # mit Feldern nach Projektbeschreibung
+                "plant_id": plant._id,
+                "plant_name": plant._name,
+                "plant_location": plant._location,
+                "care_type": schedule._care_type,
+                "next_due": next_due_date.isoformat(), # wieder in gültiges "YYYY-MM-DD" umwandeln
+                "days_overdue": days_overdue
+            }
+
+            unsorted_overdue.append(overdue_object)
+
 
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
