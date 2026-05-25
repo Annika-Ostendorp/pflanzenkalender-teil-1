@@ -78,6 +78,14 @@ def test_api_post_plants_id_logs_invalid(client):
     assert len(test_plant._logs) == 0 # kein Eintrag in Logs-Liste von Testpflanze! -> Feld fehlt ja
 
 
+def test_api_post_plants_id_logs_invalid_care_type(client):
+    plants.clear()
+
+    plant_creation_date = date(2026, 5, 25)
+    test_plant = Plant(1, "Monstera", "Deliciosa", "Büro", plant_creation_date)
+    plants.append(test_plant)
+
+    
 def test_api_post_plants_id_logs_not_found(client):
     plants.clear()
 
