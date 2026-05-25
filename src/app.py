@@ -337,7 +337,7 @@ def get_plant_next_actions(plant_id: int) -> Response:
     if test_plant is None:
         return jsonify({"error": "Plant not found"}), 404
     
-    next_actions = []
+    unsorted_actions = []
     today = date.today()
 
     for schedule in test_plant._schedules:
@@ -347,7 +347,7 @@ def get_plant_next_actions(plant_id: int) -> Response:
 
         next_due_date = schedule.next_due
 
-        days_until = (next_due_date - today).days() # mit .days() Anzahl der Tage zwischen zwei bestimmten Daten berechnen
+        days_until = (next_due_date - today).days # mit .days Anzahl der Tage zwischen zwei bestimmten Daten berechnen
 
         is_overdue = next_due_date < today # prüfen, dass Aktionen, die genau heute fällig sind nicht overdue sind
 
@@ -359,8 +359,22 @@ def get_plant_next_actions(plant_id: int) -> Response:
             "overdue": is_overdue
         }
 
-        next_actions.append(action_log_object)
+        unsorted_actions.append(action_log_object)
 
+    sorted_actions = [] # wieder Sortiermechanismus wie bei voriger POST Route
+    
+    while len(unsorted_actions) > 0:
+        soonest_action = unsorted_actions[0] # wieder 1. Aktion als Startpunkt
         
+        for action in unsorted_actions:
+            if action["next_due"] < soonest_action["next_due"]: # aufsteigend sortieren -> je älter das Datum, desto dringender ist Aktion
+                soonest_action = action
+        
+        sorted_actions.append(soonest_action)
+        unsorted_actions.remove(soonest_action)
+    
+    return jsonify(sorted_actions), 200 # fertig sortierte Liste erfolgreich zurückgeben
+    
+
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
