@@ -7,3 +7,22 @@ def test_api_get_overdue_sorting_success(client):
     plants.clear()
 
     fixed_today = date(2026, 5, 25)
+
+    with patch('app.date') as mock_date: # wieder MagicMock, da wir wieder mit Datum arbeiten
+        mock_date.today.return_value = fixed_today
+
+        # Pflanze mit überfälligem Plan erstellen für Test
+        # alle 5 Tage gießen, fällig am 15. Mai --> am 25. Mai aber schon 10 Tage überfällig
+        plant_monstera = Plant(1, "Monstera", "Deliciosa", "Wohnzimmer", date(2026, 5, 10))
+        schedule_monstera = CareSchedule(1, 1, "watering", 5, None)
+        plant_monstera._schedules.append(schedule_monstera)
+
+        # Neue Pflanze mit überfälligem Plan erstellen
+        # alle 12 Tage düngen -> fällig am 22. Mai --> aber am 25. Mai schon 3 Tage überfällig
+        plant_goldfruchtpalme = Plant(2, "Goldfruchtpalme", "Palme", "Küche", date(2026, 5, 10))
+        schedule_goldfruchtpalme = CareSchedule(2, 2, "fertilizing", 12, None)
+        plant_goldfruchtpalme._schedules.append(schedule_goldfruchtpalme)
+
+        # beide Pflanzen in plants-Liste hinzufügen
+        plants.append(plant_monstera)
+        plants.append(plant_goldfruchtpalme)
