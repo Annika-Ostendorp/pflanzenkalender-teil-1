@@ -323,5 +323,58 @@ def get_plants_logs(plant_id: int) -> Response:
     return jsonify(sorted_logs), 200 # sortierte Liste mit allen Logs erfolgreich zurückgegeben
 
 
+# Route für Endpoint GET /api/plants/<id>/next-actions
+@app.route('/api/plants/<int:plant_id>/next-actions', methods=['GET'])
+def get_plant_next_actions(plant_id: int) -> Response:
+    test_plant = None
+
+    # wieder prüfen, ob Pflanze existiert
+    for plant in plants:
+        if plant._id == plant_id:
+            test_plant = plant
+            break
+
+    if test_plant is None:
+        return jsonify({"error": "Plant not found"}), 404
+    
+    unsorted_actions = []
+    today = date.today()
+
+    for schedule in test_plant._schedules:
+        # jetzt haben wir ja neuen next_due-Property-Dekorator aus früherem Bugfix (stored-next-due-issue)
+        # entweder basierend auf letztem ActionLog oder falls kein Log existiert, basierend auf dem Erstellungsdatum
+        schedule._plant = test_plant # Testpflanze zuweisen, damit man auf Property-Dekorator zugreifen kann
+
+        next_due_date = schedule.next_due
+
+        days_until = (next_due_date - today).days # mit .days Anzahl der Tage zwischen zwei bestimmten Daten berechnen
+
+        is_overdue = next_due_date < today # prüfen, dass Aktionen, die genau heute fällig sind nicht overdue sind
+
+        action_log_object = {
+            "care_type": schedule._care_type,
+            "interval_days": schedule._interval_days,
+            "next_due": next_due_date.isoformat(),
+            "days_until": days_until,
+            "overdue": is_overdue
+        }
+
+        unsorted_actions.append(action_log_object)
+
+    sorted_actions = [] # wieder Sortiermechanismus wie bei voriger POST Route
+    
+    while len(unsorted_actions) > 0:
+        soonest_action = unsorted_actions[0] # wieder 1. Aktion als Startpunkt
+        
+        for action in unsorted_actions:
+            if action["next_due"] < soonest_action["next_due"]: # aufsteigend sortieren -> je älter das Datum, desto dringender ist Aktion
+                soonest_action = action
+        
+        sorted_actions.append(soonest_action)
+        unsorted_actions.remove(soonest_action)
+    
+    return jsonify(sorted_actions), 200 # fertig sortierte Liste erfolgreich zurückgeben
+    
+
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
