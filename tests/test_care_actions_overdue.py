@@ -46,3 +46,23 @@ def test_api_get_overdue_sorting_success(client):
 
         # und wieder testen, ob Mock-Datum auch benutzt wurde
         mock_date.today.assert_called_once()
+
+
+def test_api_get_overdue_empty_list(client):
+    plants.clear() # keine Pflanze im System -> es kann dann ja nichts überfällig sein
+
+    fixed_today = date(2026, 5, 25)
+
+    with patch('app.date') as mock_date:
+        mock_date.today.return_value = fixed_today
+
+        # wieder Daten holen
+        response = client.get('/api/overdue')
+        data = response.get_json()
+
+        # Überprüfungen
+        assert response.status_code == 200
+        assert data == [] # Test muss erfolgreich leere Liste zurückgeben
+
+        # auch hier wieder prüfen, ob Mock-Datum genutzt wurde
+        mock_date.today.assert_called_once()
