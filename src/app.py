@@ -251,5 +251,20 @@ def create_plant_log(plant_id: int) -> Response:
     if test_plant is None: # falls Pflanze nicht existiert -> Fehlermeldung
         return jsonify({"error": "Plant not found"}), 404
 
+    # Logik für optionales Attribut performed_at -> speziell das "performed_at" Feld aus data holen
+    desired_date_str = data.get("performed_at")
+    
+    if desired_date_str: # also gültig, kein leerer String o.Ä.
+        actual_date = date.fromisoformat(desired_date_str) # string von zurückgegebenem Datum in richtiges Datum umwandeln -> muss ja Format YYYY-MM-DD haben
+
+    else:
+        actual_date = date.today() # ansonsten wenn es ungültig ist -> per Default auf heute setzen
+
+    # für neues ActionLog Objekt, auch notes-Feld holen
+    notes_str = data.get("notes")
+
+    if not notes_str: # falls keine notes übergeben wurden, trotzdem leerer String -> besserer Überblick über alle möglichen Felder
+        notes_str = ""
+    
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
