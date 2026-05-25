@@ -252,7 +252,7 @@ def create_plant_log(plant_id: int) -> Response:
         return jsonify({"error": "Plant not found"}), 404
 
     # Validierung von Pflichtfeld care_type und deren Werten -> wie bei POST /api/plants Route oben
-    care_type = data["care_type"]
+    care_type = data.get("care_type")
 
     if type(care_type) is not str or str(care_type).strip() == "": # fehlt care_type, ist None oder leerer String/ ungültig? -> Fehlermeldung
         return jsonify({"error": "Bad Request: Missing or invalid care_type"}), 400
@@ -260,7 +260,6 @@ def create_plant_log(plant_id: int) -> Response:
     allowed_care_types = ["watering", "fertilizing", "repotting"]
     if care_type not in allowed_care_types:
         return jsonify({"error": "Bad Request: Invalid care_type"}), 400 # wenn falscher care_type übergeben wird -> nicht einer von den 3 Geforderten entspricht
-
 
     # Logik für optionales Attribut performed_at -> speziell das "performed_at" Feld aus data holen
     desired_date_str = data.get("performed_at")
@@ -277,6 +276,19 @@ def create_plant_log(plant_id: int) -> Response:
     if not notes_str: # falls keine notes übergeben wurden, trotzdem leerer String -> besserer Überblick über alle möglichen Felder
         notes_str = ""
     
+    # wieder wie vorhin mit max_id für eindeutige ID für neuen Log
+    max_id = 0
+    for log in test_plant._logs:
+        if log._id > max_id:
+            max_id = log._id
+    
+    new_log_id = max_id + 1 # für neuen Eintrag wieder neue ID
+
+    # neues ActionLog-Objekt erstellen und hinzufügen
+    new_log = ActionLog(new_log_id, plant_id, care_type, actual_date, notes_str)
+    test_plant._logs.append(new_log)
+
+    return jsonify(new_log.to_json()), 201 # neuer Log-Eintrag erfolgreich zurückgegeben
 
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
