@@ -31,3 +31,15 @@ def test_api_get_plants_id_logs_success_sorted(client):
 
     assert data[1]["id"] == 1
     assert data[1]["performed_at"] == "2026-05-14" # ist älteres Log nun nach dem neueren Log von der Position her?
+
+
+def test_api_get_plants_id_logs_not_found(client):
+    plants.clear() # wieder gleiche Logik wie bei test_cate_action_log.py
+
+    response = client.get('/api/plants/999/logs')
+    data = response.get_json()
+
+    # Überprüfungen
+    assert response.status_code == 404 # Pflanze existiert nicht -> Fehler 404
+    assert "error" in data
+    assert data["error"] == "Plant not found"
