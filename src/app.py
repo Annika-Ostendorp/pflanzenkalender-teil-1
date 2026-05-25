@@ -290,5 +290,21 @@ def create_plant_log(plant_id: int) -> Response:
 
     return jsonify(new_log.to_json()), 201 # neuer Log-Eintrag erfolgreich zurückgegeben
 
+
+# Route für Endpoint GET /api/plants/<id>/logs
+@app.route('/api/plants/<int:plant_id>/logs', methods=['GET'])
+def get_plants_logs(plant_id: int) -> Response:
+    test_plant = None
+
+    # wieder prüfen, ob Pflanze überhaupt existiert
+    for plant in plants:
+        if plant._id == plant_id:
+            test_plant = plant
+            break
+
+    if test_plant is None:
+        return jsonify({"error": "Plant not found"}), 404 # Pflanze existiert nicht -> Fehler 404
+
+
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
