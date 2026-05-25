@@ -36,3 +36,20 @@ def test_api_post_plants_id_logs_success_with_default_date(client): # damit test
     plant_creation_date = date(2026, 5, 20)
     test_plant = Plant(1, "Bogenhanf", "Sansevieria", "Bad", plant_creation_date)
     plants.append(test_plant)
+
+    # Payload diesmal ohne performed_at & notes -> werden Default Werte genommen?
+    payload = {
+        "care_type": "fertilizing"
+    }
+
+    response = client.post('/api/plants/1/logs', json=payload)
+    data = response.get_json()
+
+    # Überprüfungen
+    assert response.status_code == 201
+    assert data["id"] == 1
+    assert data["care_type"] == "fertilizing"
+    assert data["performed_at"] == str(date.today()) # wurde heutiges Datum genommen?
+    assert data["notes"] == "" # fehlende Notes = leerer String?
+
+    assert len(test_plant._logs) == 1
