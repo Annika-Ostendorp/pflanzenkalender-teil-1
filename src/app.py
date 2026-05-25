@@ -374,7 +374,11 @@ def get_plant_next_actions(plant_id: int) -> Response:
         unsorted_actions.remove(soonest_action)
     
     return jsonify(sorted_actions), 200 # fertig sortierte Liste erfolgreich zurückgeben
-    
+
+
+ # Route für Endpoint GET /api/overdue
+@app.route('/api/overdue', methods=['GET'])
+def get_all_overdue_tasks() -> Response: 
 
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
