@@ -402,6 +402,18 @@ def get_all_overdue_tasks() -> Response:
 
             unsorted_overdue.append(overdue_object)
 
+    # Absteigende Sortierung nach days_overdue
+    sorted_overdue = []
+    while len(unsorted_overdue) > 0:
+        most_overdue = unsorted_overdue[0] # wieder gleiche Logik wie vorige Route
 
+        for action in unsorted_overdue:
+            if action["days_overdue"] > most_overdue["days_overdue"]: # falls aktuelle Aktion mehr Tage überfällig ist -> kommt an neue erste Stelle
+                most_overdue = action
+
+        sorted_overdue.append(most_overdue)
+        unsorted_overdue.remove(most_overdue)
+
+        
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
