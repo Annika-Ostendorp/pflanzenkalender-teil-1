@@ -61,3 +61,18 @@ def test_api_post_plants_id_logs_invalid(client):
     plant_creation_date = date(2026, 5, 25)
     test_plant = Plant(1, "Goldfruchtpalme", "Palme", "Wohnzimmer", plant_creation_date)
     plants.append(test_plant)
+
+    # care_type fehlt -> muss Fehlermeldung kommen
+    payload = {
+        "performed_at": "2026-05-25",
+        "notes": "Erde nachgeschüttet"
+    }
+
+    response = client.post('/api/plants/1/logs', json=payload)
+    data = response.get_json()
+
+    # Überprüfungen
+    assert response.status_code == 400 # care_type fehlt --> 400 Bad Request
+    assert "error" in data
+    assert data["error"] == "Bad Request: Missing or invalid care_type"
+    assert len(test_plant._logs) == 0 # kein Eintrag in Logs-Liste von Testpflanze! -> Feld fehlt ja
