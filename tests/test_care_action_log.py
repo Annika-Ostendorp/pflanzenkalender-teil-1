@@ -85,7 +85,22 @@ def test_api_post_plants_id_logs_invalid_care_type(client):
     test_plant = Plant(1, "Monstera", "Deliciosa", "Büro", plant_creation_date)
     plants.append(test_plant)
 
-    
+    payload = {
+        "care_type": "composting",
+        "performed_at": "2026-05-25"
+    }
+
+    response = client.post('/api/plants/1/logs', json=payload)
+    data = response.get_json()
+
+    # Überprüfungen
+    assert response.status_code == 400 # falscher care_type -> nicht in allowed_care_types (watering, fertilizing, repotting)
+    assert "error" in data
+    assert data["error"] == "Bad Request: Invalid care_type"
+
+    assert len(test_plant._logs) == 0 # wurde ungültiger Log-Eintrag nicht gespeichert? -> Log-Liste muss leer bleiben
+
+
 def test_api_post_plants_id_logs_not_found(client):
     plants.clear()
 
