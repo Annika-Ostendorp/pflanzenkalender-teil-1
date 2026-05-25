@@ -337,6 +337,15 @@ def get_plant_next_actions(plant_id: int) -> Response:
     if test_plant is None:
         return jsonify({"error": "Plant not found"}), 404
     
-    
+    next_actions = []
+
+    for schedule in test_plant._schedules:
+        # jetzt haben wir ja neuen next_due-Property-Dekorator aus früherem Bugfix (stored-next-due-issue)
+        # entweder basierend auf letztem ActionLog oder falls kein Log existiert, basierend auf dem Erstellungsdatum
+        schedule._plant = test_plant # Testpflanze zuweisen, damit man auf Property-Dekorator zugreifen kann
+
+        next_due_date = schedule.next_due
+
+
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
