@@ -305,6 +305,11 @@ def get_plants_logs(plant_id: int) -> Response:
     if test_plant is None:
         return jsonify({"error": "Plant not found"}), 404 # Pflanze existiert nicht -> Fehler 404
 
+    # Logs für spezielle plant_id holen & in JSON umwandeln
+    logs_json = [log.to_json() for log in test_plant._logs]
+
+    return jsonify(logs_json), 200
+
 
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
