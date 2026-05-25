@@ -2,7 +2,7 @@ from models import Plant, CareSchedule
 from datetime import date
 from unittest.mock import patch
 
-def test_api_plants_id_get_success(client): # hier wieder mit MagicMock (wie bei test_plant_overview.py), um zu prüfen, ob Pflanze auch wirklich korrekt zurückgegeben ("ok") wird -> dafür Mock-Datum
+def test_api_get_plants_id_success(client): # hier wieder mit MagicMock (wie bei test_plant_overview.py), um zu prüfen, ob Pflanze auch wirklich korrekt zurückgegeben ("ok") wird -> dafür Mock-Datum
     set_today = date(2026, 5, 13)
     plant_created = date(2026, 5, 10) # Pflanze 3 Tage vor heute erstellt
     desired_next_due = date(2026, 5, 15) # in 2 Tagen fällig -> "soon"-> AttributeError (next_due of Care Schedule object has no setter) lösen -> desired_next_due
@@ -30,7 +30,7 @@ def test_api_plants_id_get_success(client): # hier wieder mit MagicMock (wie bei
         assert data["status"] == "soon"
         assert len(data["schedules"]) == 1 # werden Schedules zurückgegeben als Liste?
 
-def test_api_plants_id_get_not_found(client): # diesselbe Logik wie wenn Löschen von Pflanze nicht geht
+def test_api_get_plants_id_not_found(client): # diesselbe Logik wie wenn Löschen von Pflanze nicht geht
     response = client.get('/api/plants/99') # Bsp.ID nehmen
     data = response.get_json()
 

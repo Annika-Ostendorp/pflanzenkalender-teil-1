@@ -2,7 +2,7 @@ from datetime import date
 from app import plants
 from models import Plant, CareSchedule
 
-def test_api_plants_id_schedules_success(client):
+def test_api_post_plants_id_schedules_success(client):
     plants.clear()
 
     # wieder Testpflanze vorbereiten
@@ -28,7 +28,7 @@ def test_api_plants_id_schedules_success(client):
     assert len(test_plant._schedules) == 1 # wurde neue Pflanze hinzugefügt -> Liste muss nun Länge von 1 haben
 
 
-def test_api_plants_id_schedules_update_success(client):
+def test_api_post_plants_id_schedules_update_success(client):
     plants.clear()
 
     # wieder Vorbereitung von Testpflanze
@@ -55,7 +55,7 @@ def test_api_plants_id_schedules_update_success(client):
     assert len(test_plant._schedules) == 1
 
 
-def test_api_plants_id_schedules_errors_care_type(client):
+def test_api_post_plants_id_schedules_errors_care_type(client):
     plants.clear()
 
     # Pflanze existiert nicht im Speicher
@@ -88,7 +88,7 @@ def test_api_plants_id_schedules_errors_care_type(client):
     assert response.status_code == 400 # care_type hat falschen Typ (nicht str) -> 400
 
 
-def test_api_plants_id_schedules_errors_interval_days(client):
+def test_api_post_plants_id_schedules_errors_interval_days(client):
     plants.clear()
 
     test_plant = Plant(1, "Monstera", "Deliciosa", "Schlafzimmer", date(2026, 5, 19))

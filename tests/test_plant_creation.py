@@ -1,5 +1,5 @@
 
-def test_api_plants_post_success(client): # Beispieldaten hier verwenden --> Gültige Testdaten (Payload Aspekt in User Story)
+def test_api_post_plants_success(client): # Beispieldaten hier verwenden --> Gültige Testdaten (Payload Aspekt in User Story)
     payload = {
         "name": "Monstera",
         "species": "Deliciosa",
@@ -15,7 +15,7 @@ def test_api_plants_post_success(client): # Beispieldaten hier verwenden --> Gü
     assert "id" in data # Wurde spezifische ID vergeben? (siehe Task 3)
     assert "created_at" in data # Existiert ein Erstellungsdatum/ das heutige Datum als Default? (siehe Task 3)
 
-def test_api_plants_post_missing_fields(client):
+def test_api_post_plants_missing_fields(client):
     payload = { # erzeugen nun extra unvollständiges JSON-Objekt -> wollen ja error erzeugen
         "name": "Goldfruchtpalme"
     }
@@ -27,7 +27,7 @@ def test_api_plants_post_missing_fields(client):
     assert "error" in data # wird Fehlermeldung ausgegeben?
     assert "Bad Request: Missing or invalid JSON body" in data["error"] # Richtige Beschreibung der Fehlermeldung?
 
-def test_api_plants_post_with_date_success(client):
+def test_api_post_plants_with_date_success(client):
     payload = {
         "name": "Schmetterlingsorchidee",
         "species": "Phalaenopsis",

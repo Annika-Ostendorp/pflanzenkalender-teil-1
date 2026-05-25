@@ -2,7 +2,7 @@ from datetime import date
 from unittest.mock import patch, MagicMock # patch, um Tests zeitunabhängig zu machen
 from models import Plant, CareSchedule, ActionLog # wichtig für calculate_status Methode
 
-def test_api_plants_get_success(client): # Happy Path (200) & korrekte JSON-Struktur testen
+def test_api_get_plants_success(client): # Happy Path (200) & korrekte JSON-Struktur testen
     from app import plants # geht ja darum, dass die Liste der Pflanzen zurückgegeben wird
     plants.clear() # erstmal alles leeren, für Neustart -> sauberen Test, ob Pflanzen-Objekt existiert
 
@@ -28,7 +28,7 @@ def test_api_plants_get_success(client): # Happy Path (200) & korrekte JSON-Stru
     # nur für 2 fields Asserts, um Tests lesbar zu halten 
 
 
-def test_api_plants_get_status_soon_with_mock(): # müssen ja auch Magic Mocks nutzen
+def test_api_get_plants_status_soon_with_mock(): # müssen ja auch Magic Mocks nutzen
     # AAA-Prinzip: ARRANGE (Vorbereiten)
     # Simulation von festem Datum und Pflege-Objekt
     set_today = date(2026, 5, 13)
@@ -50,7 +50,7 @@ def test_api_plants_get_status_soon_with_mock(): # müssen ja auch Magic Mocks n
         assert result == "soon" # ist Status bei soon? -> hatten ja oben next_due Variable mit due_soon Datum gesetzt
         mock_date.today.assert_called_once() # hat unsere Logik auch wirklich das Datum abgefragt?
 
-def test_api_plants_get_status_overdue_with_mock():
+def test_api_get_plants_status_overdue_with_mock():
     # ähnlicher Aufbau nur diesmal überfälliges Datum anstelle von zukünftigem Datum
     fixed_today = date(2026, 5, 14)
     old_date = date(2026, 5, 10) # schon seit 4 Tagen überfällig
@@ -68,7 +68,7 @@ def test_api_plants_get_status_overdue_with_mock():
         mock_date.today.assert_called_once()
 
 
-def test_api_plants_get_internal_classes_coverage():
+def test_api_get_plants_internal_classes_coverage():
     # Klassen nun echt erstellen, damit pytest merkt, dass Code funktioniert -> ansonsten Code-Coverage Problem, da bisher nur Mocks verwendet
     schedule = CareSchedule(1, 1, "fertilizing", 7, date(2026, 5, 20)) # jetzt noch plant_id hinzufügen
     log = ActionLog(1, 1, "watering", date(2026, 5, 10), "Viel Wasser verbraucht")
@@ -84,7 +84,7 @@ def test_api_plants_get_internal_classes_coverage():
     assert "Viel Wasser verbraucht" in log_json["notes"]
 
 
-def test_api_plants_empty_list(client):
+def test_api_get_plants_empty_list(client):
     from app import plants
     plants.clear() # damit Liste leer ist für Überprüfung
 

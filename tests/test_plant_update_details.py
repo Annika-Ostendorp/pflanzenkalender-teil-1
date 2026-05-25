@@ -1,6 +1,6 @@
 from app import plants
 
-def test_api_plants_id_put_partial_update_success(client):
+def test_api_put_plants_id_partial_update_success(client):
     # wieder zur Vorbereitung Liste leeren für klare IDs der Pflanzen
     plants.clear()
 
@@ -25,7 +25,7 @@ def test_api_plants_id_put_partial_update_success(client):
     assert data["name"] == "Goldfruchtpalme" # bleiben name und species unverändert?
     assert data["species"] == "Palme"
 
-def test_api_plants_id_put_forbidden_fields(client):
+def test_api_put_plants_id_forbidden_fields(client):
     plants.clear()
     # wieder Pflanze anlegen, um gültige ID zu haben
     setup = {
@@ -51,7 +51,7 @@ def test_api_plants_id_put_forbidden_fields(client):
     assert "error" in data # ist Fehlermeldung in Response von Server?
     assert data["error"] == "Bad Request: Updating id, status, created_at or schedules is not allowed"
 
-def test_api_plants_id_put_empty_value(client): # 2. Möglichkeit, dass ungültige Werte übergeben werden (leerer String, etc.)
+def test_api_put_plants_id_empty_value(client): # 2. Möglichkeit, dass ungültige Werte übergeben werden (leerer String, etc.)
     plants.clear()
 
     setup = {
@@ -72,7 +72,7 @@ def test_api_plants_id_put_empty_value(client): # 2. Möglichkeit, dass ungülti
     assert "error" in data
     assert data["error"] == "Bad Request: name cannot be empty" # kommt wieder richtige Fehlermeldung für ungültiges, leeres Feld?
 
-def test_api_plants_id_put_not_found(client):
+def test_api_put_plants_id_not_found(client):
     plants.clear()
 
     response = client.put('/api/plants/999', json={"name": "Topf"})
