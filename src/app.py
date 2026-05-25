@@ -236,5 +236,10 @@ def delete_plant_schedule(plant_id: int, care_type: str) -> Response:
     return '', 204 # erfolgreich gelöscht (204) -> leerer Body ('')
 
 
+# Route für Endpoint POST /api/plants/<id>/logs
+@app.route('/api/plants/<int:plant_id>/logs', methods=['POST'])
+def create_plant_log(plant_id: int) -> Response:
+    
+
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
