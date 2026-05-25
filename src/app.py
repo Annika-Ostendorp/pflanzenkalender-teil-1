@@ -323,5 +323,20 @@ def get_plants_logs(plant_id: int) -> Response:
     return jsonify(sorted_logs), 200 # sortierte Liste mit allen Logs erfolgreich zurückgegeben
 
 
+# Route für Endpoint GET /api/plants/<id>/next-actions
+@app.route('/api/plants/<int:plant_id>/next-actions', methods=['GET'])
+def get_plant_next_actions(plant_id: int) -> Response:
+    test_plant = None
+
+    # wieder prüfen, ob Pflanze existiert
+    for plant in plants:
+        if plant._id == plant_id:
+            test_plant = plant
+            break
+
+    if test_plant is None:
+        return jsonify({"error": "Plant not found"}), 404
+    
+    
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
