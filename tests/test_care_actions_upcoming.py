@@ -27,3 +27,26 @@ def test_api_get_plants_id_next_actions_sorting_success(client):
     test_plant._schedules.append(schedule_watering)
     test_plant._schedules.append(schedule_fertilizing)
     plants.append(test_plant)
+
+    # Daten holen
+    response = client.get('/api/plants/1/next-actions')
+    data = response.get_json()
+
+    # Überprüfungen
+    assert response.status_code == 200
+    assert len(data) == 2 # sind 2 Pflegepläne in Liste der kommenden Aktionen?
+
+    # Aufsteigende Sortierung prüfen
+    assert data[0]["care_type"] == "fertilizing"
+    assert data[0]["next_due"] == "2026-05-20"
+    assert data[0]["days_until"] == -5 # als erstes (Index 0) muss in Liste die überfällige Aktion kommen
+    assert data[0]["overdue"] is True # ist überfällig -> True
+
+    # das Gießen was erst in 2 Tagen fällig ist kommt danach
+    assert data[1]["care_type"] == "watering"
+    assert data[1]["next_due"] == "2026-05-27"
+    assert data[1]["days_until"] == 2
+    assert data[1]["overdue"] is False
+
+    # wieder prüfen, ob wirklich simuliertes Datum benutzt wurde
+    mock_date.today.assert_called_once()
