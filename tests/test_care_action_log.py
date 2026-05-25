@@ -53,3 +53,11 @@ def test_api_post_plants_id_logs_success_with_default_date(client): # damit test
     assert data["notes"] == "" # fehlende Notes = leerer String?
 
     assert len(test_plant._logs) == 1
+
+
+def test_api_post_plants_id_logs_invalid(client):
+    plants.clear()
+
+    plant_creation_date = date(2026, 5, 25)
+    test_plant = Plant(1, "Goldfruchtpalme", "Palme", "Wohnzimmer", plant_creation_date)
+    plants.append(test_plant)
