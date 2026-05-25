@@ -47,6 +47,18 @@ def test_api_get_plants_id_next_actions_sorting_success(client):
         assert data[1]["next_due"] == "2026-05-27"
         assert data[1]["days_until"] == 2
         assert data[1]["overdue"] is False
-    
+
         # wieder prüfen, ob wirklich simuliertes Datum benutzt wurde
         mock_date.today.assert_called_once()
+
+
+def test_api_get_plants_id_next_actions_not_found(client):
+    plants.clear()
+
+    response = client.get('/api/plants/999/next-actions') # ID existiert wieder nicht -> Fehler 404
+    data = response.get_json()
+
+    # Überprüfungen
+    assert response.status_code == 404
+    assert "error" in data
+    assert data["error"] == "Plant not found"
