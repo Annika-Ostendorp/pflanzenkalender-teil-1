@@ -251,6 +251,17 @@ def create_plant_log(plant_id: int) -> Response:
     if test_plant is None: # falls Pflanze nicht existiert -> Fehlermeldung
         return jsonify({"error": "Plant not found"}), 404
 
+    # Validierung von Pflichtfeld care_type und deren Werten -> wie bei POST /api/plants Route oben
+    care_type = data["care_type"]
+
+    if type(care_type) is not str or str(care_type).strip() == "": # fehlt care_type, ist None oder leerer String/ ungültig? -> Fehlermeldung
+        return jsonify({"error": "Bad Request: Missing or invalid care_type"}), 400
+    
+    allowed_care_types = ["watering", "fertilizing", "repotting"]
+    if care_type not in allowed_care_types:
+        return jsonify({"error": "Bad Request: Invalid care_type"}), 400 # wenn falscher care_type übergeben wird -> nicht einer von den 3 Geforderten entspricht
+
+
     # Logik für optionales Attribut performed_at -> speziell das "performed_at" Feld aus data holen
     desired_date_str = data.get("performed_at")
     
@@ -266,5 +277,6 @@ def create_plant_log(plant_id: int) -> Response:
     if not notes_str: # falls keine notes übergeben wurden, trotzdem leerer String -> besserer Überblick über alle möglichen Felder
         notes_str = ""
     
+
 if __name__ == "__main__": # damit App aufgerufen werden kann mit Port 5000
     app.run(debug=True, port=5000) 
