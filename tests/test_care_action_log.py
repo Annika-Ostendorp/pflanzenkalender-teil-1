@@ -28,3 +28,11 @@ def test_api_post_plants_id_logs_success(client):
     assert data["notes"] == "Mit viel Regenwasser gegossen"
 
     assert len(test_plant._logs) == 1 # ist neuer Log-Eintrag in Liste?
+
+
+def test_api_post_plants_id_logs_success_with_default_date(client): # damit testen, ob Logik, wenn kein Datum übergeben wird automatisch heute als Default genommen wird
+    plants.clear()
+
+    plant_creation_date = date(2026, 5, 20)
+    test_plant = Plant(1, "Bogenhanf", "Sansevieria", "Bad", plant_creation_date)
+    plants.append(test_plant)
