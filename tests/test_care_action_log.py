@@ -105,3 +105,29 @@ def test_api_post_plants_id_logs_not_found(client):
     assert response.status_code == 404 # Pflanze nicht gefunden -> 404
     assert "error" in data
     assert data["error"] == "Plant not found"
+
+
+def test_api_post_plants_id_logs_invalid_date_format(client):
+    # neue Testpflanze anlegen
+    setup = {
+        "name": "Monstera",
+        "species": "Deliciosa",
+        "location": "Büro"
+    }
+
+    post_response = client.post('/api/plants', json=setup)
+    post_id = post_response.get_json()["id"] # speziell das ID Feld holen
+
+    log_payload = {
+        "care_type": "watering",
+        "performed_at": "gestern", # ungültiges Format!
+        "notes": "Regenwasser genutzt"
+    }
+
+    response = client.post(f'/api/plants/{post_id}/logs', json=log_payload)
+    data = response.get_json()
+
+    # Überprüfungen -> muss Fehlermeldung kommen wegen ungültigem Datum
+    assert response.status_code == 400
+    assert "error" in data
+    assert data["error"] == "Bad Request: Invalid date format. Must be YYYY-MM-DD"
