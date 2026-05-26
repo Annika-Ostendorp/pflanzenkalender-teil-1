@@ -10,7 +10,7 @@ def test_api_delete_plants_id_schedules_care_type_success(client):
     test_plant = Plant(1, "Schmetterlingsorchidee","Phalaenopsis", "Terrasse", plant_creation_date)
 
     # neuen Pflegeplan der Pflanze hinzufügen
-    test_schedule = CareSchedule(1, 1, "fertilizing", 30, None)
+    test_schedule = CareSchedule(1, 1, "fertilizing", 30)
     test_plant._schedules.append(test_schedule)
     plants.append(test_plant)
 
@@ -42,7 +42,7 @@ def test_api_delete_plants_id_schedules_care_type_not_found(client):
     plant_creation_date = date(2026, 5, 22)
     test_plant = Plant(1, "Goldfruchtpalme", "Palme", "Schlafzimmer", plant_creation_date)
 
-    test_schedule = CareSchedule(1, 1, "repotting", 7, None)
+    test_schedule = CareSchedule(1, 1, "repotting", 7)
     test_plant._schedules.append(test_schedule)
     plants.append(test_plant)
 

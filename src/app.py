@@ -31,8 +31,12 @@ def create_plant() -> Response:
 
     date_str = data.get("created_at") # mit .get(), um Fehler zu vermeiden, falls Datum nicht existieren sollte --> gibt dann per Default das jetzige Datum aus (siehe else Bedingung)
     if date_str: # falls gültig, also nicht leer o.ä.
-        actual_date = date.fromisoformat(date_str) # Datum hier wieder in date-Objekt umwandeln zur besseren Überprüfung
-
+        try:
+            actual_date = date.fromisoformat(date_str) # Datum hier wieder in date-Objekt umwandeln zur besseren Überprüfung
+        
+        except ValueError: # fängt falsche Formate ab und gibt 400 Bad Request zurück
+            return jsonify({"error": "Bad Request: Invalid date format. Must be YYYY-MM-DD"}), 400
+    
     else:
         actual_date = date.today()
 
@@ -58,8 +62,6 @@ def get_plants() -> Response:
 # Route für Endpoint DELETE /api/plants/<id>
 @app.route('/api/plants/<int:plant_id>', methods=['DELETE']) # brauchen Pflanzen-ID -> damit wir wissen, welche Pflanze wir löschen
 def delete_plant(plant_id: int) -> Response:
-    global plants # wollen wieder außerhalb von Funktion auf Liste mit all unseren Pflanzen zugreifen
-
     for plant in plants:
         if plant._id == plant_id: # hat Pflanzenobjekt diesselbe ID wie die Übergebene?
             plants.remove(plant) # falls ja, dann dieses Objekt löschen
@@ -71,8 +73,6 @@ def delete_plant(plant_id: int) -> Response:
 # Route für Endpoint GET /api/plants/<id>
 @app.route('/api/plants/<int:plant_id>', methods=['GET'])
 def get_plants_id(plant_id: int) -> Response: # ähnlicher Aufbau wie bei DELETE route, wo es auch um ID ging
-    global plants
-
     for plant in plants:
         if plant._id == plant_id:
             return jsonify(plant.to_json()), 200 # spezifische Pflanze existiert --> Erfolg (200) --> enthält bereits schedules und status
@@ -83,8 +83,6 @@ def get_plants_id(plant_id: int) -> Response: # ähnlicher Aufbau wie bei DELETE
 # Route für Endpoint PUT /api/plants/<id>
 @app.route('/api/plants/<int:plant_id>', methods=['PUT'])
 def update_plant(plant_id: int) -> Response:
-    global plants
-
     data = request.get_json() # erstmal wieder alle Daten holen
     if not data:
         return jsonify({"error": "No data provided"}), 400
@@ -134,6 +132,13 @@ def create_or_update_schedule(plant_id: int) -> Response:
     
     data = request.get_json()
 
+    # Validierung des care_types einbauen
+    allowed_care_types = ["watering", "fertilizing", "repotting"]
+    care_type = data.get("care_type")
+
+    if care_type not in allowed_care_types:
+        return jsonify({"error": "Bad Request: Invalid care_type"}), 400
+
     if not data:
         return jsonify({"error": "Missing JSON payload"}), 400 # es existieren keine Daten
     
@@ -175,7 +180,7 @@ def create_or_update_schedule(plant_id: int) -> Response:
         new_id = max_id + 1 # für neuen Plan wieder neue ID
 
         # jetzt neuen Plan erstellen & in Pflanzenliste speichern
-        new_schedule = CareSchedule(new_id, plant_id, care_type, interval_days, None)
+        new_schedule = CareSchedule(new_id, plant_id, care_type, interval_days)
 
         test_plant._schedules.append(new_schedule)
 
@@ -265,8 +270,12 @@ def create_plant_log(plant_id: int) -> Response:
     desired_date_str = data.get("performed_at")
     
     if desired_date_str: # also gültig, kein leerer String o.Ä.
-        actual_date = date.fromisoformat(desired_date_str) # string von zurückgegebenem Datum in richtiges Datum umwandeln -> muss ja Format YYYY-MM-DD haben
+        try:
+            actual_date = date.fromisoformat(desired_date_str) # string von zurückgegebenem Datum in richtiges Datum umwandeln -> muss ja Format YYYY-MM-DD haben
 
+        except ValueError:
+            return jsonify({"error": "Bad Request: Invalid date format. Must be YYYY-MM-DD"}), 400
+    
     else:
         actual_date = date.today() # ansonsten wenn es ungültig ist -> per Default auf heute setzen
 
