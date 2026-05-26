@@ -134,6 +134,13 @@ def create_or_update_schedule(plant_id: int) -> Response:
     
     data = request.get_json()
 
+    # Validierung des care_types einbauen
+    allowed_care_types = ["watering", "fertilizing", "repotting"]
+    care_type = data.get("care_type")
+
+    if care_type not in allowed_care_types:
+        return jsonify({"error": "Bad Request: Invalid care_type"}), 400
+
     if not data:
         return jsonify({"error": "Missing JSON payload"}), 400 # es existieren keine Daten
     
