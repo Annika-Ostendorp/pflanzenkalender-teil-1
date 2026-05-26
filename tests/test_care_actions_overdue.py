@@ -4,8 +4,6 @@ from app import plants
 from models import Plant, CareSchedule, ActionLog
 
 def test_api_get_overdue_sorting_success(client):
-    plants.clear()
-
     fixed_today = date(2026, 5, 25)
 
     with patch('app.date') as mock_date: # wieder MagicMock, da wir wieder mit Datum arbeiten
@@ -49,7 +47,7 @@ def test_api_get_overdue_sorting_success(client):
 
 
 def test_api_get_overdue_empty_list(client):
-    plants.clear() # keine Pflanze im System -> es kann dann ja nichts überfällig sein
+    # keine Pflanze im System -> es kann dann ja nichts überfällig sein
 
     fixed_today = date(2026, 5, 25)
 

@@ -3,8 +3,6 @@ from app import plants
 from models import Plant, CareSchedule
 
 def test_api_get_plants_id_schedules_success(client):
-    plants.clear()
-
     # Test Pflanze wieder anlegen
     plant_creation_date = date(2026, 5, 22)
     test_plant = Plant(1, "Goldfruchtpalme", "Palme", "Terrasse", plant_creation_date)
@@ -29,8 +27,6 @@ def test_api_get_plants_id_schedules_success(client):
 
 
 def test_api_get_plants_id_schedules_not_found(client):
-    plants.clear()
-
     # nicht existierende ID nehmen für GET-Request
     response = client.get('/api/plants/999/schedules')
     data = response.get_json()

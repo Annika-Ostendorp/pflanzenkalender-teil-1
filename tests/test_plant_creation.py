@@ -40,3 +40,20 @@ def test_api_post_plants_with_date_success(client):
 
     assert data["created_at"] == "2026-01-01"
     assert data["name"] == "Schmetterlingsorchidee"
+
+
+def test_api_post_plants_invalid_date_format(client):
+    payload_invalid_date = {
+        "name": "Goldfruchtpalme",
+        "species": "Palme",
+        "location": "Flur",
+        "created_at": "2026-15-99" # unmögliches Datum -> muss Fehler kommen! -> try-except-Block testen
+    }
+
+    response = client.post('/api/plants', json=payload_invalid_date)
+    data = response.get_json()
+
+    # Überprüfungen
+    assert response.status_code == 400
+    assert "error" in data
+    assert data["error"] == "Bad Request: Invalid date format. Must be YYYY-MM-DD" # kommt richtige Fehlermeldung?

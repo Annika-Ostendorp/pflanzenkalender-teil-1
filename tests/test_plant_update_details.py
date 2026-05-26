@@ -1,8 +1,6 @@
 from app import plants
 
 def test_api_put_plants_id_partial_update_success(client):
-    # wieder zur Vorbereitung Liste leeren für klare IDs der Pflanzen
-    plants.clear()
 
     # vorbereiteter Payload -> Pflanze anlegen für Ausgangszustand
     setup_payload = {
@@ -26,7 +24,6 @@ def test_api_put_plants_id_partial_update_success(client):
     assert data["species"] == "Palme"
 
 def test_api_put_plants_id_forbidden_fields(client):
-    plants.clear()
     # wieder Pflanze anlegen, um gültige ID zu haben
     setup = {
         "name": "Monstera",
@@ -52,8 +49,6 @@ def test_api_put_plants_id_forbidden_fields(client):
     assert data["error"] == "Bad Request: Updating id, status, created_at or schedules is not allowed"
 
 def test_api_put_plants_id_empty_value(client): # 2. Möglichkeit, dass ungültige Werte übergeben werden (leerer String, etc.)
-    plants.clear()
-
     setup = {
         "name": "Efeu",
         "species": "Hedera",
@@ -73,8 +68,6 @@ def test_api_put_plants_id_empty_value(client): # 2. Möglichkeit, dass ungülti
     assert data["error"] == "Bad Request: name cannot be empty" # kommt wieder richtige Fehlermeldung für ungültiges, leeres Feld?
 
 def test_api_put_plants_id_not_found(client):
-    plants.clear()
-
     response = client.put('/api/plants/999', json={"name": "Topf"})
 
     data = response.get_json()

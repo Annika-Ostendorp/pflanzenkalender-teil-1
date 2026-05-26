@@ -4,7 +4,6 @@ from models import Plant, ActionLog
 
 def test_api_get_plants_id_logs_success_sorted(client):
     # wieder Testpflanze und Logs vorbereiten
-    plants.clear()
     plant_creation_date = date(2026, 5, 10)
     test_plant = Plant(1, "Orchidee", "Phalaenopsis", "Schlafzimmer", plant_creation_date)
 
@@ -34,8 +33,6 @@ def test_api_get_plants_id_logs_success_sorted(client):
 
 
 def test_api_get_plants_id_logs_not_found(client):
-    plants.clear() # wieder gleiche Logik wie bei test_cate_action_log.py
-
     response = client.get('/api/plants/999/logs')
     data = response.get_json()
 
@@ -43,3 +40,21 @@ def test_api_get_plants_id_logs_not_found(client):
     assert response.status_code == 404 # Pflanze existiert nicht -> Fehler 404
     assert "error" in data
     assert data["error"] == "Plant not found"
+
+
+def test_api_get_plants_id_logs_empty_list(client):
+    setup = {
+        "name": "Goldfruchtpalme",
+        "species": "Palme",
+        "location": "Büro"
+    }
+
+    post_response = client.post('/api/plants', json=setup)
+    post_id = post_response.get_json()["id"]
+
+    response = client.get(f'/api/plants/{post_id}/logs')
+    data = response.get_json()
+
+    # Überprüfungen -> muss leere Liste und Status 200 zurückgeben
+    assert response.status_code == 200
+    assert data == []

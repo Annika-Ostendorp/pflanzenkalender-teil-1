@@ -3,8 +3,6 @@ from app import plants
 from models import Plant, CareSchedule
 
 def test_api_delete_plants_id_schedules_care_type_success(client):
-    plants.clear()
-
     # wieder Pflanze vorbereiten mit Pflegeplan
     plant_creation_date = date(2026, 5, 22)
     test_plant = Plant(1, "Schmetterlingsorchidee","Phalaenopsis", "Terrasse", plant_creation_date)
@@ -25,8 +23,6 @@ def test_api_delete_plants_id_schedules_care_type_success(client):
 
 
 def test_api_delete_plants_id_schedules_care_type_plant_not_found(client):
-    plants.clear()
-
     response = client.delete('/api/plants/999/schedules/watering') # ID existiert nicht -> Fehler
     data = response.get_json()
 
@@ -36,8 +32,6 @@ def test_api_delete_plants_id_schedules_care_type_plant_not_found(client):
 
 
 def test_api_delete_plants_id_schedules_care_type_not_found(client):
-    plants.clear()
-
     # wieder Testpflanze mit Test-Schedule anlegen
     plant_creation_date = date(2026, 5, 22)
     test_plant = Plant(1, "Goldfruchtpalme", "Palme", "Schlafzimmer", plant_creation_date)

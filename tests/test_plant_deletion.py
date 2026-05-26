@@ -3,7 +3,7 @@ from datetime import date
 
 def test_api_delete_plants_id_success(client):
     from app import plants
-    plants.clear() # mit leerer Liste starten -> extra Pflanze zum Löschen anlegen (das ist Vorbereitung)
+    # extra Pflanze zum Löschen anlegen (das ist Vorbereitung)
 
     test_plant = Plant(1, "Goldfruchtpalme", "Palme", "Schlafzimmer", date.today()) # wurde heute erstellt
     plants.append(test_plant)

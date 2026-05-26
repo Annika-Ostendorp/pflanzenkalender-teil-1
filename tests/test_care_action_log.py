@@ -3,8 +3,6 @@ from app import plants
 from models import Plant
 
 def test_api_post_plants_id_logs_success(client):
-    plants.clear()
-
     # wieder Testpflanze vorbereiten
     plant_creation_date = date(2026, 5, 20)
     test_plant = Plant(1, "Monstera", "Deliciosa", "Garten", plant_creation_date)
@@ -31,8 +29,6 @@ def test_api_post_plants_id_logs_success(client):
 
 
 def test_api_post_plants_id_logs_success_with_default_date(client): # damit testen, ob Logik, wenn kein Datum übergeben wird automatisch heute als Default genommen wird
-    plants.clear()
-
     plant_creation_date = date(2026, 5, 20)
     test_plant = Plant(1, "Bogenhanf", "Sansevieria", "Bad", plant_creation_date)
     plants.append(test_plant)
@@ -56,8 +52,6 @@ def test_api_post_plants_id_logs_success_with_default_date(client): # damit test
 
 
 def test_api_post_plants_id_logs_invalid(client):
-    plants.clear()
-
     plant_creation_date = date(2026, 5, 25)
     test_plant = Plant(1, "Goldfruchtpalme", "Palme", "Wohnzimmer", plant_creation_date)
     plants.append(test_plant)
@@ -79,8 +73,6 @@ def test_api_post_plants_id_logs_invalid(client):
 
 
 def test_api_post_plants_id_logs_invalid_care_type(client):
-    plants.clear()
-
     plant_creation_date = date(2026, 5, 25)
     test_plant = Plant(1, "Monstera", "Deliciosa", "Büro", plant_creation_date)
     plants.append(test_plant)
@@ -102,8 +94,6 @@ def test_api_post_plants_id_logs_invalid_care_type(client):
 
 
 def test_api_post_plants_id_logs_not_found(client):
-    plants.clear()
-
     payload = {
         "care_type": "repotting"
     }
@@ -115,3 +105,29 @@ def test_api_post_plants_id_logs_not_found(client):
     assert response.status_code == 404 # Pflanze nicht gefunden -> 404
     assert "error" in data
     assert data["error"] == "Plant not found"
+
+
+def test_api_post_plants_id_logs_invalid_date_format(client):
+    # neue Testpflanze anlegen
+    setup = {
+        "name": "Monstera",
+        "species": "Deliciosa",
+        "location": "Büro"
+    }
+
+    post_response = client.post('/api/plants', json=setup)
+    post_id = post_response.get_json()["id"] # speziell das ID Feld holen
+
+    log_payload = {
+        "care_type": "watering",
+        "performed_at": "gestern", # ungültiges Format!
+        "notes": "Regenwasser genutzt"
+    }
+
+    response = client.post(f'/api/plants/{post_id}/logs', json=log_payload)
+    data = response.get_json()
+
+    # Überprüfungen -> muss Fehlermeldung kommen wegen ungültigem Datum
+    assert response.status_code == 400
+    assert "error" in data
+    assert data["error"] == "Bad Request: Invalid date format. Must be YYYY-MM-DD"
