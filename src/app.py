@@ -62,8 +62,6 @@ def get_plants() -> Response:
 # Route für Endpoint DELETE /api/plants/<id>
 @app.route('/api/plants/<int:plant_id>', methods=['DELETE']) # brauchen Pflanzen-ID -> damit wir wissen, welche Pflanze wir löschen
 def delete_plant(plant_id: int) -> Response:
-    global plants # wollen wieder außerhalb von Funktion auf Liste mit all unseren Pflanzen zugreifen
-
     for plant in plants:
         if plant._id == plant_id: # hat Pflanzenobjekt diesselbe ID wie die Übergebene?
             plants.remove(plant) # falls ja, dann dieses Objekt löschen
@@ -75,8 +73,6 @@ def delete_plant(plant_id: int) -> Response:
 # Route für Endpoint GET /api/plants/<id>
 @app.route('/api/plants/<int:plant_id>', methods=['GET'])
 def get_plants_id(plant_id: int) -> Response: # ähnlicher Aufbau wie bei DELETE route, wo es auch um ID ging
-    global plants
-
     for plant in plants:
         if plant._id == plant_id:
             return jsonify(plant.to_json()), 200 # spezifische Pflanze existiert --> Erfolg (200) --> enthält bereits schedules und status
@@ -87,8 +83,6 @@ def get_plants_id(plant_id: int) -> Response: # ähnlicher Aufbau wie bei DELETE
 # Route für Endpoint PUT /api/plants/<id>
 @app.route('/api/plants/<int:plant_id>', methods=['PUT'])
 def update_plant(plant_id: int) -> Response:
-    global plants
-
     data = request.get_json() # erstmal wieder alle Daten holen
     if not data:
         return jsonify({"error": "No data provided"}), 400
