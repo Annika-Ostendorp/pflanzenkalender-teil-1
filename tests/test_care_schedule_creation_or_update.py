@@ -35,7 +35,7 @@ def test_api_post_plants_id_schedules_update_success(client):
     plant_creation_date = date(2026, 5, 14)
     test_plant = Plant(1, "Monstera", "Deliciosa", "Büro", plant_creation_date)
 
-    old_schedule = CareSchedule(1, 1, "watering", 7, None) # wurde noch nicht geupdatet -> old_schedule
+    old_schedule = CareSchedule(1, 1, "watering", 7) # wurde noch nicht geupdatet -> old_schedule
     test_plant._schedules.append(old_schedule) # bestehenden alten Plan der Pflanze geben
     plants.append(test_plant)
 
