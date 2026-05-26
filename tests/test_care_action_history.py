@@ -40,3 +40,21 @@ def test_api_get_plants_id_logs_not_found(client):
     assert response.status_code == 404 # Pflanze existiert nicht -> Fehler 404
     assert "error" in data
     assert data["error"] == "Plant not found"
+
+
+def test_api_get_plants_id_logs_empty_list(client):
+    setup = {
+        "name": "Goldfruchtpalme",
+        "species": "Palme",
+        "location": "Büro"
+    }
+
+    post_response = client.post('/api/plants', json=setup)
+    post_id = post_response.get_json()["id"]
+
+    response = client.get(f'/api/plants/{post_id}/logs')
+    data = response.get_json()
+
+    # Überprüfungen -> muss leere Liste und Status 200 zurückgeben
+    assert response.status_code == 200
+    assert data == []
