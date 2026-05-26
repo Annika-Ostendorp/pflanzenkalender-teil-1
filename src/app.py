@@ -175,7 +175,7 @@ def create_or_update_schedule(plant_id: int) -> Response:
         new_id = max_id + 1 # für neuen Plan wieder neue ID
 
         # jetzt neuen Plan erstellen & in Pflanzenliste speichern
-        new_schedule = CareSchedule(new_id, plant_id, care_type, interval_days, None)
+        new_schedule = CareSchedule(new_id, plant_id, care_type, interval_days)
 
         test_plant._schedules.append(new_schedule)
 
