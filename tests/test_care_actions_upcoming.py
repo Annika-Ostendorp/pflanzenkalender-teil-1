@@ -4,8 +4,6 @@ from app import plants
 from models import Plant, CareSchedule, ActionLog
 
 def test_api_get_plants_id_next_actions_sorting_success(client):
-    plants.clear()
-
     # wieder MagicMock weil wir ja mit Datum arbeiten -> wie bei status Tests früher
     fixed_today = date(2026, 5, 25)
 
@@ -53,8 +51,6 @@ def test_api_get_plants_id_next_actions_sorting_success(client):
 
 
 def test_api_get_plants_id_next_actions_not_found(client):
-    plants.clear()
-
     response = client.get('/api/plants/999/next-actions') # ID existiert wieder nicht -> Fehler 404
     data = response.get_json()
 

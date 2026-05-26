@@ -3,8 +3,6 @@ from app import plants
 from models import Plant
 
 def test_api_post_plants_id_logs_success(client):
-    plants.clear()
-
     # wieder Testpflanze vorbereiten
     plant_creation_date = date(2026, 5, 20)
     test_plant = Plant(1, "Monstera", "Deliciosa", "Garten", plant_creation_date)
@@ -31,8 +29,6 @@ def test_api_post_plants_id_logs_success(client):
 
 
 def test_api_post_plants_id_logs_success_with_default_date(client): # damit testen, ob Logik, wenn kein Datum übergeben wird automatisch heute als Default genommen wird
-    plants.clear()
-
     plant_creation_date = date(2026, 5, 20)
     test_plant = Plant(1, "Bogenhanf", "Sansevieria", "Bad", plant_creation_date)
     plants.append(test_plant)
@@ -56,8 +52,6 @@ def test_api_post_plants_id_logs_success_with_default_date(client): # damit test
 
 
 def test_api_post_plants_id_logs_invalid(client):
-    plants.clear()
-
     plant_creation_date = date(2026, 5, 25)
     test_plant = Plant(1, "Goldfruchtpalme", "Palme", "Wohnzimmer", plant_creation_date)
     plants.append(test_plant)
@@ -79,8 +73,6 @@ def test_api_post_plants_id_logs_invalid(client):
 
 
 def test_api_post_plants_id_logs_invalid_care_type(client):
-    plants.clear()
-
     plant_creation_date = date(2026, 5, 25)
     test_plant = Plant(1, "Monstera", "Deliciosa", "Büro", plant_creation_date)
     plants.append(test_plant)
@@ -102,8 +94,6 @@ def test_api_post_plants_id_logs_invalid_care_type(client):
 
 
 def test_api_post_plants_id_logs_not_found(client):
-    plants.clear()
-
     payload = {
         "care_type": "repotting"
     }
