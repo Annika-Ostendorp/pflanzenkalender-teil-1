@@ -81,7 +81,20 @@ def test_api_post_plants_id_schedules_errors_care_type(client):
     response = client.post('/api/plants/1/schedules', json=payload_wrong_type)
     assert response.status_code == 400 # care_type hat falschen Typ (nicht str) -> 400
 
+    # care_type ist gültiger str aber nicht in erlaubten Liste mit allowed_care_types
+    payload_not_allowed = {
+        "care_type": "composting",
+        "interval_days": 7
+    }
 
+    response = client.post('/api/plants/1/schedules', json=payload_not_allowed)
+    data = response.get_json()
+
+    assert response.status_code == 400
+    assert "error" in data
+    assert data["error"] == "Bad Request: Invalid care_type"
+
+    
 def test_api_post_plants_id_schedules_errors_interval_days(client):
     test_plant = Plant(1, "Monstera", "Deliciosa", "Schlafzimmer", date(2026, 5, 19))
     plants.append(test_plant)
