@@ -31,8 +31,12 @@ def create_plant() -> Response:
 
     date_str = data.get("created_at") # mit .get(), um Fehler zu vermeiden, falls Datum nicht existieren sollte --> gibt dann per Default das jetzige Datum aus (siehe else Bedingung)
     if date_str: # falls gültig, also nicht leer o.ä.
-        actual_date = date.fromisoformat(date_str) # Datum hier wieder in date-Objekt umwandeln zur besseren Überprüfung
-
+        try:
+            actual_date = date.fromisoformat(date_str) # Datum hier wieder in date-Objekt umwandeln zur besseren Überprüfung
+        
+        except ValueError: # fängt falsche Formate ab und gibt 400 Bad Request zurück
+            return jsonify({"error": "Bad Request: Invalid date format. Must be YYYY-MM-DD"}), 400
+    
     else:
         actual_date = date.today()
 
@@ -272,8 +276,12 @@ def create_plant_log(plant_id: int) -> Response:
     desired_date_str = data.get("performed_at")
     
     if desired_date_str: # also gültig, kein leerer String o.Ä.
-        actual_date = date.fromisoformat(desired_date_str) # string von zurückgegebenem Datum in richtiges Datum umwandeln -> muss ja Format YYYY-MM-DD haben
+        try:
+            actual_date = date.fromisoformat(desired_date_str) # string von zurückgegebenem Datum in richtiges Datum umwandeln -> muss ja Format YYYY-MM-DD haben
 
+        except ValueError:
+            return jsonify({"error": "Bad Request: Invalid date format. Must be YYYY-MM-DD"}), 400
+    
     else:
         actual_date = date.today() # ansonsten wenn es ungültig ist -> per Default auf heute setzen
 
