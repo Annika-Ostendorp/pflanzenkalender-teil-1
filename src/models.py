@@ -21,12 +21,12 @@ class ActionLog:
 
 
 class CareSchedule:
-    def __init__(self, id: int, plant_id: int, care_type: str, interval_days: int, next_due: date) -> None:
+    def __init__(self, id: int, plant_id: int, care_type: str, interval_days: int) -> None:
         self._id = id
         self._plant_id = plant_id # Hinzufügen von fehlender plant_id Variable
         self._care_type = care_type
         self._interval_days = interval_days
-        self._next_due = next_due
+        self._next_due = None # auf None, da es ja dynamisch berechnet wird
         self._plant = None # beim Erstellen hat Plan noch keine Pflanze -> damit Tests trotzdem nicht fehlschlagen
     
     @property # Property-Dekorator, um nicht immer Klammern mitschreiben zu müssen bei Methode -> auf Methode zugriefen wie auf normale Variablen
