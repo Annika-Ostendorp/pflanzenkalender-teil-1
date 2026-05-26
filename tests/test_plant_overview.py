@@ -4,8 +4,6 @@ from models import Plant, CareSchedule, ActionLog # wichtig für calculate_statu
 
 def test_api_get_plants_success(client): # Happy Path (200) & korrekte JSON-Struktur testen
     from app import plants # geht ja darum, dass die Liste der Pflanzen zurückgegeben wird
-    plants.clear() # erstmal alles leeren, für Neustart -> sauberen Test, ob Pflanzen-Objekt existiert
-
     test_plant = Plant(1, "Goldfruchtpalme", "Palme", "Wohnzimmer", date(2026, 7, 1))
     plants.append(test_plant)
 
@@ -90,8 +88,6 @@ def test_api_get_plants_internal_classes_coverage():
 
 def test_api_get_plants_empty_list(client):
     from app import plants
-    plants.clear() # damit Liste leer ist für Überprüfung
-
     response = client.get('/api/plants')
 
     assert response.status_code == 200

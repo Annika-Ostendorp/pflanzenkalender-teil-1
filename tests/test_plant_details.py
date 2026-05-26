@@ -9,9 +9,7 @@ def test_api_get_plants_id_success(client): # hier wieder mit MagicMock (wie bei
     with patch('models.date') as mock_date:
         mock_date.today.return_value = set_today
 
-        from app import plants # wieder Liste mit allen Pflanzen holen & leeren für sauberen Test
-        plants.clear()
-
+        from app import plants 
         test_plant = Plant(1, "Bogenhanf", "Sansevieria", "Schlafzimmer", plant_created) # wieder Testpflanze erstellen mit Mock-Datum
         
         real_schedule = CareSchedule(3, 1, "watering", 5) # brauchen hier echten Plan, da Objekt nur so mit to_json()-Methode von Flask verarbeitet werden kann
