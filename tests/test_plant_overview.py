@@ -70,7 +70,11 @@ def test_api_get_plants_status_overdue_with_mock():
 
 def test_api_get_plants_internal_classes_coverage():
     # Klassen nun echt erstellen, damit pytest merkt, dass Code funktioniert -> ansonsten Code-Coverage Problem, da bisher nur Mocks verwendet
+    plant = Plant(1, "Monstera", "Deliciosa", "Büro", date(2026, 5, 13))
+    
     schedule = CareSchedule(1, 1, "fertilizing", 7) # jetzt noch plant_id hinzufügen
+    schedule._plant = plant # Pflegeplan mit Pflanze verknüpfen, damit next_due berechnet wird
+
     log = ActionLog(1, 1, "watering", date(2026, 5, 10), "Viel Wasser verbraucht")
 
     assert schedule.next_due == date(2026, 5, 20)
