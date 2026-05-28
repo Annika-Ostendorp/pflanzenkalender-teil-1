@@ -400,16 +400,16 @@ def get_all_overdue_tasks() -> Response:
             if next_due_date < today: # filtern, ob Aktion bereits überfällig ist
                 days_overdue = (today - next_due_date).days # wieder wie vorhin Tage berechnen, die die Aktion schon überfällig ist
                
-            overdue_object = { # mit Feldern nach Projektbeschreibung
-                "plant_id": plant._id,
-                "plant_name": plant._name,
-                "plant_location": plant._location,
-                "care_type": schedule._care_type,
-                "next_due": next_due_date.isoformat(), # wieder in gültiges "YYYY-MM-DD" umwandeln
-                "days_overdue": days_overdue
-            }
-
-            unsorted_overdue.append(overdue_object)
+                overdue_object = { # mit Feldern nach Projektbeschreibung
+                    "plant_id": plant._id,
+                    "plant_name": plant._name,
+                    "plant_location": plant._location,
+                    "care_type": schedule._care_type,
+                    "next_due": next_due_date.isoformat(), # wieder in gültiges "YYYY-MM-DD" umwandeln
+                    "days_overdue": days_overdue
+                }
+    
+                unsorted_overdue.append(overdue_object)
 
     # Absteigende Sortierung nach days_overdue
     sorted_overdue = []
