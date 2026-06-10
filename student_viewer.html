@@ -1,0 +1,467 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Modularbeit Teil 1 – Prüfbericht</title><style>:root{
+  --bg:#f5f6fa;--card:#fff;--border:#d1d5db;--text:#1f2937;--muted:#6b7280;
+  --accent:#4e6ea8;--accent-light:#e8edf7;
+  --green:#16a34a;--yellow:#d97706;--red:#dc2626;
+  --code-bg:#1e1e2e;--code-fg:#cdd6f4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  background:var(--bg);color:var(--text);padding:2rem;max-width:1100px;margin:0 auto;}
+a{color:var(--accent);}code{background:#f3f4f6;padding:.1rem .3rem;border-radius:3px;font-size:.85em;}
+header{margin-bottom:1.5rem;}
+header h1{font-size:1.5rem;color:var(--accent);margin-bottom:.25rem;}
+header p{font-size:.85rem;color:var(--muted);margin-bottom:.5rem;}
+.header-buttons{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;}
+.header-buttons button,.btn-import-label{
+  padding:.3rem .75rem;border:1px solid var(--accent);border-radius:5px;
+  background:var(--accent-light);color:var(--accent);font-size:.82rem;
+  cursor:pointer;font-weight:600;display:inline-block;}
+.header-buttons button:hover,.btn-import-label:hover{background:var(--accent);color:#fff;}
+.summary-table{width:100%;border-collapse:collapse;margin-bottom:1rem;font-size:.88rem;}
+.summary-table th{text-align:left;padding:.4rem .75rem;background:var(--accent-light);
+  border-bottom:2px solid var(--border);}
+.summary-table td{padding:.3rem .75rem;border-bottom:1px solid var(--border);}
+.summary-table tr.total td{font-weight:700;background:#f0f4ff;}
+.pts{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.grade-line{font-size:.88rem;margin-bottom:.6rem;color:var(--muted);}
+.grade-schema{border-collapse:collapse;font-size:.8rem;margin-bottom:1.5rem;}
+.grade-schema th,.grade-schema td{padding:.18rem .55rem;border:1px solid var(--border);text-align:center;}
+.grade-schema th{background:var(--accent-light);font-weight:600;}
+.grade-schema tr.gs-active td{font-weight:700;background:#dbeafe;color:#1e40af;}
+details.section{background:var(--card);border:1px solid var(--border);
+  border-radius:8px;margin-bottom:.6rem;overflow:hidden;}
+details.section>summary{padding:.65rem 1rem;font-weight:600;font-size:.93rem;
+  cursor:pointer;display:flex;align-items:center;gap:.6rem;
+  list-style:none;user-select:none;}
+details.section>summary::-webkit-details-marker{display:none;}
+details.section>summary::after{content:"▼";font-size:.6rem;color:var(--muted);
+  margin-left:auto;transition:transform .15s;}
+details.section[open]>summary::after{transform:rotate(180deg);}
+details.section.full>summary{background:#dcfce7;}
+details.section.partial>summary{background:#fef9c3;}
+details.section.none>summary{background:#fee2e2;}
+.sec-title{flex:1;}.sec-score{font-size:.8rem;font-weight:700;color:var(--muted);}
+.section-body{padding:.75rem 1rem 1rem;}
+.checks-table{width:100%;border-collapse:collapse;margin-bottom:.4rem;font-size:.84rem;}
+.check-row td{padding:.28rem .2rem;vertical-align:top;}
+.check-icon{width:1.6rem;text-align:center;}
+.check-desc{width:100%;}
+.check-pts{white-space:nowrap;text-align:right;font-weight:600;padding-left:.5rem;}
+.bullet-row td,.note-row td{padding:.08rem .2rem;}
+.bullet{font-size:.79rem;color:var(--muted);padding-left:1.8rem;}
+.note{font-size:.79rem;color:var(--yellow);padding-left:1.8rem;}
+.info-box{font-size:.81rem;color:var(--muted);background:#f9fafb;
+  border-left:3px solid var(--accent);padding:.45rem .7rem;margin:.4rem 0;border-radius:0 4px 4px 0;}
+details.data-view{border:1px solid var(--border);border-radius:5px;margin-top:.45rem;}
+details.data-view>summary{padding:.35rem .7rem;font-size:.81rem;font-weight:600;
+  color:var(--accent);cursor:pointer;list-style:none;background:#f8f9ff;user-select:none;}
+details.data-view>summary::-webkit-details-marker{display:none;}
+details.data-view>summary::before{content:"▶ ";font-size:.58rem;}
+details.data-view[open]>summary::before{content:"▼ ";}
+.data-body{padding:.55rem .7rem;}
+details.item{border:1px solid var(--border);border-radius:4px;margin-bottom:.3rem;overflow:hidden;}
+details.item>summary{padding:.35rem .65rem;cursor:pointer;
+  display:flex;align-items:center;flex-wrap:wrap;gap:.3rem;
+  list-style:none;background:#fafafa;font-size:.81rem;user-select:none;}
+details.item>summary::-webkit-details-marker{display:none;}
+details.item>summary::before{content:"▶ ";font-size:.58rem;color:var(--muted);}
+details.item[open]>summary::before{content:"▼ ";}
+.iid{font-family:monospace;font-size:.8rem;min-width:2.8rem;}
+.item-title{flex:1;font-size:.83rem;}
+.item-body{padding:.55rem .7rem;border-top:1px solid var(--border);font-size:.81rem;}
+.lbl{display:inline-block;padding:.08rem .42rem;border-radius:999px;
+  font-size:.67rem;font-weight:600;color:#fff;white-space:nowrap;}
+.meta{font-size:.73rem;color:var(--muted);}
+.state{font-size:.68rem;font-weight:600;padding:.08rem .38rem;border-radius:4px;}
+.state.open{background:#dcfce7;color:var(--green);}
+.state.closed{background:#f3f4f6;color:var(--muted);}
+.missing{color:var(--red);font-size:.82rem;padding:.2rem 0;}
+table.attrs{border-collapse:collapse;font-size:.81rem;margin-bottom:.4rem;}
+table.attrs th{text-align:left;padding:.16rem .55rem .16rem 0;color:var(--muted);
+  font-weight:500;white-space:nowrap;vertical-align:top;}
+table.attrs td{padding:.16rem 0;}
+ul.simple-list{list-style:none;font-size:.81rem;}
+ul.simple-list li{padding:.12rem 0;}
+pre.pre-code{background:var(--code-bg);color:var(--code-fg);border-radius:5px;
+  padding:.8rem;font-size:.74rem;white-space:pre;overflow-x:auto;
+  max-height:480px;overflow-y:auto;}
+details.fail-detail{border:1px solid var(--border);border-radius:5px;margin-bottom:.4rem;}
+details.fail-detail>summary{padding:.35rem .6rem;cursor:pointer;font-size:.82rem;
+  background:var(--accent-light);border-radius:5px;list-style:none;}
+details.fail-detail>summary::-webkit-details-marker{display:none;}
+details.fail-detail[open]>summary{border-radius:5px 5px 0 0;}
+.fail-body{padding:.6rem .75rem;display:flex;flex-direction:column;gap:.5rem;}
+.fail-label{font-size:.75rem;font-weight:600;color:var(--muted);margin:0;}
+code.fail-ep{color:var(--accent);font-size:.82rem;}
+code.fail-name{color:var(--text);font-size:.82rem;}
+table.sprint-table{width:100%;}
+table.sprint-table th,table.sprint-table td{width:50%;vertical-align:top;padding:.18rem .4rem .18rem 0;}
+pre.pre-desc{background:#f9fafb;border:1px solid var(--border);border-radius:4px;
+  padding:.55rem;font-size:.75rem;white-space:pre-wrap;word-break:break-word;
+  max-height:320px;overflow-y:auto;margin-top:.35rem;}
+.man-inline{margin-top:.7rem;padding:.5rem .6rem;background:#f8f9ff;
+  border:1px solid var(--border);border-radius:5px;}
+.man-inline-title{font-size:.75rem;font-weight:600;color:var(--accent);margin-bottom:.3rem;}
+.man-table{border-collapse:collapse;width:100%;font-size:.84rem;}
+.man-table td{padding:.28rem .15rem;vertical-align:middle;}
+.man-label{width:100%;}
+.man-pts-cell{white-space:nowrap;padding-left:.75rem !important;
+  display:flex;align-items:center;gap:.35rem;justify-content:flex-end;}
+.man-max{color:var(--muted);font-size:.8rem;}
+input.manual-input{width:3.4rem;padding:.18rem .3rem;border:1px solid var(--border);
+  border-radius:4px;text-align:center;font-size:.88rem;background:#fff;color:var(--text);}
+input.manual-input:focus{outline:2px solid var(--accent);border-color:transparent;}
+.sec-corr{display:flex;align-items:center;gap:.5rem;margin-top:.55rem;margin-bottom:.2rem;}
+.corr-label{font-size:.75rem;font-weight:600;color:var(--muted);white-space:nowrap;}
+input.corr-input{width:4.5rem;padding:.18rem .3rem;border:1px solid var(--border);
+  border-radius:4px;text-align:center;font-size:.88rem;background:#fff;color:var(--text);}
+input.corr-input:focus{outline:2px solid var(--accent);border-color:transparent;}
+.corr-badge{font-size:.74rem;font-weight:700;margin-left:.25rem;}
+.corr-badge.pos{color:var(--green);}
+.corr-badge.neg{color:var(--red);}
+.sum-man-corr{font-size:.78rem;font-weight:600;margin-left:.25rem;color:var(--muted);}
+.sum-man-corr.pos{color:var(--green);}
+.sum-man-corr.neg{color:var(--red);}
+.sec-comment{margin-top:.45rem;}
+.comment-label{display:block;font-size:.75rem;font-weight:600;color:var(--muted);margin-bottom:.2rem;}
+textarea.comment-area{width:100%;border:1px solid var(--border);border-radius:4px;
+  padding:.35rem .5rem;font-size:.82rem;font-family:inherit;color:var(--text);
+  background:#fff;resize:vertical;min-height:2.8rem;}
+textarea.comment-area:focus{outline:2px solid var(--accent);border-color:transparent;}
+body.drag-over::after{content:'JSON hier ablegen';position:fixed;inset:0;
+  background:rgba(78,110,168,.12);border:3px dashed var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;font-weight:700;color:var(--accent);
+  pointer-events:none;z-index:9999;}
+
+.comment-readonly{background:#f9fafb;border-left:3px solid var(--accent);
+  padding:.35rem .5rem;font-size:.82rem;white-space:pre-wrap;word-break:break-word;
+  border-radius:0 4px 4px 0;color:var(--text);}
+.man-val{font-weight:700;}
+</style></head><body><header><h1>Modularbeit Teil 1 – Projektprüfung</h1><p id="report-meta"></p><div class="header-buttons"><label class="btn-import-label">📂 JSON laden<input type="file" id="file-import" accept=".json" style="display:none"></label></div></header><div id="summary-container"></div><div id="sections-container"></div><script>
+(function(){
+  var DATA=null;
+
+  function esc(s){
+    if(s==null||s===undefined)return'';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function fmtN(n){
+    n=Math.round(n*100)/100;
+    return n%1?n+'':Math.floor(Math.abs(n))*(n<0?-1:1)+'';
+  }
+  function grade(pts,max){
+    var p=Math.ceil(pts/max*100);
+    if(p>=95)return'1,0';if(p>=90)return'1,3';if(p>=85)return'1,7';
+    if(p>=80)return'2,0';if(p>=75)return'2,3';if(p>=70)return'2,7';
+    if(p>=65)return'3,0';if(p>=60)return'3,3';if(p>=55)return'3,7';
+    if(p>=50)return'4,0';return'5,0';
+  }
+  var _SCHEMA=[[95,'1,0'],[90,'1,3'],[85,'1,7'],[80,'2,0'],
+    [75,'2,3'],[70,'2,7'],[65,'3,0'],[60,'3,3'],[55,'3,7'],[50,'4,0'],[null,'5,0']];
+  function gradeSchemaHtml(achievedNote){
+    var rows=_SCHEMA.map(function(r){
+      var thresh=r[0],note=r[1];
+      var label=thresh!==null?'&#8805; '+thresh+' %':'&lt; 50 %';
+      return'<tr'+(note===achievedNote?' class="gs-active"':'')+'><td>'+label+'</td><td>'+note+'</td></tr>';
+    }).join('');
+    return'<table class="grade-schema"><tr><th>ab</th><th>Note</th></tr>'+rows+'</table>';
+  }
+  var LC={'Type::User Story':'#6699cc','Type::Bug':'#dc143c','AI Usage Doc':'#cc338b'};
+  function labelBadge(name){return'<span class="lbl" style="background:'+(LC[name]||'#888')+'">'+esc(name)+'</span>';}
+  function labelBadges(ls){return(ls&&ls.length)?ls.map(labelBadge).join(' '):'';}
+  function collapsible(title,inner){
+    return'<details class="data-view"><summary>'+esc(title)+'</summary><div class="data-body">'+inner+'</div></details>';
+  }
+  function linkify(text,pu){
+    return esc(text).replace(/#(\d+)/g,function(m,n){
+      return'<a href="'+esc(pu)+'/-/issues/'+n+'" target="_blank">#'+n+'</a>';
+    });
+  }
+  function issueBlock(issue,pu,mrs){
+    var url=pu+'/-/issues/'+issue.iid;
+    var sc=issue.state==='opened'?'open':'closed';
+    var wh=issue.weight!=null?'<span class="meta">W:'+esc(issue.weight)+'</span>':'';
+    var mrRow='';
+    if(mrs&&mrs.length){
+      var ml=mrs.slice().sort(function(a,b){return a.iid-b.iid;}).map(function(mr){
+        return'<a href="'+esc(pu)+'/-/merge_requests/'+mr.iid+'" target="_blank">!'+mr.iid+'</a>';
+      }).join(', ');
+      mrRow='<tr><th>Behebt MR</th><td>'+ml+'</td></tr>';
+    }
+    return(
+      '<details class="item"><summary>'+
+      '<a class="iid" href="'+esc(url)+'" target="_blank">#'+issue.iid+'</a>'+
+      '<span class="item-title">'+esc(issue.title)+'</span>'+
+      labelBadges(issue.labels)+
+      '<span class="meta">'+esc(issue.milestone||'—')+'</span>'+wh+
+      '<span class="state '+sc+'">'+esc(issue.state)+'</span>'+
+      '</summary><div class="item-body"><table class="attrs">'+
+      '<tr><th>Erstellt</th><td>'+esc(issue.created_at)+'</td></tr>'+
+      '<tr><th>Autor</th><td>'+esc(issue.author)+'</td></tr>'+
+      '<tr><th>Assignees</th><td>'+esc((issue.assignees||[]).join(', ')||'—')+'</td></tr>'+
+      '<tr><th>Milestone</th><td>'+esc(issue.milestone||'—')+'</td></tr>'+
+      '<tr><th>Weight</th><td>'+esc(issue.weight!=null?issue.weight:'—')+'</td></tr>'+
+      '<tr><th>Labels</th><td>'+labelBadges(issue.labels)+'</td></tr>'+
+      mrRow+'</table>'+
+      '<pre class="pre-desc">'+esc(issue.description)+'</pre>'+
+      '</div></details>'
+    );
+  }
+
+  // ── renderData: identisch mit vollem Viewer (keine Eingaben hier) ──────────
+  function renderData(d,pu){
+    var parts=[];
+    if(d.labels&&Object.keys(d.labels).length){
+      var rows=Object.keys(d.labels).map(function(n){return'<tr><td>'+labelBadge(n)+'</td><td><code>'+esc(d.labels[n])+'</code></td></tr>';}).join('');
+      parts.push(collapsible('Vorhandene Labels','<table class="attrs"><tr><th>Name</th><th>Farbe</th></tr>'+rows+'</table>'));
+    }
+    if(d.milestones&&d.milestones.length){
+      var rows=d.milestones.map(function(m){return'<tr><td>'+esc(m.title)+'</td><td>'+esc(m.start_date)+'</td><td>'+esc(m.due_date)+'</td></tr>';}).join('');
+      parts.push(collapsible('Milestones','<table class="attrs"><tr><th>Titel</th><th>Start</th><th>Ende</th></tr>'+rows+'</table>'));
+    }
+    if(d.boards&&d.boards.length){parts.push(collapsible('Issue Boards','<ul class="simple-list">'+d.boards.map(function(b){return'<li>'+esc(b)+'</li>';}).join('')+'</ul>'));}
+    if(d.templates&&Object.keys(d.templates).length){
+      var inner='';
+      Object.keys(d.templates).forEach(function(k){var v=d.templates[k];inner+=v?collapsible(k,'<pre class="pre-code">'+esc(v)+'</pre>'):'<p class="missing">❌ '+esc(k)+' — nicht gefunden</p>';});
+      parts.push(collapsible('Template-Inhalte (aus Repository)',inner));
+    }
+    [['title_scale','Bewertungsschema: Titelformat','Korrekte Titel'],['meta_scale','Bewertungsschema: Milestone / Weight','Korrekt gesetzt'],['fill_scale','Bewertungsschema: Templates ausgefüllt','Korrekt ausgefüllt'],['mr_story_scale','Bewertungsschema: User Stories mit MR','Stories mit MR'],['closes_scale','Bewertungsschema: MRs mit `Closes #x`','MRs mit `Closes #x`'],['commit_size_scale','Bewertungsschema: Commit-Größen','Commits > 30 Zeilen'],['commit_timing_scale','Bewertungsschema: Commit-Abstände','Commits < 60 s'],['endpoint_scale','Bewertungsschema: Endpunkte','Kriterium'],['mutation_scale','Bewertungsschema: Mutations-Testing','Anteil getöteter Mutanten']].forEach(function(s){
+      if(!d[s[0]])return;
+      var rows=d[s[0]].map(function(item){return'<tr><td>'+esc(item[0])+'</td><td style="text-align:right">'+esc(item[1])+'&nbsp;P</td></tr>';}).join('');
+      parts.push(collapsible(s[1],'<table class="attrs"><tr><th>'+esc(s[2])+'</th><th style="text-align:right">Punkte</th></tr>'+rows+'</table>'));
+    });
+    if(d.user_stories){var sorted=d.user_stories.slice().sort(function(a,b){return a.iid-b.iid;});parts.push(collapsible('User Stories ('+sorted.length+')',sorted.map(function(s){return issueBlock(s,pu);}).join('')||'<p class="missing">Keine gefunden</p>'));}
+    if(d.sprint1!==undefined||d.sprint2!==undefined){
+      var s1=(d.sprint1||[]).slice().sort(function(a,b){return a.iid-b.iid;}),s2=(d.sprint2||[]).slice().sort(function(a,b){return a.iid-b.iid;});
+      var n=Math.max(s1.length,s2.length),rows='';
+      for(var i=0;i<n;i++){var c1=s1[i]?'<a href="'+esc(pu+'/-/issues/'+s1[i].iid)+'" target="_blank">#'+s1[i].iid+'</a>&nbsp;'+esc(s1[i].title):'';var c2=s2[i]?'<a href="'+esc(pu+'/-/issues/'+s2[i].iid)+'" target="_blank">#'+s2[i].iid+'</a>&nbsp;'+esc(s2[i].title):'';rows+='<tr><td>'+c1+'</td><td>'+c2+'</td></tr>';}
+      parts.push(collapsible('Sprint-Verteilung (Sprint 1: '+s1.length+', Sprint 2: '+s2.length+')','<table class="attrs sprint-table"><tr><th>Sprint 1</th><th>Sprint 2</th></tr>'+rows+'</table>'));
+    }
+    if(d.merge_requests){
+      var mrs=d.merge_requests.slice().sort(function(a,b){return a.iid-b.iid;});
+      var rows=mrs.map(function(mr){var url=pu+'/-/merge_requests/'+mr.iid;var sc=mr.state==='opened'?'open':'closed';var nums=[];((mr.description||'').match(/[Cc]loses\s+#(\d+)/g)||[]).forEach(function(m){nums.push(parseInt(m.match(/\d+/)[0]));});nums.sort(function(a,b){return a-b;});var closes=nums.map(function(n){return'#'+n;}).join(', ');return'<tr><td><a href="'+esc(url)+'" target="_blank">!'+mr.iid+'</a></td><td>'+esc(mr.title)+'</td><td><span class="state '+sc+'">'+esc(mr.state)+'</span></td><td>'+esc(closes)+'</td></tr>';}).join('');
+      parts.push(collapsible('Merge Requests ('+mrs.length+')',rows?'<table class="attrs mr-table"><tr><th>MR</th><th>Titel</th><th>Status</th><th>Schließt</th></tr>'+rows+'</table>':'<p class="missing">Keine Merge Requests gefunden</p>'));
+    }
+    if(d.ki_issues){var sorted=d.ki_issues.slice().sort(function(a,b){return a.iid-b.iid;});parts.push(collapsible('KI-Nutzungsprotokolle ('+sorted.length+')',sorted.map(function(s){return issueBlock(s,pu);}).join('')||'<p class="missing">Keine gefunden</p>'));}
+    if(d.oversized_commits&&d.oversized_commits.length){var rows=d.oversized_commits.map(function(c){return'<tr><td><a href="'+esc(pu+'/-/commit/'+c.sha)+'" target="_blank"><code>'+esc(c.short)+'</code></a></td><td>'+esc(c.title.substring(0,80))+'</td><td>'+esc(c.branch)+'</td><td>'+c.lines+'</td></tr>';}).join('');parts.push(collapsible('Zu große Commits','<table class="attrs"><tr><th>SHA</th><th>Titel</th><th>Branch</th><th>Zeilen</th></tr>'+rows+'</table>'));}
+    if(d.timing_violations&&d.timing_violations.length){var rows=d.timing_violations.map(function(c){return'<tr><td><a href="'+esc(pu+'/-/commit/'+c.sha)+'" target="_blank"><code>'+esc(c.short)+'</code></a></td><td>'+esc(c.title.substring(0,80))+'</td><td>'+esc(c.branch)+'</td><td>'+c.delta+' s</td></tr>';}).join('');parts.push(collapsible('Commits mit zu kurzem Abstand (< 60 s)','<table class="attrs"><tr><th>SHA</th><th>Titel</th><th>Branch</th><th>Abstand</th></tr>'+rows+'</table>'));}
+    if(d.direct_main_commits&&d.direct_main_commits.length){var rows=d.direct_main_commits.map(function(c){return'<tr><td><a href="'+esc(pu+'/-/commit/'+c.sha)+'" target="_blank"><code>'+esc(c.short)+'</code></a></td><td>'+esc(c.title.substring(0,80))+'</td><td>'+esc(c.date)+'</td></tr>';}).join('');parts.push(collapsible('Direkte Commits auf main','<table class="attrs"><tr><th>SHA</th><th>Titel</th><th>Datum & Uhrzeit</th></tr>'+rows+'</table>'));}
+    if(d.all_commits&&d.all_commits.length){
+      var v={};(d.oversized_commits||[]).forEach(function(c){(v[c.sha]=v[c.sha]||[]).push('zu große Änderung');});(d.timing_violations||[]).forEach(function(c){(v[c.sha]=v[c.sha]||[]).push('zu kurzer Abstand');});(d.direct_main_commits||[]).forEach(function(c){(v[c.sha]=v[c.sha]||[]).push('direkter Commit auf main');});
+      var rows=d.all_commits.map(function(c){var reasons=v[c.sha];return'<tr'+(reasons?' style="background:#fee2e2" title="'+esc(reasons.join(', '))+'"':'')+'>'+
+        '<td><a href="'+esc(pu+'/-/commit/'+c.sha)+'" target="_blank"><code>'+esc(c.short)+'</code></a></td><td>'+esc(c.title.substring(0,80))+'</td><td>'+esc(c.branch)+'</td><td>'+esc(c.date)+'</td></tr>';}).join('');
+      parts.push(collapsible('Alle Commits ('+d.all_commits.length+')','<table class="attrs"><tr><th>SHA</th><th>Titel</th><th>Branch</th><th>Datum & Uhrzeit</th></tr>'+rows+'</table>'));
+    }
+    if(d.py_files){parts.push(collapsible('Python-Dateien in src/ ('+d.py_files.length+')',d.py_files.length?'<ul class="simple-list">'+d.py_files.map(function(f){return'<li><code>'+esc(f)+'</code></li>';}).join('')+'</ul>':'<p class="missing">Keine</p>'));}
+    if(d.requirements){parts.push(collapsible('requirements.txt','<pre class="pre-code">'+esc(d.requirements)+'</pre>'));}
+    if(d['pytest.ini']){parts.push(collapsible('pytest.ini','<pre class="pre-code">'+esc(d['pytest.ini'])+'</pre>'));}
+    if(d['.gitignore']){parts.push(collapsible('.gitignore','<pre class="pre-code">'+esc(d['.gitignore'])+'</pre>'));}
+    if(d.ci_content){parts.push(collapsible('.gitlab-ci.yml','<pre class="pre-code">'+esc(d.ci_content)+'</pre>'));}
+    if(d.endpoint_tests){
+      var td=d.endpoint_tests,epNames=d.endpoint_test_names||[];
+      if(td.clone_error){parts.push('<p class="missing">⚠️ Klon fehlgeschlagen: '+esc(td.clone_error)+'</p>');}
+      else{
+        if(td.pip_error){parts.push('<p class="missing">⚠️ pip install (requirements.txt) fehlgeschlagen:<br><pre class="pre-code" style="font-size:.78rem">'+esc(td.pip_error)+'</pre></p>');}
+        var rows='';
+        epNames.forEach(function(pair){var epName=pair[0],tf=pair[1],r=td[tf]||{};var total=r.total||0,failed=r.failed||0,passed=total-failed;var tCell,rowBg;if(total===0){tCell='<span style="color:var(--muted)">—</span>';rowBg=' style="background:#fef9c3"';}else if(failed===0){tCell='<span style="color:var(--green)">✅ '+passed+'/'+total+'</span>';rowBg='';}else{tCell='<span style="color:var(--red)">❌ '+passed+'/'+total+'</span>';rowBg=' style="background:#fee2e2"';}rows+='<tr'+rowBg+'><td><code>'+esc(epName)+'</code></td><td>'+tCell+'</td></tr>';});
+        var inner='<table class="attrs"><tr><th>Endpunkt</th><th>Tests</th></tr>'+rows+'</table>';
+        var failureBlocks='';
+        epNames.forEach(function(pair){var epName=pair[0],tf=pair[1],r=td[tf]||{};(r.failures||[]).forEach(function(f){if(!f||typeof f!=='object')return;var src=f.source?'<p class="fail-label">Test-Code:</p><pre class="pre-code">'+esc(f.source)+'</pre>':'';var out=f.output?'<p class="fail-label">pytest-Ausgabe:</p><pre class="pre-code">'+esc(f.output)+'</pre>':'';failureBlocks+='<details class="fail-detail"><summary><code class="fail-ep">'+esc(epName)+'</code>&nbsp;›&nbsp;<code class="fail-name">'+esc(f.name)+'</code></summary><div class="fail-body">'+src+out+'</div></details>';});});
+        if(failureBlocks){inner+=collapsible('Fehlgeschlagene Tests',failureBlocks);}
+        else if(td.pytest_output){inner+=collapsible('pytest-Ausgabe','<pre class="pre-code" style="font-size:.78rem">'+esc(td.pytest_output)+'</pre>');}
+        parts.push(collapsible('Endpunkt-Testergebnisse',inner));
+      }
+    }
+    if(d.test_files){parts.push(collapsible('Testdateien in tests/ ('+d.test_files.length+')',d.test_files.length?'<ul class="simple-list">'+d.test_files.map(function(f){return'<li><code>'+esc(f)+'</code></li>';}).join('')+'</ul>':'<p class="missing">Keine</p>'));}
+    if(d.own_tests){
+      var ot=d.own_tests,inner;
+      if(ot.error){inner='<p class="missing">⚠️ '+esc(ot.error)+'</p>';}
+      else{var total=ot.total||0,passed=ot.passed||0,failed=ot.failed||0,errors=ot.errors||0;var bc,st;if(total===0){bc='#d97706';st='Keine Tests gefunden';}else if(failed===0&&errors===0){bc='#16a34a';st='Alle '+total+' Tests bestanden';}else{bc='#dc2626';st=passed+'/'+total+' bestanden · '+failed+' fehlgeschlagen · '+errors+' Fehler';}var bw=total?Math.min(Math.floor(passed/total*100),100):0;inner='<div style="margin-bottom:.5rem;font-size:.85rem"><strong>'+esc(st)+'</strong></div><div style="background:#e5e7eb;border-radius:4px;height:10px;margin-bottom:.7rem"><div style="background:'+bc+';width:'+bw+'%;height:10px;border-radius:4px"></div></div>';}
+      if(ot.pip_error){inner='<p class="missing">⚠️ pip install fehlgeschlagen:<br><pre class="pre-code" style="font-size:.78rem">'+esc(ot.pip_error)+'</pre></p>'+inner;}
+      if(ot.output){inner+=collapsible('pytest-Ausgabe','<pre class="pre-code" style="font-size:.78rem">'+esc(ot.output)+'</pre>');}
+      parts.push(collapsible('Eigene Tests (pytest)',inner));
+    }
+    if(d.coverage){
+      var cov=d.coverage,pct=cov.pct,bw=Math.min(Math.floor(pct),100),bc=pct>=90?'#16a34a':(pct>=70?'#d97706':'#dc2626');
+      var meta=cov.source==='local_run'?'Lokal ausgeführt':'Job: <code>'+esc(cov.job_name||'?')+'</code>&nbsp;·&nbsp;Pipeline #<code>'+esc(String(cov.pipeline_id||'?'))+'</code>';
+      var summary='<div style="margin-bottom:.5rem;font-size:.85rem">Gesamt: <strong>'+pct.toFixed(1)+' %</strong>&nbsp;·&nbsp; '+meta+'</div><div style="background:#e5e7eb;border-radius:4px;height:10px;margin-bottom:.7rem"><div style="background:'+bc+';width:'+bw+'%;height:10px;border-radius:4px"></div></div>';
+      var rows=(cov.files||[]).map(function(f){return'<tr'+(f.pct<90?' style="background:#fee2e2"':'')+'>'+
+        '<td><code>'+esc(f.file)+'</code></td><td style="text-align:right">'+f.pct.toFixed(1)+' %</td>'+
+        '<td style="text-align:right">'+f.covered+'</td><td style="text-align:right">'+f.valid+'</td></tr>';}).join('');
+      parts.push(collapsible('Code Coverage ('+pct.toFixed(1)+' %)',summary+'<table class="attrs" style="width:100%"><tr><th>Datei</th><th style="text-align:right">Coverage</th><th style="text-align:right">Abgedeckt</th><th style="text-align:right">Gesamt</th></tr>'+rows+'</table>'));
+    }
+    if(d.mutation_testing){
+      var md=d.mutation_testing,inner;
+      if(md.error){inner='<p class="missing">⚠️ '+esc(md.error)+'</p>';if(md.output){inner+='<pre class="pre-code" style="margin-top:.5rem">'+esc(md.output)+'</pre>';}}
+      else{
+        var killed=md.killed||0,survived=md.survived||0,timeout=md.timeout||0,total=md.total||0,ratio=total?killed/total:0,bw=Math.min(Math.floor(ratio*100),100),bc=ratio>=0.80?'#16a34a':(ratio>=0.40?'#d97706':'#dc2626');
+        inner='<div style="margin-bottom:.5rem;font-size:.85rem">Getötet: <strong>'+killed+'</strong> / '+total+'&nbsp;·&nbsp; Überlebt: <strong>'+survived+'</strong>&nbsp;·&nbsp; Timeout: '+timeout+'&nbsp;·&nbsp; Score: <strong>'+(ratio*100).toFixed(0)+'%</strong></div><div style="background:#e5e7eb;border-radius:4px;height:10px;margin-bottom:.7rem"><div style="background:'+bc+';width:'+bw+'%;height:10px;border-radius:4px"></div></div>';
+        var sd=md.survived_details||[];
+        if(sd.length){var byFile={};sd.forEach(function(e){(byFile[e.file]=byFile[e.file]||[]).push(e);});var rh='';Object.keys(byFile).sort().forEach(function(fname){rh+='<tr><td colspan="2" style="padding-top:.6rem;font-weight:600;color:var(--muted);font-size:.8rem">'+esc(fname)+'</td></tr>';byFile[fname].forEach(function(e){rh+='<tr><td style="text-align:right;color:var(--muted);font-size:.8rem;padding-right:.5rem;white-space:nowrap">:'+e.line+'</td><td><code style="font-size:.8rem">'+esc(e.code)+'</code></td></tr>';});});inner+='<details style="margin-top:.7rem"><summary style="cursor:pointer;font-size:.8rem;color:var(--muted)">Nicht ausreichend getesteter Code ('+sd.length+' Zeilen)</summary><table style="margin-top:.4rem;border-collapse:collapse;width:100%">'+rh+'</table></details>';}
+        if(md.output){inner+='<details style="margin-top:.5rem"><summary style="cursor:pointer;font-size:.8rem;color:var(--muted)">mutmut-Ausgabe</summary><pre class="pre-code" style="margin-top:.4rem">'+esc(md.output)+'</pre></details>';}
+      }
+      parts.push(collapsible('Mutations-Testing'+(md.total?(' ('+md.killed+'/'+md.total+' getötet)'):''),inner));
+    }
+    if(d.bugs){var bugMrs=d.bug_mrs||{};var sorted=d.bugs.slice().sort(function(a,b){return a.iid-b.iid;});parts.push(collapsible('Bugs ('+sorted.length+')',sorted.map(function(b){return issueBlock(b,pu,bugMrs[String(b.iid)]||[]);}).join('')||'<p class="missing">Keine gefunden</p>'));}
+    return parts.join('\n');
+  }
+
+  function renderSection(sec,pu){
+    var icon,cls;
+    if(sec.earned===sec.possible){icon='✅';cls='full';}
+    else if(sec.earned>0){icon='🟡';cls='partial';}
+    else{icon='❌';cls='none';}
+
+    var cr='';
+    (sec.checks||[]).forEach(function(c){
+      var ci=c.earned===c.possible?'✅':(c.earned>0?'🟡':'❌');
+      cr+='<tr class="check-row"><td class="check-icon">'+ci+'</td><td class="check-desc">'+esc(c.description)+'</td><td class="check-pts">'+fmtN(c.earned)+'&nbsp;/&nbsp;'+fmtN(c.possible)+'</td></tr>';
+      (c.bullets||[]).forEach(function(b){cr+='<tr class="bullet-row"><td></td><td colspan="2" class="bullet">'+linkify(b,pu)+'</td></tr>';});
+      if(c.note){cr+='<tr class="note-row"><td></td><td colspan="2" class="note">⚠️ '+linkify(c.note,pu)+'</td></tr>';}
+    });
+
+    var infos=(sec.infos||[]).map(function(i){return'<div class="info-box">ℹ️ '+esc(i)+'</div>';}).join('');
+    var dh=renderData(sec.data||{},pu);
+
+    // Manuelle Bewertung: statisch aus gespeicherten Werten anzeigen
+    var slot=sec.manual_slot,items=sec.manual_items||[];
+    var mm=items.reduce(function(s,i){return s+i.max;},0);
+    var manVals=sec.manual_values||[];
+    var manTotal=manVals.reduce(function(s,v){return s+(parseInt(v)||0);},0);
+    var mih='';
+    if(slot&&items.length){
+      var rows=items.map(function(item,j){
+        var val=parseInt(manVals[j])||0;
+        return'<tr><td class="man-label">'+esc(item.label)+'</td>'+
+          '<td class="man-pts-cell"><span class="man-val">'+val+'</span><span class="man-max"> / '+item.max+'</span></td></tr>';
+      }).join('');
+      mih='<div class="man-inline"><div class="man-inline-title">Manuelle Bewertung</div><table class="man-table">'+rows+'</table></div>';
+    }
+
+    // Korrektur: statisch als Badge
+    var corr=parseFloat(sec.correction)||0;
+    var corrBadge='';
+    if(corr>0){corrBadge='<span class="corr-badge pos"> (+'+fmtN(corr)+')</span>';}
+    else if(corr<0){corrBadge='<span class="corr-badge neg"> ('+fmtN(corr)+')</span>';}
+
+    // Kommentar: statisch, nur wenn vorhanden
+    var cmtH='';
+    if(sec.comment){
+      cmtH='<div class="sec-comment"><span class="comment-label">Kommentar</span>'+
+        '<div class="comment-readonly">'+esc(sec.comment)+'</div></div>';
+    }
+
+    var sh=slot&&items.length
+      ?fmtN(sec.earned)+'&nbsp;+&nbsp;'+manTotal+'&nbsp;/&nbsp;'+fmtN(sec.possible+mm)+corrBadge
+      :fmtN(sec.earned)+'&nbsp;/&nbsp;'+fmtN(sec.possible)+corrBadge;
+
+    return'<details class="section '+cls+'"><summary>'+
+      '<span class="sec-icon">'+icon+'</span>'+
+      '<span class="sec-title">'+esc(sec.title)+'</span>'+
+      '<span class="sec-score">'+sh+'</span>'+
+      '</summary>'+
+      '<div class="section-body"><table class="checks-table">'+cr+'</table>'+infos+dh+mih+cmtH+'</div></details>';
+  }
+
+  function renderSummary(data){
+    var secs=data.sections||[];
+    var te=data.total_earned||0,tp=data.total_possible||0,tmm=data.total_manual_max||0;
+    var totalMan=0,totalCorr=0;
+    secs.forEach(function(s){
+      (s.manual_values||[]).forEach(function(v){totalMan+=(parseInt(v)||0);});
+      totalCorr+=parseFloat(s.correction)||0;
+    });
+    var grandTotal=te+totalMan+totalCorr,tmax=tp+tmm;
+    var rows='';
+    secs.forEach(function(s){
+      var slot=s.manual_slot,items=s.manual_items||[];
+      var mm=items.reduce(function(a,i){return a+i.max;},0);
+      var manSec=(s.manual_values||[]).reduce(function(a,v){return a+(parseInt(v)||0);},0);
+      var corr=parseFloat(s.correction)||0;
+      var corrStr='';
+      if(corr>0){corrStr='<span class="sum-man-corr pos">(+'+fmtN(corr)+')</span>';}
+      else if(corr<0){corrStr='<span class="sum-man-corr neg">('+fmtN(corr)+')</span>';}
+      var secTotal=s.earned+manSec+corr;
+      if(slot&&items.length){
+        rows+='<tr><td>'+esc(s.title)+'</td>'+
+          '<td class="pts">'+fmtN(s.earned)+'&nbsp;/&nbsp;'+fmtN(s.possible)+'</td>'+
+          '<td class="pts">'+manSec+'&nbsp;/&nbsp;'+mm+'&nbsp;'+corrStr+'</td>'+
+          '<td class="pts">'+fmtN(secTotal)+'&nbsp;/&nbsp;'+fmtN(s.possible+mm)+'</td></tr>';
+      } else {
+        rows+='<tr><td>'+esc(s.title)+'</td>'+
+          '<td class="pts">'+fmtN(s.earned)+'&nbsp;/&nbsp;'+fmtN(s.possible)+'</td>'+
+          '<td class="pts">'+corrStr+'—</td>'+
+          '<td class="pts">'+fmtN(secTotal)+'&nbsp;/&nbsp;'+fmtN(s.possible)+'</td></tr>';
+      }
+    });
+    var rawPct=tmax?grandTotal/tmax*100:0;
+    var ceiledPct=Math.ceil(rawPct);
+    var gi=tmax?grade(grandTotal,tmax):'—';
+    var ceilShown=ceiledPct>rawPct+0.001;
+    var fml=fmtN(grandTotal)+'&nbsp;/&nbsp;'+fmtN(tmax)+'&nbsp;Pkt.&nbsp;=&nbsp;'+
+      (ceilShown?rawPct.toFixed(1)+'&nbsp;%&nbsp;&rarr;&nbsp;&#8968;'+rawPct.toFixed(1)+'&#8969;&thinsp;=&thinsp;<strong>'+ceiledPct+'&nbsp;%</strong>':'<strong>'+ceiledPct+'&nbsp;%</strong>');
+    document.getElementById('summary-container').innerHTML=
+      '<table class="summary-table"><tr><th>Bereich</th><th class="pts">Automatisch</th><th class="pts">Manuell</th><th class="pts">Gesamt</th></tr>'+
+      rows+
+      '<tr class="total"><td>Gesamt</td>'+
+      '<td class="pts">'+fmtN(te)+'&nbsp;/&nbsp;'+fmtN(tp)+'</td>'+
+      '<td class="pts">'+fmtN(totalMan)+'&nbsp;/&nbsp;'+tmm+'</td>'+
+      '<td class="pts">'+fmtN(grandTotal)+'&nbsp;/&nbsp;'+fmtN(tmax)+'</td>'+
+      '</tr></table>'+
+      '<p class="grade-line">'+fml+'&nbsp;&rarr;&nbsp; Erzielte Note: <strong>'+gi+'</strong></p>'+
+      gradeSchemaHtml(gi);
+  }
+
+  function loadFile(file){
+    var r=new FileReader();
+    r.onload=function(e){
+      try{init(JSON.parse(e.target.result));}
+      catch(ex){alert('Ungültige JSON-Datei');}
+    };
+    r.readAsText(file);
+  }
+
+  function init(data){
+    DATA=data;
+    document.title='Prüfbericht – '+data.project_name;
+    document.getElementById('report-meta').innerHTML=
+      '<a href="'+esc(data.project_url)+'" target="_blank">'+esc(data.project_url)+'</a>'+
+      '&nbsp;·&nbsp; Namespace: <code>'+esc(data.namespace)+'</code>'+
+      '&nbsp;·&nbsp; Geprüft: '+esc(data.checked_at);
+    renderSummary(data);
+    document.getElementById('sections-container').innerHTML=(data.sections||[]).map(function(s){
+      return renderSection(s,data.project_url||'');
+    }).join('\n');
+  }
+
+  // Datei-Import per Button
+  document.getElementById('file-import').addEventListener('change',function(ev){
+    var f=ev.target.files[0];if(!f)return;
+    loadFile(f);ev.target.value='';
+  });
+
+  // Drag-and-drop
+  document.addEventListener('dragover',function(e){e.preventDefault();document.body.classList.add('drag-over');});
+  document.addEventListener('dragleave',function(e){if(!e.relatedTarget||e.relatedTarget===document.documentElement)document.body.classList.remove('drag-over');});
+  document.addEventListener('drop',function(e){
+    e.preventDefault();document.body.classList.remove('drag-over');
+    var f=e.dataTransfer.files[0];
+    if(f&&f.name.endsWith('.json'))loadFile(f);
+  });
+
+  // URL-Parameter ?data=
+  var dataFile=new URLSearchParams(window.location.search).get('data');
+  if(dataFile){
+    fetch(dataFile)
+      .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+      .then(init)
+      .catch(function(err){
+        document.getElementById('sections-container').innerHTML=
+          '<p style="color:#dc2626;padding:1rem">'+
+          '⚠ Datendatei nicht geladen: <code>'+esc(dataFile)+'</code> ('+err+')<br>'+
+          'Bitte den Viewer über einen HTTP-Server öffnen (z.B. <code>python -m http.server</code>).</p>';
+      });
+  }
+})();
+</script></body></html>
