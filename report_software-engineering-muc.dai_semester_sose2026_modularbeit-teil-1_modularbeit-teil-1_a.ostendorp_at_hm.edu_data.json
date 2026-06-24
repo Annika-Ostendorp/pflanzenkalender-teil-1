@@ -3,7 +3,7 @@
   "project_url": "https://gitlab.lrz.de/software-engineering-muc.dai/semester/sose2026/modularbeit-teil-1/modularbeit-teil-1_a.ostendorp_at_hm.edu",
   "namespace": "software-engineering-muc.dai/semester/sose2026/modularbeit-teil-1",
   "checked_at": "2026-06-05 18:16",
-  "total_earned": 90.5,
+  "total_earned": 91.0,
   "total_possible": 96.0,
   "total_manual_max": 8,
   "sections": [
@@ -1244,7 +1244,8 @@
             "short": "8b8608dc",
             "title": "Refactor and standardize all test names in the tests/ folder",
             "branch": "main",
-            "lines": 42
+            "lines": 42,
+            "author": "Annika Ostendorp"
           }
         ],
         "timing_violations": [
@@ -1263,6 +1264,7 @@
             "short": "92261e75",
             "title": "Refactor correct indentation for overdue_object to prevent UnboundLocalError",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-28 14:34"
           },
           {
@@ -1270,6 +1272,7 @@
             "short": "fee7221f",
             "title": "Add a boundary test for fetching logs of a plant with empty log history for task 6",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-26 12:18"
           },
           {
@@ -1277,6 +1280,7 @@
             "short": "f0b6b2b1",
             "title": "Add coverage for ValueError exceptions on invalid date strings 2/2 for task 5",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-26 12:14"
           },
           {
@@ -1284,6 +1288,7 @@
             "short": "6559fa15",
             "title": "Add coverage for ValueError exceptions on invalid date strings 1/2 for task 5",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-26 12:08"
           },
           {
@@ -1291,6 +1296,7 @@
             "short": "3987da22",
             "title": "Add error scenario for unallowed care_type strings in test_care_schedule_creation_or_update.py for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-26 12:03"
           },
           {
@@ -1298,6 +1304,7 @@
             "short": "deba87e3",
             "title": "Remove redundant plants.clear() calls to avoid code duplication 3/3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-26 11:57"
           },
           {
@@ -1305,6 +1312,7 @@
             "short": "32dddfee",
             "title": "Remove redundant plants.clear() calls to avoid code duplication 2/3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-26 11:54"
           },
           {
@@ -1312,6 +1320,7 @@
             "short": "0567463d",
             "title": "Remove redundant plants.clear() calls to avoid code duplication 1/3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-26 11:53"
           },
           {
@@ -1319,6 +1328,7 @@
             "short": "c1ceddf3",
             "title": "Isolate the test environment by clearing plants list and resetting next_id in conftest.py for tasks 1 and 2",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-26 11:48"
           },
           {
@@ -1326,6 +1336,7 @@
             "short": "07af3922",
             "title": "Fix internal classes coverage test by assigning plant to schedule for successful tests",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-26 11:36"
           },
           {
@@ -1333,6 +1344,7 @@
             "short": "2fca8c2d",
             "title": "Fix failing tests of CareSchedule instantiations by removing next_due arguments",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-26 11:33"
           },
           {
@@ -1340,6 +1352,7 @@
             "short": "e26d6ae2",
             "title": "Delete redundant global plants lines for task 5",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-26 11:22"
           },
           {
@@ -1347,6 +1360,7 @@
             "short": "f0fb9513",
             "title": "Wrap the date parsing in try-except blocks to prevent 500 errors for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-26 11:20"
           },
           {
@@ -1354,6 +1368,7 @@
             "short": "56e4c7d7",
             "title": "Add strict validation for allowed care types in POST schedules for task 3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-26 11:15"
           },
           {
@@ -1361,6 +1376,7 @@
             "short": "034c03a3",
             "title": "Update the POST /api/plants/<id>/schedules route by removing None in the new CareSchedule for task 2",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-26 11:12"
           },
           {
@@ -1368,6 +1384,7 @@
             "short": "e8350e18",
             "title": "Remove next_due from the CareSchedule constructor parameter list and set it to None for task 1",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-26 11:09"
           },
           {
@@ -1375,6 +1392,7 @@
             "short": "a63ffc0c",
             "title": "Add test for an empty list if no actions are overdue for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 15:01"
           },
           {
@@ -1382,6 +1400,7 @@
             "short": "defae55d",
             "title": "Add missing return statement in app.py for GET route and a succesful test",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 14:55"
           },
           {
@@ -1389,6 +1408,7 @@
             "short": "34aeee32",
             "title": "Add assertions for the test for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 14:53"
           },
           {
@@ -1396,6 +1416,7 @@
             "short": "e52f5195",
             "title": "Add the logic for two plants with overdue schedules for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 14:47"
           },
           {
@@ -1403,6 +1424,7 @@
             "short": "ab4aba84",
             "title": "Add test preparation for global filter for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 14:39"
           },
           {
@@ -1410,6 +1432,7 @@
             "short": "aa972bf9",
             "title": "Add sorting mechanism by days_overdue in descending order for task 3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 14:36"
           },
           {
@@ -1417,6 +1440,7 @@
             "short": "ffe86603",
             "title": "Implement a global filter to identify all overdue actions across all plants for task 2",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 14:33"
           },
           {
@@ -1424,6 +1448,7 @@
             "short": "b3f3cfd1",
             "title": "Implement the GET route for task 1",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 14:23"
           },
           {
@@ -1431,6 +1456,7 @@
             "short": "73eed61e",
             "title": "Add test for a missing plant for task 6",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 14:10"
           },
           {
@@ -1438,6 +1464,7 @@
             "short": "97fc7be6",
             "title": "Fix indentation 3/3  to resolve AssertionError where mock_date.today was called 0 times",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 14:08"
           },
           {
@@ -1445,6 +1472,7 @@
             "short": "8eacf999",
             "title": "Fix indentation 2/3  to resolve AssertionError where mock_date.today was called 0 times",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 14:05"
           },
           {
@@ -1452,6 +1480,7 @@
             "short": "d0d70b17",
             "title": "Fix indentation 1/3  to resolve AssertionError where mock_date.today was called 0 times",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 14:04"
           },
           {
@@ -1459,6 +1488,7 @@
             "short": "d44d7b88",
             "title": "Add the assertions for the test for task 5",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 13:55"
           },
           {
@@ -1466,6 +1496,7 @@
             "short": "bdeb0b10",
             "title": "Implement the logic for a test for a correct calculation and sorting for task 5",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 13:45"
           },
           {
@@ -1473,6 +1504,7 @@
             "short": "c1733c58",
             "title": "Add preparation for a correct calculation and sorting test with MagicMock for task 5",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 13:35"
           },
           {
@@ -1480,6 +1512,7 @@
             "short": "f3ecada3",
             "title": "Add the sorting mechanism by next_due in ascending order for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 13:09"
           },
           {
@@ -1487,6 +1520,7 @@
             "short": "2137a355",
             "title": "Implement the logic for the days_until and overdue boolean for task 3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 13:00"
           },
           {
@@ -1494,6 +1528,7 @@
             "short": "2f8bee35",
             "title": "Added the calculation logic to the route from the former bugfix in the CareSchedule class for task 2",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 12:53"
           },
           {
@@ -1501,6 +1536,7 @@
             "short": "c7fb66d3",
             "title": "Implement the GET route with the plant_id path parameter for task 1",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 12:46"
           },
           {
@@ -1508,6 +1544,7 @@
             "short": "02ad57a1",
             "title": "Add test for a missing plant for task 5",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 12:33"
           },
           {
@@ -1515,6 +1552,7 @@
             "short": "33b9488c",
             "title": "Add the logic for a succesful retrieval of all care actions for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 12:31"
           },
           {
@@ -1522,6 +1560,7 @@
             "short": "a207e04b",
             "title": "Add preparation for a successful retrieval of all care actions for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 12:26"
           },
           {
@@ -1529,6 +1568,7 @@
             "short": "74176a06",
             "title": "Add the sorting mechanism for the results by descending date for task 3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 12:06"
           },
           {
@@ -1536,6 +1576,7 @@
             "short": "0fdccbf5",
             "title": "Add logic to filter the care log for the specific plant_id for task 2",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 11:57"
           },
           {
@@ -1543,6 +1584,7 @@
             "short": "98b714e6",
             "title": "Implement the GET route with a plant_id path parameter for preparation for task 1",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 11:53"
           },
           {
@@ -1550,6 +1592,7 @@
             "short": "3d852aa6",
             "title": "Add the logic for an invalid care_type test for task 5",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 11:38"
           },
           {
@@ -1557,6 +1600,7 @@
             "short": "7a475b90",
             "title": "Add test preparation for an invalid care_type for task 5",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 11:33"
           },
           {
@@ -1564,6 +1608,7 @@
             "short": "2b0e1a99",
             "title": "Add test for a missing plant for task 6",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 11:30"
           },
           {
@@ -1571,6 +1616,7 @@
             "short": "42567b20",
             "title": "Add the logic for a missing care_type test for task 5",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 11:25"
           },
           {
@@ -1578,6 +1624,7 @@
             "short": "6139f8cc",
             "title": "Add preparation for a missing care_type test for task 5",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 11:20"
           },
           {
@@ -1585,6 +1632,7 @@
             "short": "53b4346d",
             "title": "Add logic for a successful logging test with default date for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 11:15"
           },
           {
@@ -1592,6 +1640,7 @@
             "short": "17046be1",
             "title": "Add preparation for a successful logging test with default date for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 11:10"
           },
           {
@@ -1599,6 +1648,7 @@
             "short": "15222db5",
             "title": "Add test for a successful created log entry for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 11:07"
           },
           {
@@ -1606,6 +1656,7 @@
             "short": "c6dcb3a1",
             "title": "Implement preparation for successful logging test for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 11:02"
           },
           {
@@ -1613,6 +1664,7 @@
             "short": "8b8608dc",
             "title": "Refactor and standardize all test names in the tests/ folder",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 10:53"
           },
           {
@@ -1620,6 +1672,7 @@
             "short": "061ed5f2",
             "title": "Add logic to create a new successful unique ActionLog entry for task 3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 10:33"
           },
           {
@@ -1627,6 +1680,7 @@
             "short": "d37b5ee6",
             "title": "Implement the validation for the mandatory care_type field and correct values for task 3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 10:27"
           },
           {
@@ -1634,6 +1688,7 @@
             "short": "bd10ed3a",
             "title": "Add the logic to handle the optional performed_at field for task 2",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 10:13"
           },
           {
@@ -1641,6 +1696,7 @@
             "short": "e1d1af6d",
             "title": "Add preparation with test_plant for task 2",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 10:03"
           },
           {
@@ -1648,6 +1704,7 @@
             "short": "ad3828c7",
             "title": "Initialize the POST route with the plant_id path parameter for task 1",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-25 09:59"
           },
           {
@@ -1655,6 +1712,7 @@
             "short": "58f94e4f",
             "title": "Add logic for the test where the care_type is missing for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 18:46"
           },
           {
@@ -1662,6 +1720,7 @@
             "short": "0d79651a",
             "title": "Add preparation for test with a missing care_type for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 18:40"
           },
           {
@@ -1669,6 +1728,7 @@
             "short": "3a8995c0",
             "title": "Add test for a missing plant for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 18:37"
           },
           {
@@ -1676,6 +1736,7 @@
             "short": "bbca7f72",
             "title": "Add logic for successful deletion of the specific care schedule for task 3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 18:31"
           },
           {
@@ -1683,6 +1744,7 @@
             "short": "4a258eff",
             "title": "Add preparation with test_plant and test_schedule for deletion for task 3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 18:26"
           },
           {
@@ -1690,6 +1752,7 @@
             "short": "5061bcd2",
             "title": "Initialize test for a successful deletion for task 3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 18:22"
           },
           {
@@ -1697,6 +1760,7 @@
             "short": "771dab43",
             "title": "Add logic to remove this care schedule with the specific care_type from the plant for task 2",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 18:19"
           },
           {
@@ -1704,6 +1768,7 @@
             "short": "da8540e9",
             "title": "Add logic to find a care schedule with a specific care_type for task 2",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 18:15"
           },
           {
@@ -1711,6 +1776,7 @@
             "short": "8593e5f2",
             "title": "Add the logic to search for the specific plant for task 2",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 18:12"
           },
           {
@@ -1718,6 +1784,7 @@
             "short": "894f4429",
             "title": "Initialize the DELETE with the plant_id and care_type path parameters for task 1",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 18:08"
           },
           {
@@ -1725,6 +1792,7 @@
             "short": "fc5a4eb7",
             "title": "Implement test for a missing plant for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 16:59"
           },
           {
@@ -1732,6 +1800,7 @@
             "short": "d7258884",
             "title": "Add the logic for a successful retrieval for task 3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 16:55"
           },
           {
@@ -1739,6 +1808,7 @@
             "short": "977d0c8a",
             "title": "Implement test preparation for a successful retrieval for task 3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 16:51"
           },
           {
@@ -1746,6 +1816,7 @@
             "short": "7caad3eb",
             "title": "Implement the logic to filter the schedules list for the specific plant_id for task 2",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 16:44"
           },
           {
@@ -1753,6 +1824,7 @@
             "short": "d49d780e",
             "title": "Initialize the GET route with the plant_id as a path parameter for task 1",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 16:28"
           },
           {
@@ -1760,6 +1832,7 @@
             "short": "9a507d70",
             "title": "Add test logic for invalid interval_days type and amount for task 6",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 13:52"
           },
           {
@@ -1767,6 +1840,7 @@
             "short": "4cb361fa",
             "title": "Add test for missing interval_days attribute for task 6",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 13:48"
           },
           {
@@ -1774,6 +1848,7 @@
             "short": "c132622e",
             "title": "Add test logic for invalid care_type attribute for task 6",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 13:39"
           },
           {
@@ -1781,6 +1856,7 @@
             "short": "db459026",
             "title": "Implement test for missing plant for task 6",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 13:32"
           },
           {
@@ -1788,6 +1864,7 @@
             "short": "a5fa83f8",
             "title": "Add logic to update an existing schedule for task 5",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 13:25"
           },
           {
@@ -1795,6 +1872,7 @@
             "short": "100f6a64",
             "title": "Implement test preparation for task 5",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 13:14"
           },
           {
@@ -1802,6 +1880,7 @@
             "short": "8aff57b0",
             "title": "Implement test for a successful care schedule creation for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 13:05"
           },
           {
@@ -1809,6 +1888,7 @@
             "short": "5bcae89e",
             "title": "Add validation for missing and invalid payload attributes for task 3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 12:49"
           },
           {
@@ -1816,6 +1896,7 @@
             "short": "741fe709",
             "title": "Implement the logic to create a new entry for the schedules list for task 2",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 12:30"
           },
           {
@@ -1823,6 +1904,7 @@
             "short": "8bf7e778",
             "title": "Implement Scenario A and B for the logic to differentiate between creating or updating an entry for a schedule for task 2",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 12:11"
           },
           {
@@ -1830,6 +1912,7 @@
             "short": "06c7669b",
             "title": "Add logic to find a specific plant and existing care schedule",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 11:58"
           },
           {
@@ -1837,6 +1920,7 @@
             "short": "7c53b925",
             "title": "Implement the POST route with the plant_id path parameter for task 1",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-22 11:50"
           },
           {
@@ -1844,6 +1928,7 @@
             "short": "36d02c02",
             "title": "Refactor test_api_plants_id_get_success method with plant_created variable for dynamic calculating for a successful test",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-21 17:23"
           },
           {
@@ -1851,6 +1936,7 @@
             "short": "531b7554",
             "title": "Calculate dynamic next_due based on last_log and plant creation date",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-21 17:11"
           },
           {
@@ -1858,6 +1944,7 @@
             "short": "bc78f91d",
             "title": "Find proper last_log for care_type in the CareSchedule next_due property",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-21 17:03"
           },
           {
@@ -1865,6 +1952,7 @@
             "short": "1ba796df",
             "title": "Add runtime plant reference to class CareSchedule into to_json and calculate_status methods of class Plant",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-21 16:48"
           },
           {
@@ -1872,6 +1960,7 @@
             "short": "931e0ecd",
             "title": "Fix frontend issue via render_template",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-21 16:07"
           },
           {
@@ -1879,6 +1968,7 @@
             "short": "a8847771",
             "title": "Enable CORS with import from flask_cors in app.py",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-21 15:47"
           },
           {
@@ -1886,6 +1976,7 @@
             "short": "1c2abec4",
             "title": "Add CORS configuration in requirements.txt",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-21 15:39"
           },
           {
@@ -1893,6 +1984,7 @@
             "short": "9c01d194",
             "title": "Refactor date mock path 'app.date' to target new models module for a successful test and pipeline",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-21 15:10"
           },
           {
@@ -1900,6 +1992,7 @@
             "short": "992a9474",
             "title": "Fix coverage config re2 syntax error for a succeeding pipeline",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-21 14:58"
           },
           {
@@ -1907,6 +2000,7 @@
             "short": "27e5184e",
             "title": "Add build job to compress all files from the src/ folder into a src.zip file",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-21 14:32"
           },
           {
@@ -1914,6 +2008,7 @@
             "short": "0b629b72",
             "title": "Refactor coverage run to target tests/ folder",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-21 14:03"
           },
           {
@@ -1921,6 +2016,7 @@
             "short": "928e1869",
             "title": "Add junit and cobertura coverage reporting to the test job",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-21 13:58"
           },
           {
@@ -1928,6 +2024,7 @@
             "short": "fd09640f",
             "title": "Add test job with coverage execution commands",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-21 13:53"
           },
           {
@@ -1935,6 +2032,7 @@
             "short": "16776521",
             "title": "Initialize .gitlab-ci.yml file with configuration of python image and stages",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-21 13:45"
           },
           {
@@ -1942,6 +2040,7 @@
             "short": "c94d2773",
             "title": "Add missing test for an empty list",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 21:53"
           },
           {
@@ -1949,6 +2048,7 @@
             "short": "226d7667",
             "title": "Move if __name__ == __main__ block to end of app.py file",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 18:33"
           },
           {
@@ -1956,6 +2056,7 @@
             "short": "5662c796",
             "title": "Add test for a non-existing ID for task 7",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 18:30"
           },
           {
@@ -1963,6 +2064,7 @@
             "short": "5c31061c",
             "title": "Add test for invalid fields for task 6",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 18:23"
           },
           {
@@ -1970,6 +2072,7 @@
             "short": "29663f91",
             "title": "Add test for updating forbidden fields for task 6",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 18:11"
           },
           {
@@ -1977,6 +2080,7 @@
             "short": "b471d342",
             "title": "Implement test for successful partial update for task 5",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 17:53"
           },
           {
@@ -1984,6 +2088,7 @@
             "short": "63eadecd",
             "title": "Added correct imports from modules.py for classes and deleted unnecessary import in test_plant_creation.py",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 17:14"
           },
           {
@@ -1991,6 +2096,7 @@
             "short": "1028a4d4",
             "title": "Add further logic to avoid updates with invalid or empty data",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 17:00"
           },
           {
@@ -1998,6 +2104,7 @@
             "short": "83bfa3c7",
             "title": "Add logic to update the plant-object in the in-memory-storage and identify which allowed fields need to be updated for tasks 2 & 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 16:45"
           },
           {
@@ -2005,6 +2112,7 @@
             "short": "27240cb9",
             "title": "Add validation logic to block updates to forbidden fields for task 3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 16:39"
           },
           {
@@ -2012,6 +2120,7 @@
             "short": "e166c841",
             "title": "Implement PUT route with plant_id path parameter and extract JSON payload for task 1 & 2",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 16:35"
           },
           {
@@ -2019,6 +2128,7 @@
             "short": "0a73872b",
             "title": "Refactored test_plant_overview.py by updating mock patch paths to models.date and change from app import Plant, CareSchedule, ActionLog to from models import Plant, CareSchedule, ActionLog according to new models.py file",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 14:21"
           },
           {
@@ -2026,6 +2136,7 @@
             "short": "167ff4e0",
             "title": "Added from datetime import date line to avoid  a NameError",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 14:14"
           },
           {
@@ -2033,6 +2144,7 @@
             "short": "004202be",
             "title": "Deleted rest of class Plant in app.py",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 14:11"
           },
           {
@@ -2040,6 +2152,7 @@
             "short": "9fe0e107",
             "title": "Deleted calculate_status method in app.py and added class Plant import from models.py",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 14:11"
           },
           {
@@ -2047,6 +2160,7 @@
             "short": "cacb08c1",
             "title": "Add calculate_status method to class Plant in src/models.py",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 14:09"
           },
           {
@@ -2054,6 +2168,7 @@
             "short": "6efa12d5",
             "title": "Add class Plant to src/models.py",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 14:08"
           },
           {
@@ -2061,6 +2176,7 @@
             "short": "9240cba4",
             "title": "Deleted class CareSchedule in app.py and added CareSchedule to import from models.py",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 14:07"
           },
           {
@@ -2068,6 +2184,7 @@
             "short": "5d1ee5bc",
             "title": "Add class CareSchedule to src/models.py",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 14:05"
           },
           {
@@ -2075,6 +2192,7 @@
             "short": "5c288cff",
             "title": "Deleted class ActionLog and from datetime import date, timedelta in app.py and imported ActionLog from src/models.py",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 14:04"
           },
           {
@@ -2082,6 +2200,7 @@
             "short": "2d1d3cfd",
             "title": "Added ActionLog class to src/models.py",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 14:02"
           },
           {
@@ -2089,6 +2208,7 @@
             "short": "58692f4f",
             "title": "Added new file src/models.py and added necessary imports",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-15 13:59"
           },
           {
@@ -2096,6 +2216,7 @@
             "short": "6b82aab8",
             "title": "Refactor test for successful insight into plant's details to fix AssertionError: assert 'overdue' == 'soon' & add test for unsuccessful insight into plant's details  for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 19:20"
           },
           {
@@ -2103,6 +2224,7 @@
             "short": "2ec29b6c",
             "title": "Refactor test_plant_deletion.py for correct error message and test_plant_overview.py for validation of plant_id in classes & to_json methods",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 18:58"
           },
           {
@@ -2110,6 +2232,7 @@
             "short": "9d5a9914",
             "title": "Add missing plant_id variable to CareSchedule and ActionLog classes in app.py",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 18:49"
           },
           {
@@ -2117,6 +2240,7 @@
             "short": "85b7846b",
             "title": "Refactor test to fix AttributeError: property 'next_due' of 'CareSchedule' object has no setter",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 18:24"
           },
           {
@@ -2124,6 +2248,7 @@
             "short": "bdb041d3",
             "title": "Implement test for successful insight into details of a plant",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 18:18"
           },
           {
@@ -2131,6 +2256,7 @@
             "short": "fd1e848f",
             "title": "Delete unnecessary data = response.get_json() as it is not called in test",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 17:31"
           },
           {
@@ -2138,6 +2264,7 @@
             "short": "af9ce9f4",
             "title": "Implement GET route including a plant_id path parameter & search logic for tasks 1,2 and 3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 17:18"
           },
           {
@@ -2145,6 +2272,7 @@
             "short": "165e1c3d",
             "title": "Add missing description for DELETE route",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 16:43"
           },
           {
@@ -2152,6 +2280,7 @@
             "short": "5a302bde",
             "title": "Add mechanism if __name__ == '__main__' to app.py for local execution",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 12:55"
           },
           {
@@ -2159,6 +2288,7 @@
             "short": "4a34acb5",
             "title": "Add test for non-existing ID for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 12:47"
           },
           {
@@ -2166,6 +2296,7 @@
             "short": "d4a6ff02",
             "title": "Implement test for successful deletion for task 3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 12:42"
           },
           {
@@ -2173,6 +2304,7 @@
             "short": "13369353",
             "title": "Implement DELETE route with plant_id parameter and deletion logic for task 1 & 2",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 10:56"
           },
           {
@@ -2180,6 +2312,7 @@
             "short": "9b19d47d",
             "title": "Add extra test to cover CareSchedule and ActionLog classes directly for better code coverage",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 08:45"
           },
           {
@@ -2187,6 +2320,7 @@
             "short": "c74d9d9c",
             "title": "Add test in test_plant_creation.py to cover missing date error for code coverage",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 08:42"
           },
           {
@@ -2194,6 +2328,7 @@
             "short": "43d9b6de",
             "title": "Add MagicMock test for overdue status case",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 08:13"
           },
           {
@@ -2201,6 +2336,7 @@
             "short": "a05b6d56",
             "title": "Rename tests according to requirements",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 07:54"
           },
           {
@@ -2208,6 +2344,7 @@
             "short": "3c2d3ea7",
             "title": "Centralize @pytest.fixture in conftest.py and clean up test files",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 07:49"
           },
           {
@@ -2215,6 +2352,7 @@
             "short": "68bf963d",
             "title": "Refactor calculate_status_method in app.py for successful mocking",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 07:43"
           },
           {
@@ -2222,6 +2360,7 @@
             "short": "47e3b23e",
             "title": "Add MagicMock method for validation of calculate_status method",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-14 07:38"
           },
           {
@@ -2229,6 +2368,7 @@
             "short": "dc813c16",
             "title": "Add JSON structure validation to test for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-13 21:28"
           },
           {
@@ -2236,6 +2376,7 @@
             "short": "133d8652",
             "title": "Implement test for happy path for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-13 21:15"
           },
           {
@@ -2243,6 +2384,7 @@
             "short": "39fef2bd",
             "title": "Add next_due variable in to_json method in class CareSchedule for valid status calculation",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-13 21:00"
           },
           {
@@ -2250,6 +2392,7 @@
             "short": "270fedf8",
             "title": "Implement calculate_status method with next_due placeholder for future /plants/<id>/next-actions endpoint for task 2 & 3",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-13 20:51"
           },
           {
@@ -2257,6 +2400,7 @@
             "short": "fcbde967",
             "title": "Implement GET Flask route for task 1",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-13 18:30"
           },
           {
@@ -2264,6 +2408,7 @@
             "short": "56d2968a",
             "title": "Implement an error handling test case for missing fields for task 5",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-12 16:54"
           },
           {
@@ -2271,6 +2416,7 @@
             "short": "b816fce2",
             "title": "Implement test case for successful plant creation for task 4",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-12 16:21"
           },
           {
@@ -2278,6 +2424,7 @@
             "short": "78e4f527",
             "title": "Refactor schedules and logs in class Plant and to_json(self) method",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-12 15:02"
           },
           {
@@ -2285,6 +2432,7 @@
             "short": "bae069da",
             "title": "Add CareSchedule and ActionLog classes",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-11 19:32"
           },
           {
@@ -2292,6 +2440,7 @@
             "short": "b040312b",
             "title": "Update class Plant to use date objects and iterate date handling in POST route",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-11 19:26"
           },
           {
@@ -2299,6 +2448,7 @@
             "short": "5e5c4af2",
             "title": "Implement unique ID generation and default date handling for task 3 with a new plant object",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-11 18:37"
           },
           {
@@ -2306,6 +2456,7 @@
             "short": "b5dd5a3d",
             "title": "Add to_json method for access to private member variables of class Plant",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-11 18:10"
           },
           {
@@ -2313,6 +2464,7 @@
             "short": "a3e870c8",
             "title": "Add class Plant and import datetime module",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-11 18:06"
           },
           {
@@ -2320,6 +2472,7 @@
             "short": "bf0cb36e",
             "title": "Add missing class diagram image in images/ folder",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-11 17:45"
           },
           {
@@ -2327,6 +2480,7 @@
             "short": "5bf81dc0",
             "title": "Add validation for missing or empty mandatory fields for task 2",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-09 23:04"
           },
           {
@@ -2334,6 +2488,7 @@
             "short": "38d2db22",
             "title": "Implement basic app structure, POST route and JSON extraction for first task",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-09 22:35"
           },
           {
@@ -2341,6 +2496,7 @@
             "short": "dfc26d03",
             "title": "Finalize requirements.txt by adding pytest-mock",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-08 12:26"
           },
           {
@@ -2348,6 +2504,7 @@
             "short": "e1c78201",
             "title": "Setup of project structure and finalized configurations",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-06 08:33"
           },
           {
@@ -2355,6 +2512,7 @@
             "short": "44727902",
             "title": "Add issue templates",
             "branch": "main",
+            "author": "Annika Ostendorp",
             "date": "2026-05-02 17:16"
           }
         ]
@@ -2368,7 +2526,7 @@
     {
       "title": "8.6 Implementierung der REST API (24P)",
       "sec_id": "8",
-      "earned": 20.5,
+      "earned": 21.0,
       "possible": 24.0,
       "manual_slot": null,
       "manual_items": [],
@@ -2426,12 +2584,11 @@
         },
         {
           "description": "`PUT /api/plants/<id>`",
-          "earned": 0.5,
+          "earned": 1.0,
           "possible": 1.5,
           "note": null,
           "bullets": [
-            "test_put_plant_empty_body_returns_200",
-            "test_put_plant_no_body_has_error_field"
+            "test_put_plant_empty_body_returns_200"
           ]
         },
         {
@@ -2539,7 +2696,7 @@
             ]
           },
           "test_post_plants.py": {
-            "total": 14,
+            "total": 8,
             "failed": 0,
             "failures": [],
             "passes": [
@@ -2548,15 +2705,9 @@
               "test_post_plants_response_values_match_input",
               "test_post_plants_with_explicit_created_at",
               "test_post_plants_default_created_at_is_today",
-              "test_post_plants_new_plant_has_status_ok",
               "test_post_plants_plant_appears_in_get_all",
               "test_post_plants_each_plant_gets_unique_id",
-              "test_post_plants_missing_name_returns_400",
-              "test_post_plants_missing_species_returns_400",
-              "test_post_plants_missing_location_returns_400",
-              "test_post_plants_empty_body_returns_400",
-              "test_post_plants_error_response_has_error_field",
-              "test_post_plants_missing_all_fields_returns_400"
+              "test_post_plants_error_response_has_error_field"
             ]
           },
           "test_get_plant_by_id.py": {
@@ -2579,18 +2730,13 @@
             ]
           },
           "test_put_plant.py": {
-            "total": 20,
-            "failed": 2,
+            "total": 18,
+            "failed": 1,
             "failures": [
               {
                 "name": "test_put_plant_empty_body_returns_200",
                 "output": "tests/endpoints/test_put_plant.py:47: in test_put_plant_empty_body_returns_200\n    assert resp.status_code == 200\nE   assert 400 == 200\nE    +  where 400 = <WrapperTestResponse streamed [400 BAD REQUEST]>.status_code",
                 "source": "def test_put_plant_empty_body_returns_200(client, plant):\n    resp = client.put(f'/api/plants/{plant[\"id\"]}', json={})\n    assert resp.status_code == 200"
-              },
-              {
-                "name": "test_put_plant_no_body_has_error_field",
-                "output": "tests/endpoints/test_put_plant.py:97: in test_put_plant_no_body_has_error_field\n    assert 'error' in resp.get_json()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: argument of type 'NoneType' is not iterable",
-                "source": "def test_put_plant_no_body_has_error_field(client, plant):\n    resp = client.put(f'/api/plants/{plant[\"id\"]}',\n                      content_type='application/json', data='')\n    assert 'error' in resp.get_json()"
               }
             ],
             "passes": [
@@ -2607,7 +2753,6 @@
               "test_put_plant_invalid_field_created_at_returns_400",
               "test_put_plant_invalid_field_schedules_returns_400",
               "test_put_plant_invalid_field_has_error_field",
-              "test_put_plant_no_body_returns_400",
               "test_put_plant_null_body_returns_400",
               "test_put_plant_null_body_has_error_field",
               "test_put_plant_not_found_returns_404",
@@ -2652,12 +2797,12 @@
             "failures": [
               {
                 "name": "test_post_schedules_null_body_returns_400",
-                "output": "tests/endpoints/test_post_schedules.py:122: in test_post_schedules_null_body_returns_400\n    resp = client.post(f'/api/plants/{plant[\"id\"]}/schedules',\n.pip_deps/werkzeug/test.py:1167: in post\n    return self.open(*args, **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/testing.py:235: in open\n    response = super().open(\n.pip_deps/werkzeug/test.py:1116: in open\n    response_parts = self.run_wsgi_app(request.environ, buffered=buffered)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:988: in run_wsgi_app\n    rv = run_wsgi_app(self.application, environ, buffered=buffered)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:1264: in run_wsgi_app\n    app_rv = app(environ, start_response)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1536: in __call__\n    return self.wsgi_app(environ, start_response)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1514: in wsgi_app\n    response = self.handle_exception(e)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:202: in wrapped_function\n    return cors_after_request(app.make_response(f(*args, **kwargs)))\n                                                ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1511: in wsgi_app\n    response = self.full_dispatch_request()\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:919: in full_dispatch_request\n    rv = self.handle_user_exception(e)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:202: in wrapped_function\n    return cors_after_request(app.make_response(f(*args, **kwargs)))\n                                                ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:917: in full_dispatch_request\n    rv = self.dispatch_request()\n         ^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:902: in dispatch_request\n    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc/app.py:138: in create_or_update_schedule\n    care_type = data.get(\"care_type\")\n                ^^^^^^^^\nE   AttributeError: 'NoneType' object has no attribute 'get'",
+                "output": "tests/endpoints/test_post_schedules.py:122: in test_post_schedules_null_body_returns_400\n    resp = client.post(f'/api/plants/{plant[\"id\"]}/schedules',\n.pip_deps/werkzeug/test.py:1167: in post\n    return self.open(*args, **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/testing.py:235: in open\n    response = super().open(\n.pip_deps/werkzeug/test.py:1116: in open\n    response_parts = self.run_wsgi_app(request.environ, buffered=buffered)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:988: in run_wsgi_app\n    rv = run_wsgi_app(self.application, environ, buffered=buffered)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:1264: in run_wsgi_app\n    app_rv = app(environ, start_response)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1536: in __call__\n    return self.wsgi_app(environ, start_response)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1514: in wsgi_app\n    response = self.handle_exception(e)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:206: in wrapped_function\n    return cors_after_request(app_any.make_response(f(*args, **kwargs)))\n                                                    ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1511: in wsgi_app\n    response = self.full_dispatch_request()\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:919: in full_dispatch_request\n    rv = self.handle_user_exception(e)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:206: in wrapped_function\n    return cors_after_request(app_any.make_response(f(*args, **kwargs)))\n                                                    ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:917: in full_dispatch_request\n    rv = self.dispatch_request()\n         ^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:902: in dispatch_request\n    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc/app.py:138: in create_or_update_schedule\n    care_type = data.get(\"care_type\")\n                ^^^^^^^^\nE   AttributeError: 'NoneType' object has no attribute 'get'",
                 "source": "def test_post_schedules_null_body_returns_400(client, plant):\n    resp = client.post(f'/api/plants/{plant[\"id\"]}/schedules',\n                       data='null', content_type='application/json')\n    assert resp.status_code == 400"
               },
               {
                 "name": "test_post_schedules_null_body_has_error_field",
-                "output": "tests/endpoints/test_post_schedules.py:128: in test_post_schedules_null_body_has_error_field\n    resp = client.post(f'/api/plants/{plant[\"id\"]}/schedules',\n.pip_deps/werkzeug/test.py:1167: in post\n    return self.open(*args, **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/testing.py:235: in open\n    response = super().open(\n.pip_deps/werkzeug/test.py:1116: in open\n    response_parts = self.run_wsgi_app(request.environ, buffered=buffered)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:988: in run_wsgi_app\n    rv = run_wsgi_app(self.application, environ, buffered=buffered)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:1264: in run_wsgi_app\n    app_rv = app(environ, start_response)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1536: in __call__\n    return self.wsgi_app(environ, start_response)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1514: in wsgi_app\n    response = self.handle_exception(e)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:202: in wrapped_function\n    return cors_after_request(app.make_response(f(*args, **kwargs)))\n                                                ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1511: in wsgi_app\n    response = self.full_dispatch_request()\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:919: in full_dispatch_request\n    rv = self.handle_user_exception(e)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:202: in wrapped_function\n    return cors_after_request(app.make_response(f(*args, **kwargs)))\n                                                ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:917: in full_dispatch_request\n    rv = self.dispatch_request()\n         ^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:902: in dispatch_request\n    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc/app.py:138: in create_or_update_schedule\n    care_type = data.get(\"care_type\")\n                ^^^^^^^^\nE   AttributeError: 'NoneType' object has no attribute 'get'",
+                "output": "tests/endpoints/test_post_schedules.py:128: in test_post_schedules_null_body_has_error_field\n    resp = client.post(f'/api/plants/{plant[\"id\"]}/schedules',\n.pip_deps/werkzeug/test.py:1167: in post\n    return self.open(*args, **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/testing.py:235: in open\n    response = super().open(\n.pip_deps/werkzeug/test.py:1116: in open\n    response_parts = self.run_wsgi_app(request.environ, buffered=buffered)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:988: in run_wsgi_app\n    rv = run_wsgi_app(self.application, environ, buffered=buffered)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:1264: in run_wsgi_app\n    app_rv = app(environ, start_response)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1536: in __call__\n    return self.wsgi_app(environ, start_response)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1514: in wsgi_app\n    response = self.handle_exception(e)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:206: in wrapped_function\n    return cors_after_request(app_any.make_response(f(*args, **kwargs)))\n                                                    ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1511: in wsgi_app\n    response = self.full_dispatch_request()\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:919: in full_dispatch_request\n    rv = self.handle_user_exception(e)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:206: in wrapped_function\n    return cors_after_request(app_any.make_response(f(*args, **kwargs)))\n                                                    ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:917: in full_dispatch_request\n    rv = self.dispatch_request()\n         ^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:902: in dispatch_request\n    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc/app.py:138: in create_or_update_schedule\n    care_type = data.get(\"care_type\")\n                ^^^^^^^^\nE   AttributeError: 'NoneType' object has no attribute 'get'",
                 "source": "def test_post_schedules_null_body_has_error_field(client, plant):\n    resp = client.post(f'/api/plants/{plant[\"id\"]}/schedules',\n                       data='null', content_type='application/json')\n    assert 'error' in resp.get_json()"
               }
             ],
@@ -2729,12 +2874,12 @@
               },
               {
                 "name": "test_post_logs_null_body_returns_400",
-                "output": "tests/endpoints/test_post_logs.py:98: in test_post_logs_null_body_returns_400\n    resp = client.post(f'/api/plants/{plant[\"id\"]}/logs',\n.pip_deps/werkzeug/test.py:1167: in post\n    return self.open(*args, **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/testing.py:235: in open\n    response = super().open(\n.pip_deps/werkzeug/test.py:1116: in open\n    response_parts = self.run_wsgi_app(request.environ, buffered=buffered)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:988: in run_wsgi_app\n    rv = run_wsgi_app(self.application, environ, buffered=buffered)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:1264: in run_wsgi_app\n    app_rv = app(environ, start_response)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1536: in __call__\n    return self.wsgi_app(environ, start_response)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1514: in wsgi_app\n    response = self.handle_exception(e)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:202: in wrapped_function\n    return cors_after_request(app.make_response(f(*args, **kwargs)))\n                                                ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1511: in wsgi_app\n    response = self.full_dispatch_request()\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:919: in full_dispatch_request\n    rv = self.handle_user_exception(e)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:202: in wrapped_function\n    return cors_after_request(app.make_response(f(*args, **kwargs)))\n                                                ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:917: in full_dispatch_request\n    rv = self.dispatch_request()\n         ^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:902: in dispatch_request\n    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc/app.py:261: in create_plant_log\n    care_type = data.get(\"care_type\")\n                ^^^^^^^^\nE   AttributeError: 'NoneType' object has no attribute 'get'",
+                "output": "tests/endpoints/test_post_logs.py:98: in test_post_logs_null_body_returns_400\n    resp = client.post(f'/api/plants/{plant[\"id\"]}/logs',\n.pip_deps/werkzeug/test.py:1167: in post\n    return self.open(*args, **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/testing.py:235: in open\n    response = super().open(\n.pip_deps/werkzeug/test.py:1116: in open\n    response_parts = self.run_wsgi_app(request.environ, buffered=buffered)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:988: in run_wsgi_app\n    rv = run_wsgi_app(self.application, environ, buffered=buffered)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:1264: in run_wsgi_app\n    app_rv = app(environ, start_response)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1536: in __call__\n    return self.wsgi_app(environ, start_response)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1514: in wsgi_app\n    response = self.handle_exception(e)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:206: in wrapped_function\n    return cors_after_request(app_any.make_response(f(*args, **kwargs)))\n                                                    ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1511: in wsgi_app\n    response = self.full_dispatch_request()\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:919: in full_dispatch_request\n    rv = self.handle_user_exception(e)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:206: in wrapped_function\n    return cors_after_request(app_any.make_response(f(*args, **kwargs)))\n                                                    ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:917: in full_dispatch_request\n    rv = self.dispatch_request()\n         ^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:902: in dispatch_request\n    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc/app.py:261: in create_plant_log\n    care_type = data.get(\"care_type\")\n                ^^^^^^^^\nE   AttributeError: 'NoneType' object has no attribute 'get'",
                 "source": "def test_post_logs_null_body_returns_400(client, plant):\n    resp = client.post(f'/api/plants/{plant[\"id\"]}/logs',\n                       data='null', content_type='application/json')\n    assert resp.status_code == 400"
               },
               {
                 "name": "test_post_logs_null_body_has_error_field",
-                "output": "tests/endpoints/test_post_logs.py:104: in test_post_logs_null_body_has_error_field\n    resp = client.post(f'/api/plants/{plant[\"id\"]}/logs',\n.pip_deps/werkzeug/test.py:1167: in post\n    return self.open(*args, **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/testing.py:235: in open\n    response = super().open(\n.pip_deps/werkzeug/test.py:1116: in open\n    response_parts = self.run_wsgi_app(request.environ, buffered=buffered)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:988: in run_wsgi_app\n    rv = run_wsgi_app(self.application, environ, buffered=buffered)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:1264: in run_wsgi_app\n    app_rv = app(environ, start_response)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1536: in __call__\n    return self.wsgi_app(environ, start_response)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1514: in wsgi_app\n    response = self.handle_exception(e)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:202: in wrapped_function\n    return cors_after_request(app.make_response(f(*args, **kwargs)))\n                                                ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1511: in wsgi_app\n    response = self.full_dispatch_request()\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:919: in full_dispatch_request\n    rv = self.handle_user_exception(e)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:202: in wrapped_function\n    return cors_after_request(app.make_response(f(*args, **kwargs)))\n                                                ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:917: in full_dispatch_request\n    rv = self.dispatch_request()\n         ^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:902: in dispatch_request\n    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc/app.py:261: in create_plant_log\n    care_type = data.get(\"care_type\")\n                ^^^^^^^^\nE   AttributeError: 'NoneType' object has no attribute 'get'",
+                "output": "tests/endpoints/test_post_logs.py:104: in test_post_logs_null_body_has_error_field\n    resp = client.post(f'/api/plants/{plant[\"id\"]}/logs',\n.pip_deps/werkzeug/test.py:1167: in post\n    return self.open(*args, **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/testing.py:235: in open\n    response = super().open(\n.pip_deps/werkzeug/test.py:1116: in open\n    response_parts = self.run_wsgi_app(request.environ, buffered=buffered)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:988: in run_wsgi_app\n    rv = run_wsgi_app(self.application, environ, buffered=buffered)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:1264: in run_wsgi_app\n    app_rv = app(environ, start_response)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1536: in __call__\n    return self.wsgi_app(environ, start_response)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1514: in wsgi_app\n    response = self.handle_exception(e)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:206: in wrapped_function\n    return cors_after_request(app_any.make_response(f(*args, **kwargs)))\n                                                    ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1511: in wsgi_app\n    response = self.full_dispatch_request()\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:919: in full_dispatch_request\n    rv = self.handle_user_exception(e)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:206: in wrapped_function\n    return cors_after_request(app_any.make_response(f(*args, **kwargs)))\n                                                    ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:917: in full_dispatch_request\n    rv = self.dispatch_request()\n         ^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:902: in dispatch_request\n    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc/app.py:261: in create_plant_log\n    care_type = data.get(\"care_type\")\n                ^^^^^^^^\nE   AttributeError: 'NoneType' object has no attribute 'get'",
                 "source": "def test_post_logs_null_body_has_error_field(client, plant):\n    resp = client.post(f'/api/plants/{plant[\"id\"]}/logs',\n                       data='null', content_type='application/json')\n    assert 'error' in resp.get_json()"
               }
             ],
@@ -2790,7 +2935,7 @@
               "test_get_overdue_excludes_non_overdue_schedules"
             ]
           },
-          "pytest_output": "^^^^^^^^\n.pip_deps/werkzeug/test.py:1264: in run_wsgi_app\n    app_rv = app(environ, start_response)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1536: in __call__\n    return self.wsgi_app(environ, start_response)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1514: in wsgi_app\n    response = self.handle_exception(e)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:202: in wrapped_function\n    return cors_after_request(app.make_response(f(*args, **kwargs)))\n                                                ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1511: in wsgi_app\n    response = self.full_dispatch_request()\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:919: in full_dispatch_request\n    rv = self.handle_user_exception(e)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:202: in wrapped_function\n    return cors_after_request(app.make_response(f(*args, **kwargs)))\n                                                ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:917: in full_dispatch_request\n    rv = self.dispatch_request()\n         ^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:902: in dispatch_request\n    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc/app.py:138: in create_or_update_schedule\n    care_type = data.get(\"care_type\")\n                ^^^^^^^^\nE   AttributeError: 'NoneType' object has no attribute 'get'\n____________________ test_put_plant_empty_body_returns_200 _____________________\ntests/endpoints/test_put_plant.py:47: in test_put_plant_empty_body_returns_200\n    assert resp.status_code == 200\nE   assert 400 == 200\nE    +  where 400 = <WrapperTestResponse streamed [400 BAD REQUEST]>.status_code\n____________________ test_put_plant_no_body_has_error_field ____________________\ntests/endpoints/test_put_plant.py:97: in test_put_plant_no_body_has_error_field\n    assert 'error' in resp.get_json()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: argument of type 'NoneType' is not iterable\n----- generated xml file: /tmp/checker86_3ox4uwdh/repo/junit_endpoints.xml -----\n=========================== short test summary info ============================\nFAILED tests/endpoints/test_post_logs.py::test_post_logs_empty_body_has_error_field\nFAILED tests/endpoints/test_post_logs.py::test_post_logs_null_body_returns_400\nFAILED tests/endpoints/test_post_logs.py::test_post_logs_null_body_has_error_field\nFAILED tests/endpoints/test_post_schedules.py::test_post_schedules_null_body_returns_400\nFAILED tests/endpoints/test_post_schedules.py::test_post_schedules_null_body_has_error_field\nFAILED tests/endpoints/test_put_plant.py::test_put_plant_empty_body_returns_200\nFAILED tests/endpoints/test_put_plant.py::test_put_plant_no_body_has_error_field\n======================== 7 failed, 151 passed in 0.65s ========================="
+          "pytest_output": "deps/werkzeug/test.py:1116: in open\n    response_parts = self.run_wsgi_app(request.environ, buffered=buffered)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:988: in run_wsgi_app\n    rv = run_wsgi_app(self.application, environ, buffered=buffered)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/werkzeug/test.py:1264: in run_wsgi_app\n    app_rv = app(environ, start_response)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1536: in __call__\n    return self.wsgi_app(environ, start_response)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1514: in wsgi_app\n    response = self.handle_exception(e)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:206: in wrapped_function\n    return cors_after_request(app_any.make_response(f(*args, **kwargs)))\n                                                    ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:1511: in wsgi_app\n    response = self.full_dispatch_request()\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:919: in full_dispatch_request\n    rv = self.handle_user_exception(e)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask_cors/extension.py:206: in wrapped_function\n    return cors_after_request(app_any.make_response(f(*args, **kwargs)))\n                                                    ^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:917: in full_dispatch_request\n    rv = self.dispatch_request()\n         ^^^^^^^^^^^^^^^^^^^^^^^\n.pip_deps/flask/app.py:902: in dispatch_request\n    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc/app.py:138: in create_or_update_schedule\n    care_type = data.get(\"care_type\")\n                ^^^^^^^^\nE   AttributeError: 'NoneType' object has no attribute 'get'\n____________________ test_put_plant_empty_body_returns_200 _____________________\ntests/endpoints/test_put_plant.py:47: in test_put_plant_empty_body_returns_200\n    assert resp.status_code == 200\nE   assert 400 == 200\nE    +  where 400 = <WrapperTestResponse streamed [400 BAD REQUEST]>.status_code\n----- generated xml file: /tmp/checker86_puwl4q9g/repo/junit_endpoints.xml -----\n=========================== short test summary info ============================\nFAILED tests/endpoints/test_post_logs.py::test_post_logs_empty_body_has_error_field\nFAILED tests/endpoints/test_post_logs.py::test_post_logs_null_body_returns_400\nFAILED tests/endpoints/test_post_logs.py::test_post_logs_null_body_has_error_field\nFAILED tests/endpoints/test_post_schedules.py::test_post_schedules_null_body_returns_400\nFAILED tests/endpoints/test_post_schedules.py::test_post_schedules_null_body_has_error_field\nFAILED tests/endpoints/test_put_plant.py::test_put_plant_empty_body_returns_200\n======================== 6 failed, 144 passed in 0.55s ========================="
         },
         "endpoint_test_names": [
           [
@@ -3550,7 +3695,7 @@
           "description": "Code Quality Visualisierung in Gitlab (`coverage_report` mit `cobertura` und XML-Pfad)",
           "earned": 1,
           "possible": 1,
-          "note": null,
+          "note": "Cobertura-Artefakt in Pipeline #3106899, Job \"run_all_tests\"",
           "bullets": []
         },
         {
@@ -3563,7 +3708,47 @@
       ],
       "infos": [],
       "data": {
-        "ci_content": "image: python:3.13.5\n\nstages:\n- test\n- build\n\n# Test Job erstellen, der auf allen Branches läuft\nrun_all_tests:\n  stage: test\n  before_script:\n    - pip3 install -r requirements.txt # damit alle Abhängigkeiten installiert sind\n  script: # nach Vorlesungsinhalten\n    - pytest --junitxml=report.xml\n    - coverage run --source=src -m pytest tests/\n    - coverage report\n    - coverage xml -o cov.xml\n  coverage: \"/^TOTAL.*\\\\s+(\\\\d+\\\\%)$/\"\n  artifacts:\n    when: always\n    reports:\n      junit: report.xml\n      coverage_report:\n        coverage_format: cobertura\n        path: cov.xml\n\n# Build Job\nbuild-job:\n  stage: build\n  script:\n    - apt-get update && apt-get install -y zip # Zip-Tool installieren\n    - zip -r src.zip src/ # alle Dateien und Unterordner aus src/ kommen in eine einzige komprimierte Datei src.zip\n  artifacts:\n    when: always\n    paths:\n      - src.zip "
+        "ci_content": "image: python:3.13.5\n\nstages:\n- test\n- build\n\n# Test Job erstellen, der auf allen Branches läuft\nrun_all_tests:\n  stage: test\n  before_script:\n    - pip3 install -r requirements.txt # damit alle Abhängigkeiten installiert sind\n  script: # nach Vorlesungsinhalten\n    - pytest --junitxml=report.xml\n    - coverage run --source=src -m pytest tests/\n    - coverage report\n    - coverage xml -o cov.xml\n  coverage: \"/^TOTAL.*\\\\s+(\\\\d+\\\\%)$/\"\n  artifacts:\n    when: always\n    reports:\n      junit: report.xml\n      coverage_report:\n        coverage_format: cobertura\n        path: cov.xml\n\n# Build Job\nbuild-job:\n  stage: build\n  script:\n    - apt-get update && apt-get install -y zip # Zip-Tool installieren\n    - zip -r src.zip src/ # alle Dateien und Unterordner aus src/ kommen in eine einzige komprimierte Datei src.zip\n  artifacts:\n    when: always\n    paths:\n      - src.zip ",
+        "pipeline_coverage": {
+          "coverage_job": {
+            "pipeline_id": 3106899,
+            "job_name": "run_all_tests",
+            "coverage": 96.0,
+            "source": "job"
+          },
+          "cobertura_artifact": {
+            "pipeline_id": 3106899,
+            "job_name": "run_all_tests"
+          },
+          "debug": [
+            {
+              "pipeline_id": 3106899,
+              "ref": "main",
+              "status": "success",
+              "pipeline_coverage_raw": null,
+              "jobs": [
+                {
+                  "name": "build-job",
+                  "coverage": null,
+                  "artifact_types": [
+                    "archive",
+                    "metadata",
+                    "trace"
+                  ]
+                },
+                {
+                  "name": "run_all_tests",
+                  "coverage": 96.0,
+                  "artifact_types": [
+                    "trace",
+                    "junit",
+                    "cobertura"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       },
       "correction": 0,
       "comment": "",
