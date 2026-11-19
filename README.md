@@ -114,7 +114,50 @@ Die Tests lassen sich mit pytest ausführen:
 python -m pytest
 ```
 
-Der konkrete Startbefehl für den Flask-Server richtet sich nach dem im Repository verwendeten Anwendungseinstiegspunkt.
+**Anwendung starten (im Repository-Hauptverzeichnis):**
+
+```bash
+python src/app.py
+```
+
+Danach ist die Anwendung lokal unter **http://127.0.0.1:5000** erreichbar. Der Start über `app.run(debug=True, port=5000)` ist für die lokale Entwicklung vorgesehen; den Debug-Modus nicht öffentlich betreiben.
+
+## Technische Referenz: Datenmodell und API
+
+Der Anwendungscode befindet sich in `src/app.py`; die Klassen `Plant`, `CareSchedule` und `ActionLog` sind in `src/models.py` definiert. Das HTML-/JavaScript-Frontend liegt unter `src/templates/` und `src/static/` und war im Rahmen der Aufgabenstellung vorgegeben. **Meine Entwicklungsaufgabe war die Flask-Backend-Implementierung.**
+
+### REST-Endpunkte
+
+| Methode | Pfad | Funktion |
+|---|---|---|
+| GET | `/api/plants` | Alle Pflanzen einschließlich ihres Status abrufen |
+| POST | `/api/plants` | Pflanze anlegen |
+| GET | `/api/plants/<id>` | Eine Pflanze abrufen |
+| PUT | `/api/plants/<id>` | Pflanzeninformationen aktualisieren |
+| DELETE | `/api/plants/<id>` | Pflanze löschen |
+| GET | `/api/plants/<id>/schedules` | Pflegepläne abrufen |
+| POST | `/api/plants/<id>/schedules` | Pflegeplan anlegen oder aktualisieren |
+| DELETE | `/api/plants/<id>/schedules/<care_type>` | Pflegeplan für einen Pflegetyp entfernen |
+| GET | `/api/plants/<id>/logs` | Pflegeprotokoll abrufen |
+| POST | `/api/plants/<id>/logs` | Pflegeaktivität dokumentieren |
+| GET | `/api/plants/<id>/next-actions` | Nächste fällige Pflegeaufgaben berechnen |
+| GET | `/api/overdue` | Überfällige Pflegeaufgaben aller Pflanzen abrufen |
+
+Der HTML-Einstiegspunkt ist zusätzlich unter `/` erreichbar. Die API verarbeitet JSON-Anfragen beziehungsweise JSON-Antworten. Für Pflegepläne sind die Typen `watering`, `fertilizing` und `repotting` vorgesehen.
+
+### Termin- und Statuslogik
+
+Das nächste Fälligkeitsdatum wird anhand der letzten protokollierten Aktivität und des hinterlegten Pflegeintervalls berechnet; falls noch kein Protokoll existiert, dient das Erstellungsdatum der Pflanze als Ausgangspunkt. Der berechnete Pflanzenstatus unterscheidet zwischen `ok`, `soon` und `overdue`.
+
+### Datenhaltung und Tests
+
+Teil 1 verwendet **In-Memory-Datenhaltung**. Nach einem Neustart der Anwendung müssen bisher angelegte Pflanzen daher nicht mehr vorhanden sein. Die Tests befinden sich unter `tests/`; `pytest.ini` setzt den Python-Pfad auf `src`. Zum lokalen Testen aus dem Repository-Hauptverzeichnis:
+
+```bash
+python -m pytest
+```
+
+Die vorhandene `requirements.txt` enthält Flask, Flask-CORS, pytest, pytest-cov und pytest-mock. Die separate [API-Spezifikation](ProjectDescription.md) beschreibt Datenfelder und erwartete Antworten im Detail.
 
 ## KI-Unterstützung
 
